@@ -53,6 +53,7 @@
 
             <EditText
                 android:id="@+id/edt_username"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -78,6 +79,7 @@
 
             <EditText
                 android:id="@+id/edt_email"
+                android:inputType="textEmailAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -103,6 +105,7 @@
 
             <EditText
                 android:id="@+id/edt_address"
+                android:inputType="text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
