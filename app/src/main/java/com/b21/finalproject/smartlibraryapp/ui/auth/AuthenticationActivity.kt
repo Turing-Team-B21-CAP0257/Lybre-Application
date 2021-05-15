@@ -15,6 +15,7 @@ class AuthenticationActivity : AppCompatActivity() {
         binding = ActivityAuthenticationBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // set default light mode
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         // Set View Pager and Tabs
