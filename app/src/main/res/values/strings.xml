@@ -2,6 +2,19 @@
     <string name="app_name">Smart Library App</string>
     <string name="login_title">Login</string>
     <string name="register_title">Register</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_login_title">Welcome to Smart Library App</string>
+    <string name="welcome_login_title2">Lets login with your library account !</string>
+    <string name="username_title">Username</string>
+    <string name="password_title">Password</string>
+    <string name="forgot_password_title">Forgot the password ?</string>
+    <string name="email_smartlibrary_title">SmartLibrary_Officiall@gmail.com</string>
+    <string name="copyright_title">CopyRight by Smart Library System 2021</string>
+    <string name="welcome_register_title">Lets register your account in here !</string>
+    <string name="email_title">Email</string>
+    <string name="address_title">Address</string>
+    <string name="birthday_title">BirthDay</string>
+    <string name="male_title">Male</string>
+    <string name="female_title">Female</string>
+    <string name="register_title">Register</string>
 </resources>

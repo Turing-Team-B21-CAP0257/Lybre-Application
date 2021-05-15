@@ -13,4 +13,28 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="margin_auth" parent="Theme.SmartLibraryApp">
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+    </style>
+
+    <style name="title_head2_text" parent="margin_auth">
+        <item name="fontFamily">@font/poppins_semibold</item>
+        <item name="android:textColor">@color/palette_400</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="title_content_text">
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/palette_400</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="title_content_small_text">
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/palette_400</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
 </resources>
