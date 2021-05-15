@@ -15,8 +15,8 @@
     </style>
 
     <style name="margin_auth" parent="Theme.SmartLibraryApp">
-        <item name="android:layout_marginStart">8dp</item>
-        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
     </style>
 
     <style name="title_head2_text" parent="margin_auth">
