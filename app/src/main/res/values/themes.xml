@@ -20,20 +20,17 @@
     </style>
 
     <style name="title_head2_text" parent="margin_auth">
-        <item name="fontFamily">@font/poppins_semibold</item>
-        <item name="android:textColor">@color/palette_400</item>
+        <item name="fontFamily">@font/poppins_regular</item>
         <item name="android:textSize">14sp</item>
     </style>
 
     <style name="title_content_text">
         <item name="fontFamily">@font/poppins_regular</item>
-        <item name="android:textColor">@color/palette_400</item>
         <item name="android:textSize">12sp</item>
     </style>
 
     <style name="title_content_small_text">
         <item name="fontFamily">@font/poppins_regular</item>
-        <item name="android:textColor">@color/palette_400</item>
         <item name="android:textSize">10sp</item>
     </style>
 

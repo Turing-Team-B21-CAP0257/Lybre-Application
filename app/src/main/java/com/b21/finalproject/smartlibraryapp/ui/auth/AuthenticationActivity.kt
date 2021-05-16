@@ -1,9 +1,8 @@
 package com.b21.finalproject.smartlibraryapp.ui.auth
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityAuthenticationBinding
 
 class AuthenticationActivity : AppCompatActivity() {
