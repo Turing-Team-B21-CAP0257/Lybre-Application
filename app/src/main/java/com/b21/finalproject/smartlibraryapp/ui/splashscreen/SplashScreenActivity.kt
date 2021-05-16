@@ -10,7 +10,7 @@ import com.b21.finalproject.smartlibraryapp.ui.auth.AuthenticationActivity
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private val TIME_SCREEN_END = 2000L
+    private val TIME_SCREEN_END = 1000L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
