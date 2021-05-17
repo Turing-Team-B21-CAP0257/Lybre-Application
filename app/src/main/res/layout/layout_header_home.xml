@@ -25,7 +25,7 @@
     <ImageView
         android:id="@+id/imageView6"
         android:layout_width="0dp"
-        android:layout_height="300dp"
+        android:layout_height="400dp"
         android:scaleType="centerCrop"
         android:src="@drawable/background_home"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,8 +35,8 @@
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/flat_hand_home"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,12 +46,12 @@
         android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/poppins_regular"
         android:text="@string/welcome_home_title"
         android:textColor="@color/white"
-        android:textSize="28sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView7"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="@+id/imageView6"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
@@ -64,8 +64,74 @@
         android:maxLength="15"
         tools:text="Yossy Syahida"
         android:textColor="@color/white"
-        android:textSize="24sp"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tv_welcome"
         app:layout_constraintTop_toBottomOf="@+id/tv_welcome" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_username"
+        app:layout_constraintVertical_bias="0.65999997">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_menu_borrowed"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:src="@drawable/photo_camera_black_24dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Borrow a book"
+                    android:textAlignment="center"
+                    android:textColor="@color/palette_200"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_menu_return"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            app:cardCornerRadius="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:src="@drawable/bookmark_added_black_24dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Return a book"
+                    android:textAlignment="center"
+                    android:textColor="@color/palette_200"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
