@@ -2,6 +2,7 @@ package com.b21.finalproject.smartlibraryapp.ui.home.ui.home
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.TextView
@@ -13,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 
 class HomeFragment : Fragment() {
 
@@ -47,6 +49,16 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // go to books activity
+        binding.layoutHeaderAllbooks.imgItemMore.setOnClickListener {
+            val intent = Intent(requireContext(), BooksActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

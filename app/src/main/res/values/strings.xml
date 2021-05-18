@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Smart Library App</string>
 
-<!--  AUTH  -->
+    <!--  AUTH  -->
     <string name="login_title">Login</string>
     <string name="register_title">Register</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -21,7 +21,7 @@
     <string name="smartlibrary_application_title">Smart Library Application</string>
     <string name="finalproject_title">Final Project Bangkit 2021</string>
 
-<!--  Home  -->
+    <!--  Home  -->
     <string name="title_activity_home">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
@@ -32,5 +32,17 @@
     <string name="all_books_header_title">All Books</string>
     <string name="recomended_header_title">Recommended a Books</string>
     <string name="welcome_home_title">Welcome,</string>
+    <string name="title_activity_books">BooksActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="all_books_title">All books</string>
 
 </resources>
