@@ -44,5 +44,6 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="all_books_title">All books</string>
+    <string name="my_profile">My Profile</string>
 
 </resources>
