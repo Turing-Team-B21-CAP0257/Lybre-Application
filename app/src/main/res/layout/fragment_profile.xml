@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical">
     android:fillViewport="true">
 
     <LinearLayout
@@ -23,33 +26,20 @@
             android:background="@drawable/background_main"
             android:orientation="vertical">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="0dp"
-        android:layout_height="?actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:background="@color/white"
-            app:titleTextColor="@color/palette_200"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/my_profile"
-                android:textColor="@color/palette_200"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_regular"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
 
+    <include
+        android:id="@+id/layout_header_profile"
+        layout="@layout/layout_header_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
     <TextView
         android:id="@+id/text_home"
         android:layout_width="match_parent"
@@ -178,3 +168,4 @@
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
+</LinearLayout>
