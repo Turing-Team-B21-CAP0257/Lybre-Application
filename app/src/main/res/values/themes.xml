@@ -73,6 +73,16 @@
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
+
+    <style name="textViewTtitleProfile">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
+    </style>
     <style name="Theme.SmartLibraryApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.SmartLibraryApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Dark" />

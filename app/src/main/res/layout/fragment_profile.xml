@@ -35,7 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="-95dp"
+        android:layout_marginTop="-75dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/background_main"
         android:orientation="vertical">
@@ -57,14 +57,8 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/username_title"
-            android:textSize="12sp"
-            android:textStyle="bold"/>
+            style="@style/textViewTtitleProfile"
+            android:text="@string/username_title"/>
 
         <include
             android:id="@+id/layout_username_edit_profile"
@@ -73,14 +67,8 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/address_title"
-            android:textSize="12sp"
-            android:textStyle="bold"/>
+            style="@style/textViewTtitleProfile"
+            android:text="@string/address_title"/>
 
         <include
             android:id="@+id/layout_address_edit_profile"
@@ -89,14 +77,8 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/email_title"
-            android:textSize="12sp"
-            android:textStyle="bold"/>
+            style="@style/textViewTtitleProfile"
+            android:text="@string/email_title"/>
 
         <include
             android:id="@+id/layout_email_edit_profile"
@@ -105,14 +87,8 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/birthday_title"
-            android:textSize="12sp"
-            android:textStyle="bold"/>
+            style="@style/textViewTtitleProfile"
+            android:text="@string/birthday_title"/>
 
         <include
             android:id="@+id/layout_birthday_edit_profile"
@@ -121,14 +97,8 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/sex_title"
-            android:textSize="12sp"
-            android:textStyle="bold"/>
+            style="@style/textViewTtitleProfile"
+            android:text="@string/sex_title"/>
 
         <include
             android:id="@+id/layout_sex_edit_profile"
@@ -137,14 +107,8 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/password_title"
-            android:textSize="12sp"
-            android:textStyle="bold"/>
+            style="@style/textViewTtitleProfile"
+            android:text="@string/password_title"/>
 
         <include
             android:id="@+id/layout_password_edit_profile"
