@@ -56,5 +56,6 @@
     <string name="sex_profile">Female</string>
     <string name="sex_title">Sex</string>
     <string name="password_profile">y*******</string>
+    <string name="history_borrowed_toolbar">History Borrowed</string>
 
 </resources>
