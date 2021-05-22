@@ -7,7 +7,7 @@
     <TextView
         style="@style/textViewProfile"
         android:id="@+id/tv_address"
-        android:text="@string/address_profile"
+        android:text="@string/address_edit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
