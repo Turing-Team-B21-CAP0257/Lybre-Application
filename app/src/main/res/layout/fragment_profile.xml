@@ -32,6 +32,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="-95dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/background_main"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/full_name"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <include
+            android:id="@+id/layout_fullname_edit_profile"
+            layout="@layout/layout_fullname_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
     <TextView
         android:id="@+id/text_home"
         android:layout_width="match_parent"
