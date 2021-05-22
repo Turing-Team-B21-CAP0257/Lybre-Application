@@ -50,7 +50,7 @@
     <string name="yossy_syahida">Yossy Syahida</string>
     <string name="fullname_title">Full Name</string>
     <string name="yossyhds_username">yossyhds</string>
-    <string name="address_edit">Jl.Angkasa</string>
+    <string name="address_profile">Jl.Angkasa</string>
     <string name="email_profile">yossysyahida@gmail.com</string>
     <string name="full_name">Full Name</string>
     <string name="my_profile">My Profile</string>
@@ -61,5 +61,9 @@
     <string name="borrow_the_book_title">Borrow the book</string>
     <string name="deadline_of_borrowed_title">Deadline of Borrowed</string>
     <string name="return_now_title">Return now</string>
+    <string name="birthday_profile">29 - February - 2020</string>
+    <string name="sex_profile">Female</string>
+    <string name="sex_title">Sex</string>
+    <string name="password_profile">y*******</string>
 
 </resources>

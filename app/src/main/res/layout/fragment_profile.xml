@@ -82,5 +82,53 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/birthday_title"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/layout_birthday_edit_profile"
+            layout="@layout/layout_edit_profile_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/sex_title"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/layout_sex_edit_profile"
+            layout="@layout/layout_edit_profile_sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/password_title"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <include
+            android:id="@+id/layout_password_edit_profile"
+            layout="@layout/layout_edit_profile_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 </LinearLayout>
