@@ -50,7 +50,11 @@
     <string name="yossy_syahida">Yossy Syahida</string>
     <string name="fullname_title">Full Name</string>
     <string name="yossyhds_username">yossyhds</string>
-    <string name="address_edit">Jl.Angkasa</string>
+    <string name="address_profile">Jl.Angkasa</string>
     <string name="email_profile">yossysyahida@gmail.com</string>
+    <string name="birthday_profile">29 - February - 2020</string>
+    <string name="sex_profile">Female</string>
+    <string name="sex_title">Sex</string>
+    <string name="password_profile">y*******</string>
 
 </resources>
