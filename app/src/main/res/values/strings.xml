@@ -48,6 +48,7 @@
     <!--  Profile  -->
     <string name="my_profile">My Profile</string>
     <string name="yossy_syahida">Yossy Syahida</string>
-    <string name="full_name">Full Name</string>
+    <string name="fullname_title">Full Name</string>
+    <string name="yossyhds_username">yossyhds</string>
 
 </resources>
