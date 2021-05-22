@@ -19,19 +19,34 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/full_name"
+            android:text="@string/fullname_title"
             android:textSize="12sp"
             android:textStyle="bold" />
 
         <include
             android:id="@+id/layout_fullname_edit_profile"
             layout="@layout/layout_fullname_edit_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/username_title"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <include
+            android:id="@+id/layout_username_edit_profile"
+            layout="@layout/layout_username_edit_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
