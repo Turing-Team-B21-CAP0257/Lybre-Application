@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     android:orientation="vertical">
     android:fillViewport="true">
 
@@ -26,89 +33,125 @@
             android:background="@drawable/background_main"
             android:orientation="vertical">
 
-    <include
-        android:id="@+id/layout_header_profile"
-        layout="@layout/layout_header_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="-140dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/background_main"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/fullname_title"
-            android:textSize="12sp"
-            android:textStyle="bold" />
-
         <include
-            android:id="@+id/layout_fullname_edit_profile"
-            layout="@layout/layout_edit_profile_fullname"
+            android:id="@+id/layout_header_profile"
+            layout="@layout/layout_header_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            style="@style/textViewTtitleProfile"
-            android:text="@string/username_title"/>
-
-        <include
-            android:id="@+id/layout_username_edit_profile"
-            layout="@layout/layout_edit_profile_username"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="-140dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/background_main"
+            android:orientation="vertical">
 
-        <TextView
-            style="@style/textViewTtitleProfile"
-            android:text="@string/address_title"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/fullname_title"
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
-        <include
-            android:id="@+id/layout_address_edit_profile"
-            layout="@layout/layout_edit_profile_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <include
+                android:id="@+id/layout_fullname_edit_profile"
+                layout="@layout/layout_edit_profile_fullname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-        <TextView
-            style="@style/textViewTtitleProfile"
-            android:text="@string/email_title"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:src="@drawable/line_divider"
+                android:layout_marginTop="7dp" />
 
-        <include
-            android:id="@+id/layout_email_edit_profile"
-            layout="@layout/layout_edit_profile_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <TextView
+                style="@style/textViewTtitleProfile"
+                android:text="@string/username_title"/>
 
-        <TextView
-            style="@style/textViewTtitleProfile"
-            android:text="@string/birthday_title"/>
+            <include
+                android:id="@+id/layout_username_edit_profile"
+                layout="@layout/layout_edit_profile_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-        <include
-            android:id="@+id/layout_birthday_edit_profile"
-            layout="@layout/layout_edit_profile_birthday"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:src="@drawable/line_divider"
+                android:layout_marginTop="7dp" />
 
-        <TextView
-            style="@style/textViewTtitleProfile"
-            android:text="@string/sex_title"/>
+            <TextView
+                style="@style/textViewTtitleProfile"
+                android:text="@string/address_title"/>
 
-        <include
-            android:id="@+id/layout_sex_edit_profile"
-            layout="@layout/layout_edit_profile_sex"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            <include
+                android:id="@+id/layout_address_edit_profile"
+                layout="@layout/layout_edit_profile_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
-        <TextView
-            style="@style/textViewTtitleProfile"
-            android:text="@string/password_title"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:src="@drawable/line_divider"
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                style="@style/textViewTtitleProfile"
+                android:text="@string/email_title"/>
+
+            <include
+                android:id="@+id/layout_email_edit_profile"
+                layout="@layout/layout_edit_profile_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:src="@drawable/line_divider"
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                style="@style/textViewTtitleProfile"
+                android:text="@string/birthday_title"/>
+
+            <include
+                android:id="@+id/layout_birthday_edit_profile"
+                layout="@layout/layout_edit_profile_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:src="@drawable/line_divider"
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                style="@style/textViewTtitleProfile"
+                android:text="@string/sex_title"/>
+
+            <include
+                android:id="@+id/layout_sex_edit_profile"
+                layout="@layout/layout_edit_profile_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:src="@drawable/line_divider"
+                android:layout_marginTop="7dp" />
+
+            <TextView
+                style="@style/textViewTtitleProfile"
+                android:text="@string/password_title"/>
 
         <include
             android:id="@+id/layout_password_edit_profile"
@@ -246,3 +289,11 @@
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
 </LinearLayout>
+            <include
+                android:id="@+id/layout_password_edit_profile"
+                layout="@layout/layout_edit_profile_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
