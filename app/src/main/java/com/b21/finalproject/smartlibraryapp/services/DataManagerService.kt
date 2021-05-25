@@ -112,22 +112,23 @@ class DataManagerService : Service(), CoroutineScope {
             var isInsertSucccess: Boolean
 
             try {
-                databaseHelper.beginTransaction()
+//                databaseHelper.beginTransaction()
 //                databaseHelper.libraryDao().insertBookEntities(bookModels)
                 databaseHelper.libraryDao().insertRatingEntities(ratingModels)
 //                databaseHelper.libraryDao().insertUserEntities(userModels)
                 for (i in 0..100) {
                     progress += progressDiff
                 }
-                databaseHelper.setTransactionSuccessful()
+//                databaseHelper.setTransactionSuccessful()
                 isInsertSucccess = true
                 appPreference.firstRun = false
             } catch (e: Exception) {
                 Log.e(TAG, "doInBackground: Exception")
                 isInsertSucccess = false
-            } finally {
-                databaseHelper.endTransaction()
             }
+//            finally {
+//                databaseHelper.endTransaction()
+//            }
 
             publishProgress(MAX_PROGRESS.toInt())
 

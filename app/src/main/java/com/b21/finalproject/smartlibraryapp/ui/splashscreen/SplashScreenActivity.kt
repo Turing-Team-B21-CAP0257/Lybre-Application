@@ -1,5 +1,6 @@
 package com.b21.finalproject.smartlibraryapp.ui.splashscreen
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
@@ -8,9 +9,11 @@ import android.os.*
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.b21.finalproject.smartlibraryapp.R
+import com.b21.finalproject.smartlibraryapp.databinding.ActivitySplashScreenBinding
 import com.b21.finalproject.smartlibraryapp.services.DataManagerService
 import com.b21.finalproject.smartlibraryapp.ui.auth.AuthenticationActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
@@ -18,7 +21,7 @@ import java.lang.ref.WeakReference
 
 class SplashScreenActivity : AppCompatActivity(), HandlerCallBack {
 
-    private lateinit var progressBar: ProgressBar
+    private lateinit var binding: ActivitySplashScreenBinding
 
     private lateinit var mBoundService: Messenger
     private var mServiceBound: Boolean = false
@@ -57,9 +60,8 @@ class SplashScreenActivity : AppCompatActivity(), HandlerCallBack {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
-
-        progressBar = findViewById(R.id.progressBar)
+        binding = ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val mBoundServiceIntent = Intent(this@SplashScreenActivity, DataManagerService::class.java)
         val mActiviyMessenger = Messenger(IncomingHandler(this))
@@ -74,18 +76,23 @@ class SplashScreenActivity : AppCompatActivity(), HandlerCallBack {
     }
 
     override fun onPreparation() {
-        Toast.makeText(this, "Memulai memuat data", Toast.LENGTH_LONG).show()
-        progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
+        binding.tvLoading.visibility = View.VISIBLE
+        binding.tvLoading2.visibility = View.VISIBLE
     }
 
     override fun updateProgress(progress: Long) {
         Log.d("PROGRESS", "updateProgress: $progress")
-        progressBar.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
+        binding.tvLoading.visibility = View.VISIBLE
+        binding.tvLoading2.visibility = View.VISIBLE
     }
 
     override fun loadSuccess() {
-        progressBar.visibility = View.GONE
-        Toast.makeText(this, "BERHASIL", Toast.LENGTH_LONG).show()
+        binding.progressBar.visibility = View.GONE
+        binding.tvLoading.visibility = View.GONE
+        binding.tvLoading2.visibility = View.GONE
+        binding.tvLoading.text = "Selesai"
         startActivity(Intent(this@SplashScreenActivity, AuthenticationActivity::class.java))
         finish()
     }
