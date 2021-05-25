@@ -90,7 +90,7 @@ class SplashScreenActivity : AppCompatActivity(), HandlerCallBack {
 
     override fun loadSuccess() {
         binding.progressBar.visibility = View.GONE
-        binding.tvLoading.visibility = View.GONE
+        binding.tvLoading.visibility = View.VISIBLE
         binding.tvLoading2.visibility = View.GONE
         binding.tvLoading.text = "Selesai"
         startActivity(Intent(this@SplashScreenActivity, AuthenticationActivity::class.java))

@@ -100,9 +100,9 @@ class DataManagerService : Service(), CoroutineScope {
         val firstRun = appPreference.firstRun as Boolean
 
         if (firstRun) {
-//            val bookModels = preLoadRawBooks()
+            val bookModels = preLoadRawBooks()
             val ratingModels = preLoadRawRatings()
-//            val userModels = preLoadRawUsers()
+            val userModels = preLoadRawUsers()
 
             var progress = 30.0
             publishProgress(progress.toInt())
@@ -113,9 +113,9 @@ class DataManagerService : Service(), CoroutineScope {
 
             try {
 //                databaseHelper.beginTransaction()
-//                databaseHelper.libraryDao().insertBookEntities(bookModels)
+                databaseHelper.libraryDao().insertBookEntities(bookModels)
                 databaseHelper.libraryDao().insertRatingEntities(ratingModels)
-//                databaseHelper.libraryDao().insertUserEntities(userModels)
+                databaseHelper.libraryDao().insertUserEntities(userModels)
                 for (i in 0..100) {
                     progress += progressDiff
                 }
@@ -158,38 +158,39 @@ class DataManagerService : Service(), CoroutineScope {
         }
     }
 
-//    private fun preLoadRawBooks(): ArrayList<BookEntity> {
-//        val bookModels = ArrayList<BookEntity>()
-//        var line: String?
-//        val reader: BufferedReader
-//        try {
-//            val rawText = resources.openRawResource(R.raw.Books)
-//
-//            reader = BufferedReader(InputStreamReader(rawText))
-//
-//            reader.readLine()
-//
-//            do {
-//                line = reader.readLine()
-//                val splitstr = line.split(",").toTypedArray()
-//
-//                val bookModel = BookEntity(
-//                    splitstr[0],
-//                    splitstr[1],
-//                    splitstr[2],
-//                    splitstr[3],
-//                    splitstr[4],
-//                    splitstr[5],
-//                    splitstr[6],
-//                    splitstr[7]
-//                )
-//                bookModels.add(bookModel)
-//            } while (line != null)
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//        return bookModels
-//    }
+    private fun preLoadRawBooks(): ArrayList<BookEntity> {
+        val bookModels = ArrayList<BookEntity>()
+        var line: String?
+        val reader: BufferedReader
+        try {
+            val rawText = resources.openRawResource(R.raw.newbook)
+
+            reader = BufferedReader(InputStreamReader(rawText))
+
+            reader.readLine()
+
+            do {
+                line = reader.readLine()
+
+                val splitstr = line.split(",").toTypedArray()
+
+                val bookModel = BookEntity(
+                    splitstr[0],
+                    splitstr[1],
+                    splitstr[2],
+                    splitstr[3],
+                    splitstr[4],
+                    splitstr[5],
+                    splitstr[6],
+                    splitstr[7]
+                )
+                bookModels.add(bookModel)
+            } while (line != null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return bookModels
+    }
 
     private fun preLoadRawRatings(): ArrayList<RatingEntity> {
         val ratingModels = ArrayList<RatingEntity>()
@@ -204,6 +205,7 @@ class DataManagerService : Service(), CoroutineScope {
 
             do {
                 line = reader.readLine()
+
                 val splitstr = line.split(",").toTypedArray()
 
                 val ratingModel = RatingEntity(
@@ -219,38 +221,39 @@ class DataManagerService : Service(), CoroutineScope {
         return ratingModels
     }
 
-//    private fun preLoadRawUsers(): ArrayList<UserEntity> {
-//        val userModels = ArrayList<UserEntity>()
-//        var line: String?
-//        val reader: BufferedReader
-//        try {
-//            val rawText = resources.openRawResource(R.raw.Users)
-//
-//            reader = BufferedReader(InputStreamReader(rawText))
-//
-//            reader.readLine()
-//
-//            do {
-//                line = reader.readLine()
-//                val splitstr = line.split(",").toTypedArray()
-//
-//                val userModel = UserEntity(
-//                    splitstr[0],
-//                    splitstr[1],
-//                    splitstr[2],
-//                    "Lorem ipsum",
-//                    "Female",
-//                    "Lorem ipsum",
-//                    "2000/01/01",
-//                    "Lorem ipsum",
-//                    "Lorem ipsum",
-//                    "LoremIpsum"
-//                )
-//                userModels.add(userModel)
-//            } while (line != null)
-//        } catch (e: Exception) {
-//            e.printStackTrace()
-//        }
-//        return userModels
-//    }
+    private fun preLoadRawUsers(): ArrayList<UserEntity> {
+        val userModels = ArrayList<UserEntity>()
+        var line: String?
+        val reader: BufferedReader
+        try {
+            val rawText = resources.openRawResource(R.raw.newuser)
+
+            reader = BufferedReader(InputStreamReader(rawText))
+
+            reader.readLine()
+
+            do {
+                line = reader.readLine()
+
+                val splitstr = line.split(",").toTypedArray()
+
+                val userModel = UserEntity(
+                    splitstr[0],
+                    splitstr[1],
+                    splitstr[2],
+                    "Lorem ipsum",
+                    "Female",
+                    "Lorem ipsum",
+                    "2000/01/01",
+                    "Lorem ipsum",
+                    "Lorem ipsum",
+                    "LoremIpsum"
+                )
+                userModels.add(userModel)
+            } while (line != null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return userModels
+    }
 }
