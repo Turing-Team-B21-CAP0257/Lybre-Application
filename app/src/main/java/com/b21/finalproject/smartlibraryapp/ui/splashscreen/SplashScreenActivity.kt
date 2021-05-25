@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.services.DataManagerService
+import com.b21.finalproject.smartlibraryapp.ui.auth.AuthenticationActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 import java.lang.ref.WeakReference
 
@@ -74,6 +75,7 @@ class SplashScreenActivity : AppCompatActivity(), HandlerCallBack {
 
     override fun onPreparation() {
         Toast.makeText(this, "Memulai memuat data", Toast.LENGTH_LONG).show()
+        progressBar.visibility = View.VISIBLE
     }
 
     override fun updateProgress(progress: Long) {
@@ -84,7 +86,7 @@ class SplashScreenActivity : AppCompatActivity(), HandlerCallBack {
     override fun loadSuccess() {
         progressBar.visibility = View.GONE
         Toast.makeText(this, "BERHASIL", Toast.LENGTH_LONG).show()
-        startActivity(Intent(this@SplashScreenActivity, HomeActivity::class.java))
+        startActivity(Intent(this@SplashScreenActivity, AuthenticationActivity::class.java))
         finish()
     }
 
