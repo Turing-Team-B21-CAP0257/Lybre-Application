@@ -9,10 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartLibraryApp">
+        <service
+            android:name=".services.DataManagerService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".ui.home.ui.books.BooksActivity"
             android:label="@string/title_activity_books"
-            android:theme="@style/Theme.SmartLibraryApp.NoActionBar"/>
+            android:theme="@style/Theme.SmartLibraryApp.NoActionBar" />
         <activity
             android:name=".ui.home.HomeActivity"
             android:label="@string/app_name" />

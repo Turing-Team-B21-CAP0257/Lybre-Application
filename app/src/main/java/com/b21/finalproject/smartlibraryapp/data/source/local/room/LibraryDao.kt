@@ -13,13 +13,13 @@ import com.b21.finalproject.smartlibraryapp.data.source.local.entity.UserEntity
 interface LibraryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBookEntities(books: LiveData<List<BookEntity>>)
+    fun insertBookEntities(books: List<BookEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertRatingEntities(ratings: LiveData<List<RatingEntity>>)
+    fun insertRatingEntities(ratings: List<RatingEntity>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUserEntities(users: LiveData<List<UserEntity>>)
+    fun insertUserEntities(users: List<UserEntity>)
 
     @Query("SELECT * FROM book_tb")
     fun getAllbooks(): LiveData<List<BookEntity>>
