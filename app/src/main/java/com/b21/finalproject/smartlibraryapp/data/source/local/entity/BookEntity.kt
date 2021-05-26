@@ -10,9 +10,13 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "book_tb")
 data class BookEntity(
-    @PrimaryKey
+    @PrimaryKey()
     @NonNull
-    @ColumnInfo(name = "ISBN")
+    @ColumnInfo
+    var bookId: String,
+
+    @NonNull
+    @ColumnInfo(name = "isbn")
     var ISBN: String,
 
     @ColumnInfo(name = "book_title")
@@ -34,5 +38,8 @@ data class BookEntity(
     var imageUrl_m: String,
 
     @ColumnInfo(name = "image_url_l")
-    var imageUrl_l: String
+    var imageUrl_l: String,
+
+    @ColumnInfo(name = "rating")
+    var rating: String
 ) : Parcelable

@@ -112,23 +112,18 @@ class DataManagerService : Service(), CoroutineScope {
             var isInsertSucccess: Boolean
 
             try {
-//                databaseHelper.beginTransaction()
                 databaseHelper.libraryDao().insertBookEntities(bookModels)
                 databaseHelper.libraryDao().insertRatingEntities(ratingModels)
                 databaseHelper.libraryDao().insertUserEntities(userModels)
                 for (i in 0..100) {
                     progress += progressDiff
                 }
-//                databaseHelper.setTransactionSuccessful()
                 isInsertSucccess = true
                 appPreference.firstRun = false
             } catch (e: Exception) {
                 Log.e(TAG, "doInBackground: Exception")
                 isInsertSucccess = false
             }
-//            finally {
-//                databaseHelper.endTransaction()
-//            }
 
             publishProgress(MAX_PROGRESS.toInt())
 
@@ -182,7 +177,9 @@ class DataManagerService : Service(), CoroutineScope {
                     splitstr[4],
                     splitstr[5],
                     splitstr[6],
-                    splitstr[7]
+                    splitstr[7],
+                    splitstr[8],
+                    splitstr[9]
                 )
                 bookModels.add(bookModel)
             } while (line != null)
@@ -236,11 +233,12 @@ class DataManagerService : Service(), CoroutineScope {
                 line = reader.readLine()
 
                 val splitstr = line.split(",").toTypedArray()
+                val location = "${splitstr[1]}, ${splitstr[2]}, ${splitstr[3]}"
 
                 val userModel = UserEntity(
                     splitstr[0],
-                    splitstr[1],
-                    splitstr[2],
+                    location,
+                    splitstr[4],
                     "Lorem ipsum",
                     "Female",
                     "Lorem ipsum",

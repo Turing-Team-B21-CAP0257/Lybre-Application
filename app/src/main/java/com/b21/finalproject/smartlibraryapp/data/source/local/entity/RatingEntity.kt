@@ -7,12 +7,12 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "rating_tb")
 data class RatingEntity(
-    @PrimaryKey
+    @PrimaryKey()
     @NonNull
     @ColumnInfo(name = "user_id")
     var userId: String,
 
-    @ColumnInfo(name = "ISBN")
+    @ColumnInfo(name = "isbn")
     var ISBN: String,
 
     @ColumnInfo(name = "book_rating")

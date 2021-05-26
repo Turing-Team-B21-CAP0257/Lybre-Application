@@ -1,6 +1,7 @@
 package com.b21.finalproject.smartlibraryapp.data.source.local.room
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -22,14 +23,14 @@ interface LibraryDao {
     fun insertUserEntities(users: List<UserEntity>)
 
     @Query("SELECT * FROM book_tb")
-    fun getAllbooks(): LiveData<List<BookEntity>>
+    fun getAllbooks(): List<BookEntity>
 
     @Query("SELECT * FROM rating_tb")
-    fun getAllRatings(): LiveData<List<RatingEntity>>
+    fun getAllRatings(): List<RatingEntity>
 
     @Query("SELECT * FROM book_tb WHERE ISBN = :isbn")
-    fun getBookByisbn(isbn: String): LiveData<BookEntity>
+    fun getBookByisbn(isbn: String): BookEntity
 
     @Query("SELECT * FROM book_tb WHERE book_title = :bookTitle")
-    fun getBookByTitle(bookTitle: String): LiveData<BookEntity>
+    fun getBookByTitle(bookTitle: String): BookEntity
 }
