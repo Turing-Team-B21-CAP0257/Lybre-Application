@@ -27,6 +27,8 @@ task clean(type: Delete) {
 }
 
 ext {
+    glideVersion = '4.11.0'
+
     roomVersion = '2.3.0'
     roomRuntimeVersion = '2.3.0'
 

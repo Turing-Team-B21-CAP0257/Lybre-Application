@@ -1,8 +1,13 @@
 package com.b21.finalproject.smartlibraryapp.data.source
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.b21.finalproject.smartlibraryapp.data.source.local.LocalDataSource
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 
 class BookRepository private constructor(private val localDataSource: LocalDataSource) : BookDataSource{
 
@@ -16,8 +21,13 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
             }
     }
 
-    override fun getAllBooks(): List<BookEntity> =
-        localDataSource.getAllBooks()
+    override fun getAllBooks(): LiveData<List<BookEntity>> {
+        val result = MutableLiveData<List<BookEntity>>()
+        GlobalScope.async(Dispatchers.IO) {
+            result.postValue(localDataSource.getAllBooks())
+        }
+        return result
+    }
 
     override fun getAllRatings(): List<RatingEntity> =
         localDataSource.getAllRatings()

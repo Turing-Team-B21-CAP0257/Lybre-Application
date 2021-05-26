@@ -53,7 +53,11 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glideVersion"
+
     // Room Database
+    kapt "androidx.room:room-ktx:$roomVersion"
     kapt "androidx.room:room-compiler:$roomVersion"
     implementation "androidx.room:room-runtime:$roomRuntimeVersion"
 

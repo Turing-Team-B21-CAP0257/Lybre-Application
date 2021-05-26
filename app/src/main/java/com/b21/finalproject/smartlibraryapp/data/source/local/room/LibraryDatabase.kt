@@ -24,7 +24,7 @@ abstract class LibraryDatabase : RoomDatabase(){
                     context.applicationContext,
                     LibraryDatabase::class.java,
                     "Libraries.db"
-                ).build().apply {
+                ).allowMainThreadQueries().build().apply {
                     INSTANCE = this
                 }
             }
