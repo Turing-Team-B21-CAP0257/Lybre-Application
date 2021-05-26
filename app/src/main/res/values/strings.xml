@@ -47,15 +47,15 @@
 
     <!--  Profile  -->
     <string name="my_profile">My Profile</string>
-    <string name="yossy_syahida">Yossy Syahida</string>
+    <string name="smart_library">Smart Library System</string>
     <string name="fullname_title">Full Name</string>
-    <string name="yossyhds_username">yossyhds</string>
+    <string name="smartlbr_username">smartlbr</string>
     <string name="address_profile">Jl.Angkasa</string>
-    <string name="email_profile">yossysyahida@gmail.com</string>
-    <string name="birthday_profile">29 - February - 2020</string>
+    <string name="email_profile">SmartLibrary_Officiall@gmail.com</string>
+    <string name="birthday_profile">01 - Mei - 2021</string>
     <string name="sex_profile">Female</string>
     <string name="sex_title">Sex</string>
-    <string name="password_profile">y*******</string>
+    <string name="password_profile">s********</string>
     <string name="history_borrowed_toolbar">History Borrowed</string>
 
 </resources>
