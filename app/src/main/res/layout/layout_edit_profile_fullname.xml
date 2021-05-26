@@ -7,7 +7,7 @@
     <TextView
         style="@style/textViewProfile"
         android:id="@+id/tv_fullname"
-        android:text="@string/yossy_syahida"
+        android:text="@string/smart_library"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
