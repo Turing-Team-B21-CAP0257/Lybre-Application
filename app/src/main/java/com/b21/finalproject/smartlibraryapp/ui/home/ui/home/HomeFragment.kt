@@ -4,6 +4,7 @@ import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -12,12 +13,19 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
+import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment() {
 
+
+    private lateinit var factory: ViewModelFactory
     private lateinit var homeViewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
@@ -35,7 +43,8 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        factory = ViewModelFactory.getInstance(requireContext())
+        homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -59,6 +68,25 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), BooksActivity::class.java)
             startActivity(intent)
         }
+
+        if (activity != null) {
+            val allBooksAdapter = HomeAdapter()
+
+            binding.rvRecommendedBooks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvRecommendedBooks.setHasFixedSize(true)
+
+            binding.rvAllbooks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvAllbooks.setHasFixedSize(true)
+
+            homeViewModel.getAllBooks().observe(viewLifecycleOwner, { books ->
+                allBooksAdapter.setAllbooks(books)
+                binding.rvAllbooks.adapter = allBooksAdapter
+                binding.rvRecommendedBooks.adapter = allBooksAdapter
+            })
+
+
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

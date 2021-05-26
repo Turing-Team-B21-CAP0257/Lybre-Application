@@ -9,9 +9,9 @@
             android:title="@string/all_books_title" />
         <item
             android:id="@+id/nav_gallery"
-            android:title="Lorem Ipsum" />
+            android:title="Recommended Books" />
         <item
             android:id="@+id/nav_slideshow"
-            android:title="Lorem Ipsum2" />
+            android:title="Most preferred book" />
     </group>
 </menu>

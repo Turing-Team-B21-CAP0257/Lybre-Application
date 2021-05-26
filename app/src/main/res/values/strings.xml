@@ -44,6 +44,8 @@
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
     <string name="all_books_title">All books</string>
+    <string name="loading">Load data from local</string>
+    <string name="loading2">This will take a while for the first time...</string>
 
     <!--  Profile  -->
     <string name="my_profile">My Profile</string>

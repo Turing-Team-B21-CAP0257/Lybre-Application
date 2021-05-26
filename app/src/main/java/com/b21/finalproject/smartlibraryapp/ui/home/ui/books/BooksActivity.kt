@@ -2,16 +2,15 @@ package com.b21.finalproject.smartlibraryapp.ui.home.ui.books
 
 import android.os.Bundle
 import android.view.Menu
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.app.AppCompatActivity
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityBooksBinding
+import com.google.android.material.navigation.NavigationView
 
 class BooksActivity : AppCompatActivity() {
 
@@ -27,10 +26,6 @@ class BooksActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarBooks.toolbar)
         supportActionBar?.title = ""
 
-        binding.appBarBooks.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_books)

@@ -15,6 +15,6 @@
     <ImageView
         android:src="@drawable/logo_1_nocolor3_blur"
         android:layout_gravity="center_horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="85dp"
+        android:layout_height="85dp" />
 </LinearLayout>

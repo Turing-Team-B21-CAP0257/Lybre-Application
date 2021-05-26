@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentBookmarkBinding
+import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 
 class BookmarkFragment : Fragment() {
 
@@ -33,7 +34,8 @@ class BookmarkFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        bookmarkViewModel = ViewModelProvider(this).get(BookmarkViewModel::class.java)
+        val factory = ViewModelFactory.getInstance(requireContext())
+        bookmarkViewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
 
         _binding = FragmentBookmarkBinding.inflate(inflater, container, false)
         val root: View = binding.root

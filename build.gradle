@@ -25,3 +25,12 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    glideVersion = '4.11.0'
+
+    roomVersion = '2.3.0'
+    roomRuntimeVersion = '2.3.0'
+
+    pagingVersion = '2.1.1'
+}
