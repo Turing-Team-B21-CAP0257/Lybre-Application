@@ -7,7 +7,7 @@
     <TextView
         style="@style/textViewProfile"
         android:id="@+id/tv_username"
-        android:text="@string/yossyhds_username"
+        android:text="@string/smartlbr_username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
