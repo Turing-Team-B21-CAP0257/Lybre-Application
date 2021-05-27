@@ -32,8 +32,7 @@ class BooksActivity : AppCompatActivity() {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_all_books, R.id.nav_gallery, R.id.nav_slideshow
+            setOf(R.id.nav_all_books, R.id.nav_recommended_books, R.id.nav_most_books
             ), drawerLayout
         )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
