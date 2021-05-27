@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
+import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -57,6 +58,8 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
+
+        unShowPopulate()
         return root
     }
 
@@ -78,12 +81,12 @@ class HomeFragment : Fragment() {
             binding.rvAllbooks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.rvAllbooks.setHasFixedSize(true)
 
-            homeViewModel.getAllBooks().observe(viewLifecycleOwner, { books ->
+            homeViewModel.getAllBooks(SortUtils.RANDOM).observe(viewLifecycleOwner, { books ->
+                showPopulate()
                 allBooksAdapter.setAllbooks(books)
                 binding.rvAllbooks.adapter = allBooksAdapter
                 binding.rvRecommendedBooks.adapter = allBooksAdapter
             })
-
 
         }
 
@@ -116,4 +119,21 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+    private fun showPopulate() {
+        binding.progressBar.visibility = View.GONE
+        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.VISIBLE
+        binding.layoutHeaderRecommended.imgItemMore.visibility = View.VISIBLE
+        binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.VISIBLE
+        binding.layoutHeaderAllbooks.imgItemMore.visibility = View.VISIBLE
+    }
+
+    private fun unShowPopulate() {
+        binding.progressBar.visibility = View.VISIBLE
+        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.GONE
+        binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
+        binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.GONE
+        binding.layoutHeaderAllbooks.imgItemMore.visibility = View.GONE
+    }
+
 }

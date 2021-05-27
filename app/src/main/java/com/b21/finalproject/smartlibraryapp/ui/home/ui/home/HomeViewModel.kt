@@ -13,7 +13,7 @@ class HomeViewModel(private val bookRepository: BookRepository) : ViewModel() {
     }
     val text: LiveData<String> = _text
 
-    fun getAllBooks(): LiveData<List<BookEntity>> =
-        bookRepository.getAllBooks()
+    fun getAllBooks(sort: String): LiveData<List<BookEntity>> =
+        bookRepository.getAllBooks(sort)
 
 }
