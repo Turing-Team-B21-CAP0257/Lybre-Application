@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
@@ -65,6 +66,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //go to recommended books fragment in Books Activity
+        binding.layoutHeaderRecommended.imgItemMore.setOnClickListener {
+            val intent = Intent(requireContext(), BooksActivity::class.java)
+            startActivity(intent)
+        }
 
         // go to books activity
         binding.layoutHeaderAllbooks.imgItemMore.setOnClickListener {

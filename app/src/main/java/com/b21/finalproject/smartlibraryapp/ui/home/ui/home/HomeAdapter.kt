@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ItemListRecommendedBooksBinding
@@ -52,9 +53,15 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
                 val title = bookEntity.book_title.split("\"").toTypedArray()
                 val author = bookEntity.book_author.split("\"").toTypedArray()
 
+                val circularProgressBar = CircularProgressDrawable(itemView.context).apply {
+                    strokeWidth = 5f
+                    centerRadius = 30f
+                    start()
+                }
+
                 Glide.with(itemView.context)
                     .load("http://images.amazon.com/images/P/${url[6]}")
-                    .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error))
+                    .apply(RequestOptions.placeholderOf(circularProgressBar).error(R.drawable.ic_error))
                     .into(imgItemBook)
 
                 tvNameOfBook.text = title[1]
