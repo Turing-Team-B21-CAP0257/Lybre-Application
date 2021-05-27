@@ -8,7 +8,7 @@ import com.b21.finalproject.smartlibraryapp.vo.Resource
 
 interface BookDataSource {
 
-    fun getAllBooks(): LiveData<List<BookEntity>>
+    fun getAllBooks(sort: String): LiveData<List<BookEntity>>
 
     fun getAllRatings(): List<RatingEntity>
 

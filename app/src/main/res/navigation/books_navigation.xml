@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.gallery.GalleryFragment"
+        android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.RecommendedBooks.RecommendedBooksFragment"
         android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        tools:layout="@layout/fragment_recommended_books" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.slideshow.SlideshowFragment"
+        android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.MostBooks.MostBooksFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        tools:layout="@layout/fragment_most_books" />
 </navigation>

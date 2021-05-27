@@ -7,7 +7,7 @@
     tools:context=".ui.home.ui.books.menu.RecommendedBooks.RecommendedBooksFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_allbooks"
+        android:id="@+id/rv_recommended_books"
         android:padding="16dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
