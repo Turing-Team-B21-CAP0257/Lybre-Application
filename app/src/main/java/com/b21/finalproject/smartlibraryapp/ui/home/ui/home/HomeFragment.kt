@@ -171,13 +171,7 @@ class HomeFragment : Fragment() {
 
     private fun showItemSearchPopulate() {
         binding.progressBar.visibility = View.GONE
-//        binding.rvAllbooks.visibility = View.GONE
-//        binding.rvRecommendedBooks.visibility = View.GONE
-//        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.GONE
-//        binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
         binding.layoutHeaderResult.tvRecommendedBooks.text = "Result The Search"
-//        binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.GONE
-//        binding.layoutHeaderAllbooks.imgItemMore.visibility = View.GONE
         binding.layoutHeaderResult.imgItemMore.visibility = View.VISIBLE
         binding.layoutHeaderResult.tvRecommendedBooks.visibility = View.VISIBLE
         binding.rvSearchBooks.visibility = View.VISIBLE

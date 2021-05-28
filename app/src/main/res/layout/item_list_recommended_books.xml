@@ -58,7 +58,7 @@
                 <RatingBar
                     android:id="@+id/tv_rating_of_book"
                     style = "?android:attr/ratingBarStyleSmall"
-                    android:numStars="10"
+                    android:numStars="5"
                     android:stepSize="0.1"
                     android:progressTint="@color/palette_gold"
                     android:layout_width="wrap_content"

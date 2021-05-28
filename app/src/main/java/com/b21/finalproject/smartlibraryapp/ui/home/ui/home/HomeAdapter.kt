@@ -63,7 +63,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
                 tvNameOfBook.text = title[1]
                 tvDescOfBook.text = author[1]
-                tvRatingOfBook.rating = bookEntity.rating.toFloat()
+                tvRatingOfBook.rating = bookEntity.rating.toFloat() / 2
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailBookActivity::class.java)
