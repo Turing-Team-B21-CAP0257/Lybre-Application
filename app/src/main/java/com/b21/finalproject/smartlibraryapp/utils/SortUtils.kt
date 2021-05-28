@@ -14,7 +14,7 @@ object SortUtils {
     fun getSortedQuery(filter: String): SimpleSQLiteQuery {
         val simpleQuery = StringBuilder().append("SELECT * FROM book_tb ")
         when (filter) {
-            RECOMMENDED -> simpleQuery.append("ORDER BY bookId ASC LIMIT 1000")
+            RECOMMENDED -> simpleQuery.append("ORDER BY RANDOM() LIMIT 1000")
             RANDOM      -> simpleQuery.append("ORDER BY RANDOM() LIMIT 1000")
             MOST        -> simpleQuery.append("ORDER BY rating DESC LIMIT 1000")
         }
