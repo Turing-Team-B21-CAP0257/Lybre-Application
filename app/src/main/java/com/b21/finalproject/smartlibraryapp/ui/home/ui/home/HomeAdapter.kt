@@ -1,5 +1,6 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.home
 
+import android.util.Log
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
             allBooks.addAll(books)
             notifyDataSetChanged()
         } else {
+            allBooks.clear()
             allBooks.addAll(books)
             notifyDataSetChanged()
         }

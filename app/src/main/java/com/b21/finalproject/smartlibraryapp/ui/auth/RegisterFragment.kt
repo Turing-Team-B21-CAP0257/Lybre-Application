@@ -1,60 +1,67 @@
 package com.b21.finalproject.smartlibraryapp.ui.auth
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.b21.finalproject.smartlibraryapp.R
+import com.b21.finalproject.smartlibraryapp.databinding.FragmentLoginBinding
+import com.b21.finalproject.smartlibraryapp.databinding.FragmentRegisterBinding
+import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RegisterFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RegisterFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_register, container, false)
-    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RegisterFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RegisterFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        binding.btnRegister.setOnClickListener {
+            if (binding.edtUsername.text.isEmpty()) {
+                binding.edtUsername.error = "Username Required"
+                binding.edtUsername.requestFocus()
+                return@setOnClickListener
             }
+            if (binding.edtEmail.text.isEmpty()) {
+                binding.edtEmail.error = "Email Required"
+                binding.edtEmail.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtAddress.text.isEmpty()) {
+                binding.edtAddress.error = "Address Required"
+                binding.edtAddress.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtBirthday.text.isEmpty()) {
+                binding.edtBirthday.error = "Birthday Required"
+                binding.edtBirthday.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtPassword.text.isEmpty()) {
+                binding.edtPassword.error = "Password Required"
+                binding.edtPassword.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.rgSex.checkedRadioButtonId != -1) {
+
+//                if (!binding.rbMale.isChecked)
+//                    binding.rbMale.error = "Please choose your gender"
+//                else if (!binding.rbFemale.isChecked)
+//                    binding.rbFemale.error = "Please choose your gender"
+            }
+            else{
+                val intent = Intent(activity, HomeActivity::class.java)
+                startActivity(intent)
+            }
+        }
     }
 }
