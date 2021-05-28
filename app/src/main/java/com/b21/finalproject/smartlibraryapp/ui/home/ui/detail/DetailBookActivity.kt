@@ -89,7 +89,7 @@ class DetailBookActivity : AppCompatActivity() {
             tvPublisher.text = publisher[1]
 
             ratingBar.rating = book.rating.toFloat() / 2
-            tvRatings.text = number2digit.toString()
+            tvRatings.text = "${number2digit} / 10"
         }
 
         binding.layoutHeaderRecommended.imgItemMore.setOnClickListener {
