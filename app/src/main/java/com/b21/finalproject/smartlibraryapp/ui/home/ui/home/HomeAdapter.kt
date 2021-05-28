@@ -1,6 +1,7 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.home
 
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -61,6 +62,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
                     .apply(RequestOptions.placeholderOf(circularProgressBar).error(R.drawable.ic_error))
                     .into(imgItemBook)
 
+                Log.d("error", bookEntity.toString())
                 tvNameOfBook.text = title[1]
                 tvDescOfBook.text = author[1]
                 tvRatingOfBook.rating = bookEntity.rating.toFloat() / 2

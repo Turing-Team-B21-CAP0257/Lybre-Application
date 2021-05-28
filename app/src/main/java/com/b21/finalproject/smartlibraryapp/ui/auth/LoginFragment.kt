@@ -14,11 +14,7 @@ class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -28,8 +24,20 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnLogin.setOnClickListener {
-            val intent = Intent(activity, HomeActivity::class.java)
-            startActivity(intent)
+            if (binding.edtUsername.text.isEmpty()) {
+                binding.edtUsername.error = "Username Required"
+                binding.edtUsername.requestFocus()
+                return@setOnClickListener
+            }
+            if (binding.edtPassword.text.isEmpty()) {
+                binding.edtPassword.error = "Password Required"
+                binding.edtPassword.requestFocus()
+                return@setOnClickListener
+            }
+            else{
+                val intent = Intent(activity, HomeActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
@@ -37,5 +45,4 @@ class LoginFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }
