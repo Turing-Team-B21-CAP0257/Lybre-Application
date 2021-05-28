@@ -8,28 +8,16 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.SmartLibraryApp.AppBarOverlay">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:titleTextColor="@color/palette_200"
-            app:navigationIcon="@drawable/menu_black_24dp"
             android:background="@color/white"
-            app:popupTheme="@style/Theme.SmartLibraryApp.PopupOverlay">
+            app:titleTextColor="@color/palette_200"
+            app:navigationIcon="@drawable/menu_black_24dp">
 
-                <TextView
-                    android:text="Books"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:textColor="@color/palette_200"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_centerHorizontal="true"/>
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>

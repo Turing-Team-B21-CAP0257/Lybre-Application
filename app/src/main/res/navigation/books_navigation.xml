@@ -14,12 +14,12 @@
     <fragment
         android:id="@+id/nav_recommended_books"
         android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.RecommendedBooks.RecommendedBooksFragment"
-        android:label="@string/menu_gallery"
+        android:label="@string/recomended_header_title"
         tools:layout="@layout/fragment_recommended_books" />
 
     <fragment
         android:id="@+id/nav_most_books"
         android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.MostBooks.MostBooksFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/popular_books_title"
         tools:layout="@layout/fragment_most_books" />
 </navigation>
