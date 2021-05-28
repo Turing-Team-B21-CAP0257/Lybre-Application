@@ -2,21 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.b21.finalproject.smartlibraryapp">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.SmartLibraryApp">
+        android:theme="@style/Theme.SmartLibraryApp"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.home.ui.detail.DetailBookActivity"
+            android:parentActivityName=".ui.home.HomeActivity"></activity>
+
         <service
             android:name=".services.DataManagerService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".ui.home.ui.books.BooksActivity"

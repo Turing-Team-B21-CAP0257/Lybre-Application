@@ -67,4 +67,7 @@ dependencies {
 
     // Paging
     implementation "androidx.paging:paging-runtime:$pagingVersion"
+
+    // CardView
+    implementation "androidx.cardview:cardview:1.0.0"
 }
