@@ -43,8 +43,6 @@ class DetailBookActivity : AppCompatActivity() {
 
         val bookId = intent.getIntExtra(BOOK_ID, 0)
 
-        Log.i(TAG, bookId.toString())
-
         binding.rvRecommendedBooks.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvRecommendedBooks.setHasFixedSize(true)
 
@@ -68,6 +66,10 @@ class DetailBookActivity : AppCompatActivity() {
         val author = book.book_author.split("\"").toTypedArray()
         val publisher = book.publisher.split("\"").toTypedArray()
 
+        val number2digit = Math.round(book.rating.toDouble() * 10.0) / 10.0
+
+        Log.i(TAG, number2digit.toString())
+
         val circularProgressBar = CircularProgressDrawable(this@DetailBookActivity).apply {
             strokeWidth = 5f
             centerRadius = 30f
@@ -86,7 +88,8 @@ class DetailBookActivity : AppCompatActivity() {
             tvAuthor.text = author[1]
             tvPublisher.text = publisher[1]
 
-            ratingBar.rating = book.rating.toFloat()
+            ratingBar.rating = book.rating.toFloat() / 2
+            tvRatings.text = number2digit.toString()
         }
 
         binding.layoutHeaderRecommended.imgItemMore.setOnClickListener {
