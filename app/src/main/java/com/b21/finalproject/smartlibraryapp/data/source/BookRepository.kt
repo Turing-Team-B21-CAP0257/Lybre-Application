@@ -41,7 +41,7 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
     }
 
     override fun getRecommendedBooks(sort: String): LiveData<List<BookEntity>> {
-        val query = SortUtils.getBookByQuery(sort)
+        val query = SortUtils.getSortedQuery(sort)
         val result = MutableLiveData<List<BookEntity>>()
         GlobalScope.async(Dispatchers.IO) {
             result.postValue(localDataSource.getAllBooks(query))
