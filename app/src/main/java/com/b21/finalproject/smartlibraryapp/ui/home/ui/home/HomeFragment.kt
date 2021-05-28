@@ -25,7 +25,7 @@ import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), CoroutineScope {
 
     private lateinit var factory: ViewModelFactory
     private lateinit var homeViewModel: HomeViewModel
@@ -34,6 +34,11 @@ class HomeFragment : Fragment() {
     private lateinit var resultAdapter: HomeAdapter
     private var _binding: FragmentHomeBinding? = null
 
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
+
+    private lateinit var job : Job
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -41,6 +46,8 @@ class HomeFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        job = Job()
+        job.start()
     }
 
     override fun onCreateView(
@@ -97,8 +104,11 @@ class HomeFragment : Fragment() {
             binding.rvSearchBooks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.rvSearchBooks.setHasFixedSize(true)
 
-            getDataFromViewModel()
-
+            job = launch {
+                val getData = async(Dispatchers.Main) {  getDataFromViewModel() }
+                getData.await()
+            }
+            job.start()
         }
 
     }
@@ -134,6 +144,7 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        job.cancel()
     }
 
     private fun getDataFromViewModel() {
