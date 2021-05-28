@@ -1,10 +1,13 @@
 package com.b21.finalproject.smartlibraryapp.data.source.local.entity
 
+import android.os.Parcelable
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 @Entity(tableName = "user_tb")
 data class UserEntity(
     @PrimaryKey()
@@ -38,4 +41,4 @@ data class UserEntity(
 
     @ColumnInfo(name = "password")
     var password: String
-)
+) : Parcelable

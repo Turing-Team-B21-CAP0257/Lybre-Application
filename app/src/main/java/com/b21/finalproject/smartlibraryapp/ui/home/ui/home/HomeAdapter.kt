@@ -1,5 +1,6 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.home
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -7,6 +8,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ItemListRecommendedBooksBinding
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBookActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -62,6 +64,12 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
                 tvNameOfBook.text = title[1]
                 tvDescOfBook.text = author[1]
                 tvRatingOfBook.rating = bookEntity.rating.toFloat()
+
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailBookActivity::class.java)
+                    intent.putExtra(DetailBookActivity.BOOK_ID, bookEntity.bookId)
+                    itemView.context.startActivity(intent)
+                }
             }
         }
     }
