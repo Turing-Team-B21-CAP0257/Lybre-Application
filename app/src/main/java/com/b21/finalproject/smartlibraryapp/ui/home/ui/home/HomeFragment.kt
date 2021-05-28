@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
@@ -26,9 +27,11 @@ import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment() {
 
-
     private lateinit var factory: ViewModelFactory
     private lateinit var homeViewModel: HomeViewModel
+    private lateinit var adapter: HomeAdapter
+    private lateinit var recommendedAdapter: HomeAdapter
+    private lateinit var resultAdapter: HomeAdapter
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -60,12 +63,13 @@ class HomeFragment : Fragment() {
             textView.text = it
         })
 
-        unShowPopulate()
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        unShowPopulate()
 
         //go to recommended books fragment in Books Activity
         binding.layoutHeaderRecommended.imgItemMore.setOnClickListener {
@@ -80,7 +84,9 @@ class HomeFragment : Fragment() {
         }
 
         if (activity != null) {
-            val allBooksAdapter = HomeAdapter()
+            adapter             = HomeAdapter()
+            recommendedAdapter  = HomeAdapter()
+            resultAdapter       = HomeAdapter()
 
             binding.rvRecommendedBooks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.rvRecommendedBooks.setHasFixedSize(true)
@@ -88,12 +94,10 @@ class HomeFragment : Fragment() {
             binding.rvAllbooks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.rvAllbooks.setHasFixedSize(true)
 
-            homeViewModel.getAllBooks(SortUtils.RANDOM).observe(viewLifecycleOwner, { books ->
-                showPopulate()
-                allBooksAdapter.setAllbooks(books)
-                binding.rvAllbooks.adapter = allBooksAdapter
-                binding.rvRecommendedBooks.adapter = allBooksAdapter
-            })
+            binding.rvSearchBooks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            binding.rvSearchBooks.setHasFixedSize(true)
+
+            getDataFromViewModel()
 
         }
 
@@ -109,7 +113,12 @@ class HomeFragment : Fragment() {
         searchView.queryHint = "Search your favorite books"
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                Toast.makeText(requireContext(), query, Toast.LENGTH_SHORT).show()
+                val text = query as String
+                homeViewModel.getBookByQuery(text).observe(viewLifecycleOwner, { books ->
+                    showItemSearchPopulate()
+                    resultAdapter.setAllbooks(books)
+                    binding.rvSearchBooks.adapter = resultAdapter
+                })
                 return true
             }
 
@@ -127,12 +136,27 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    private fun getDataFromViewModel() {
+        homeViewModel.getAllBooks(SortUtils.RANDOM).observe(viewLifecycleOwner, { books ->
+            adapter.setAllbooks(books)
+            binding.rvAllbooks.adapter = adapter
+        })
+
+        homeViewModel.getRecommendedBooks(SortUtils.RECOMMENDED).observe(viewLifecycleOwner, { books ->
+            showPopulate()
+            recommendedAdapter.setAllbooks(books)
+            binding.rvRecommendedBooks.adapter = recommendedAdapter
+        })
+    }
+
     private fun showPopulate() {
         binding.progressBar.visibility = View.GONE
         binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.VISIBLE
         binding.layoutHeaderRecommended.imgItemMore.visibility = View.VISIBLE
         binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.VISIBLE
         binding.layoutHeaderAllbooks.imgItemMore.visibility = View.VISIBLE
+        binding.layoutHeaderResult.tvRecommendedBooks.visibility = View.GONE
+        binding.layoutHeaderResult.imgItemMore.visibility = View.GONE
     }
 
     private fun unShowPopulate() {
@@ -141,6 +165,34 @@ class HomeFragment : Fragment() {
         binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
         binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.GONE
         binding.layoutHeaderAllbooks.imgItemMore.visibility = View.GONE
+        binding.layoutHeaderResult.tvRecommendedBooks.visibility = View.GONE
+        binding.layoutHeaderResult.imgItemMore.visibility = View.GONE
+    }
+
+    private fun showItemSearchPopulate() {
+        binding.progressBar.visibility = View.GONE
+//        binding.rvAllbooks.visibility = View.GONE
+//        binding.rvRecommendedBooks.visibility = View.GONE
+//        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.GONE
+//        binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
+        binding.layoutHeaderResult.tvRecommendedBooks.text = "Result The Search"
+//        binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.GONE
+//        binding.layoutHeaderAllbooks.imgItemMore.visibility = View.GONE
+        binding.layoutHeaderResult.imgItemMore.visibility = View.VISIBLE
+        binding.layoutHeaderResult.tvRecommendedBooks.visibility = View.VISIBLE
+        binding.rvSearchBooks.visibility = View.VISIBLE
+    }
+
+    private fun unShowItemSearchPopulate() {
+        binding.progressBar.visibility = View.GONE
+        binding.rvAllbooks.visibility = View.GONE
+        binding.rvRecommendedBooks.visibility = View.GONE
+        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.GONE
+        binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
+        binding.layoutHeaderRecommended.tvRecommendedBooks.text = "Result The Search"
+        binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.GONE
+        binding.layoutHeaderAllbooks.imgItemMore.visibility = View.GONE
+        binding.rvSearchBooks.visibility = View.GONE
     }
 
 }

@@ -1,7 +1,5 @@
 package com.b21.finalproject.smartlibraryapp.data.source.local
 
-import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity

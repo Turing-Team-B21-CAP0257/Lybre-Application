@@ -10,6 +10,10 @@ interface BookDataSource {
 
     fun getAllBooks(sort: String): LiveData<List<BookEntity>>
 
+    fun getRecommendedBooks(sort: String): LiveData<List<BookEntity>>
+
+    fun getBookByQuery(text: String): LiveData<List<BookEntity>>
+
     fun getAllRatings(): List<RatingEntity>
 
     fun getBookByIsbn(isbn: String): BookEntity

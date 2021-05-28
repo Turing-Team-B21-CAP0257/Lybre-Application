@@ -16,4 +16,9 @@ class HomeViewModel(private val bookRepository: BookRepository) : ViewModel() {
     fun getAllBooks(sort: String): LiveData<List<BookEntity>> =
         bookRepository.getAllBooks(sort)
 
+    fun getRecommendedBooks(sort: String): LiveData<List<BookEntity>> =
+        bookRepository.getRecommendedBooks(sort)
+
+    fun getBookByQuery(query: String): LiveData<List<BookEntity>> =
+        bookRepository.getBookByQuery(query)
 }
