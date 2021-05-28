@@ -19,8 +19,6 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
 
     fun getAllRatings(): List<RatingEntity> = mLibraryDao.getAllRatings()
 
-    fun getBookByIsbn(isbn: String): BookEntity = mLibraryDao.getBookByisbn(isbn)
-
-    fun getBookByTitle(title: String): BookEntity = mLibraryDao.getBookByTitle(title)
+    fun getBookById(bookId: Int): BookEntity = mLibraryDao.getBookById(bookId)
 
 }

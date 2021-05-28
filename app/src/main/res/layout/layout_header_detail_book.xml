@@ -7,14 +7,17 @@
 
     <TextView
         android:id="@+id/tv_book_title"
-        android:fontFamily="@font/poppins_medium"
-        android:textSize="18dp"
-        android:textColor="@color/palette_200"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:maxLines="2"
+        android:fontFamily="@font/poppins_medium"
         android:text="The Name of Book"
+        android:textColor="@color/palette_200"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toStartOf="@+id/ib_bookmark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,33 +57,35 @@
         android:text="ISBN"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/palette_200"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toTopOf="@+id/cardView" />
 
     <TextView
         android:id="@+id/tv_isbn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        tools:text="0195153448"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_regular"
-        android:textSize="10sp"
         android:textColor="@color/palette_200"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
+        tools:text="0195153448" />
 
     <TextView
         android:id="@+id/textView10"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/poppins_medium"
         android:text="Year of Publication"
         android:textColor="@color/palette_200"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/tv_isbn" />
 
@@ -92,7 +97,7 @@
         android:layout_marginTop="4dp"
         tools:text="2021"
         android:fontFamily="@font/poppins_regular"
-        android:textSize="10sp"
+        android:textSize="12sp"
         android:textColor="@color/palette_200"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
@@ -106,22 +111,26 @@
         android:fontFamily="@font/poppins_medium"
         android:text="Author"
         android:textColor="@color/palette_200"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/tv_year_publication" />
 
     <TextView
         android:id="@+id/tv_author"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        tools:text="Lorem Ipsum"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_regular"
-        android:textSize="10sp"
         android:textColor="@color/palette_200"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
+        tools:text="Lorem Ipsum" />
 
     <TextView
         android:id="@+id/textView14"
@@ -132,22 +141,26 @@
         android:fontFamily="@font/poppins_medium"
         android:text="Publisher"
         android:textColor="@color/palette_200"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/tv_author" />
 
     <TextView
         android:id="@+id/tv_publisher"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        tools:text="Lorem Ipsum"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_regular"
-        android:textSize="10sp"
         android:textColor="@color/palette_200"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        tools:text="Lorem Ipsum" />
 
     <TextView
         android:id="@+id/textView16"
@@ -158,7 +171,7 @@
         android:fontFamily="@font/poppins_medium"
         android:text="Ratings"
         android:textColor="@color/palette_200"
-        android:textSize="12sp"
+        android:textSize="14sp"
         app:layout_constraintStart_toEndOf="@+id/cardView"
         app:layout_constraintTop_toBottomOf="@+id/tv_publisher" />
 
@@ -167,6 +180,7 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:numStars="5"
         android:stepSize="0.1"
+        android:progressTint="@color/palette_gold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"

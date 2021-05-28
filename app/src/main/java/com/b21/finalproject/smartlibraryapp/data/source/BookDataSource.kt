@@ -16,8 +16,6 @@ interface BookDataSource {
 
     fun getAllRatings(): List<RatingEntity>
 
-    fun getBookByIsbn(isbn: String): BookEntity
-
-    fun getBookByTitle(title: String): BookEntity
+    fun getBookById(bookId: Int): LiveData<BookEntity>
 
 }
