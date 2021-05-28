@@ -52,11 +52,13 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
     override fun getAllRatings(): List<RatingEntity> =
         localDataSource.getAllRatings()
 
-    override fun getBookByIsbn(isbn: String): BookEntity =
-        localDataSource.getBookByIsbn(isbn)
-
-    override fun getBookByTitle(title: String): BookEntity =
-        localDataSource.getBookByTitle(title)
+    override fun getBookById(bookId: Int): LiveData<BookEntity> {
+        val result = MutableLiveData<BookEntity>()
+        GlobalScope.async(Dispatchers.IO) {
+            result.postValue(localDataSource.getBookById(bookId))
+        }
+        return result
+    }
 
 
 }

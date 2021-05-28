@@ -67,7 +67,7 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailBookActivity::class.java)
-                    intent.putExtra(DetailBookActivity.BOOK_ID, bookEntity.bookId)
+                    intent.putExtra(DetailBookActivity.BOOK_ID, bookEntity.bookId.toInt())
                     itemView.context.startActivity(intent)
                 }
             }

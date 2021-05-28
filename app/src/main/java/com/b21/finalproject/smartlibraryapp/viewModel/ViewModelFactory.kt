@@ -7,6 +7,7 @@ import com.b21.finalproject.smartlibraryapp.data.source.BookRepository
 import com.b21.finalproject.smartlibraryapp.di.Injection
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.bookmark.BookmarkViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.allBooks.AllBooksViewModel
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val bookRepository: BookRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -31,6 +32,9 @@ class ViewModelFactory private constructor(private val bookRepository: BookRepos
             }
             modelClass.isAssignableFrom(BookmarkViewModel::class.java) -> {
                 return BookmarkViewModel(bookRepository) as T
+            }
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                return DetailViewModel(bookRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel Class : ${modelClass.name}")
         }
