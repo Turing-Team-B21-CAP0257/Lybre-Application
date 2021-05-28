@@ -25,18 +25,32 @@
 
             <ProgressBar
                 android:id="@+id/progress_bar"
-                android:layout_marginTop="135dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="135dp"
                 android:visibility="gone" />
+
+            <include
+                android:id="@+id/layout_header_result"
+                layout="@layout/layout_header_recommended"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search_books"
+                style="@style/margin_auth"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
             <include
                 android:id="@+id/layout_header_recommended"
                 layout="@layout/layout_header_recommended"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp" />
+                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_recommended_books"
@@ -48,14 +62,14 @@
                 android:id="@+id/layout_header_allbooks"
                 layout="@layout/layout_header_allbooks"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp" />
+                android:layout_height="wrap_content" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_allbooks"
                 style="@style/margin_auth"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
         </LinearLayout>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

@@ -31,6 +31,24 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         return result
     }
 
+    override fun getBookByQuery(text: String): LiveData<List<BookEntity>> {
+        val query = SortUtils.getBookByQuery(text)
+        val result = MutableLiveData<List<BookEntity>>()
+        GlobalScope.async(Dispatchers.IO) {
+            result.postValue(localDataSource.getAllBooks(query))
+        }
+        return result
+    }
+
+    override fun getRecommendedBooks(sort: String): LiveData<List<BookEntity>> {
+        val query = SortUtils.getBookByQuery(sort)
+        val result = MutableLiveData<List<BookEntity>>()
+        GlobalScope.async(Dispatchers.IO) {
+            result.postValue(localDataSource.getAllBooks(query))
+        }
+        return result
+    }
+
     override fun getAllRatings(): List<RatingEntity> =
         localDataSource.getAllRatings()
 

@@ -1,8 +1,5 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.home
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +9,6 @@ import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ItemListRecommendedBooksBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import java.net.URL
-import kotlin.math.log
 
 class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
@@ -21,10 +16,10 @@ class HomeAdapter : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     fun setAllbooks(books: List<BookEntity>) {
         if (allBooks.size != 0) {
+            allBooks.clear()
             allBooks.addAll(books)
             notifyDataSetChanged()
         } else {
-            allBooks.clear()
             allBooks.addAll(books)
             notifyDataSetChanged()
         }
