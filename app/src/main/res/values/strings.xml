@@ -30,7 +30,7 @@
     <string name="title_history">History</string>
     <string name="title_profile">Profile</string>
     <string name="all_books_header_title">All Books</string>
-    <string name="recomended_header_title">Recommended a Books</string>
+    <string name="recomended_header_title">Recommended Books</string>
     <string name="welcome_home_title">Welcome,</string>
     <string name="title_activity_books">BooksActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -45,6 +45,7 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="all_books_title">All books</string>
     <string name="loading">Load data from local</string>
-    <string name="loading2">This will take a while for the first time...</string>
+    <string name="loading2">This will take a while for the first time</string>
+    <string name="popular_books_title">Popular Books</string>
 
 </resources>

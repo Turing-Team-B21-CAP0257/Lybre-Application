@@ -9,9 +9,9 @@
             android:title="@string/all_books_title" />
         <item
             android:id="@+id/nav_recommended_books"
-            android:title="Recommended Books" />
+            android:title="@string/recomended_header_title" />
         <item
             android:id="@+id/nav_most_books"
-            android:title="Most preferred book" />
+            android:title="@string/popular_books_title" />
     </group>
 </menu>

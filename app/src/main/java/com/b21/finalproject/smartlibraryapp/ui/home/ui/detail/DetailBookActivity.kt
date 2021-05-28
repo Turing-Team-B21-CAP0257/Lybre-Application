@@ -37,7 +37,6 @@ class DetailBookActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarDetailBook.toolbar)
         supportActionBar?.title = "Detail Book"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         adapter = HomeAdapter()
 
