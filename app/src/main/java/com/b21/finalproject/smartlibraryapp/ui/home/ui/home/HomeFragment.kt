@@ -20,14 +20,12 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import kotlinx.coroutines.*
@@ -54,6 +52,7 @@ class HomeFragment : Fragment(), CoroutineScope {
     companion object {
         const val CAMERA_REQUEST_CODE = 100
         const val CAMERA_PERMISSION_CODE = 200
+        const val CAMERA_RETURN_BOOK_CODE = 101
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -114,6 +113,11 @@ class HomeFragment : Fragment(), CoroutineScope {
                     CAMERA_REQUEST_CODE
                 )
             }
+        }
+
+        binding.layoutHeaderHome.cardMenuReturn.setOnClickListener {
+            val intent = Intent(requireContext(), ReturnBookActivity::class.java)
+            startActivity(intent)
         }
 
         if (activity != null) {

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.home.ui.returnbook.ReturnBookActivity">
+
+    <include
+        android:id="@+id/app_bar_detail_book"
+        layout="@layout/app_bar_detail_books"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/layout_header_return_book"
+        layout="@layout/layout_header_return_book"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_return_books"
+        tools:listitem="@layout/item_list_return_book"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

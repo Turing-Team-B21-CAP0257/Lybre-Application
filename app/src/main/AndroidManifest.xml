@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartLibraryApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.home.ui.detail.DetailBorrowBookActivity"></activity>
+        <activity android:name=".ui.home.ui.returnbook.ReturnBookActivity"
+            android:parentActivityName=".ui.home.HomeActivity"></activity>
+        <activity android:name=".ui.home.ui.detail.DetailBorrowBookActivity" />
         <activity
             android:name=".ui.home.ui.detail.DetailBookActivity"
             android:parentActivityName=".ui.home.HomeActivity" />
