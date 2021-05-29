@@ -1,15 +1,22 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.home
 
+import android.Manifest
+import android.app.Activity
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import kotlinx.coroutines.*
@@ -42,6 +50,11 @@ class HomeFragment : Fragment(), CoroutineScope {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    companion object {
+        const val CAMERA_REQUEST_CODE = 100
+        const val CAMERA_PERMISSION_CODE = 200
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,6 +103,19 @@ class HomeFragment : Fragment(), CoroutineScope {
             startActivity(intent)
         }
 
+        binding.layoutHeaderHome.cardMenuBorrowed.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            } else {
+                ActivityCompat.requestPermissions(
+                    requireActivity(),
+                    arrayOf(Manifest.permission.CAMERA),
+                    CAMERA_REQUEST_CODE
+                )
+            }
+        }
+
         if (activity != null) {
             adapter             = HomeAdapter()
             recommendedAdapter  = HomeAdapter()
@@ -111,6 +137,35 @@ class HomeFragment : Fragment(), CoroutineScope {
             job.start()
         }
 
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CAMERA_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            } else {
+                Toast.makeText(requireContext(), "You must allow the permission for camera !", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == CAMERA_REQUEST_CODE) {
+                val image: Bitmap = data?.extras?.get("data") as Bitmap
+                Log.i("MYTAG", image.toString())
+                val intent = Intent(requireContext(), DetailBorrowBookActivity::class.java)
+                intent.putExtra(DetailBorrowBookActivity.IMAGE_CAPTURE, image)
+                startActivity(intent)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

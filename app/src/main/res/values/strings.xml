@@ -47,5 +47,8 @@
     <string name="loading">Load data from local</string>
     <string name="loading2">This will take a while for the first time</string>
     <string name="popular_books_title">Popular Books</string>
+    <string name="date_of_borrowed_title">Date of Borrowed</string>
+    <string name="borrow_the_book_title">Borrow the book</string>
+    <string name="deadline_of_borrowed_title">Deadline of Borrowed</string>
 
 </resources>
