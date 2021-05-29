@@ -1,6 +1,8 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.detail
 
+import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Matrix
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +12,7 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityDetailBorrowBookBinding
+import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
@@ -44,7 +47,8 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         binding.rvWrongBooks.setHasFixedSize(true)
 
         val imageCapture = intent.getParcelableExtra<Bitmap>(IMAGE_CAPTURE)
-        binding.layoutHeaderDetailBorrow.imgResultCapture.setImageBitmap(imageCapture)
+        val rotateImage = rotateImage(imageCapture!!)
+        binding.layoutHeaderDetailBorrow.imgResultCapture.setImageBitmap(rotateImage)
 
         viewModel.getBookById(1).observe(this, { book ->
             showPopulate(book)
@@ -55,6 +59,12 @@ class DetailBorrowBookActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
             binding.rvWrongBooks.adapter = adapter
         })
+
+        binding.btnBorrow.setOnClickListener {
+            val intent = Intent(this@DetailBorrowBookActivity, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
     }
 
     private fun showPopulate(book: BookEntity) {
@@ -90,5 +100,13 @@ class DetailBorrowBookActivity : AppCompatActivity() {
 
         binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
         binding.layoutHeaderRecommended.tvRecommendedBooks.text = "Wrong book? might you mean these book!"
+    }
+
+    private fun rotateImage(img: Bitmap): Bitmap? {
+        val matrix = Matrix()
+        matrix.postRotate(90f)
+        val rotatedImg = Bitmap.createBitmap(img, 0, 0, img.width, img.height, matrix, true)
+        img.recycle()
+        return rotatedImg
     }
 }

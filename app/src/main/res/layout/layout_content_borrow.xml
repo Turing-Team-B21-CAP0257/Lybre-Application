@@ -21,6 +21,9 @@
 
         <EditText
             android:id="@+id/edt_date_of_borrowed"
+            android:enabled="false"
+            android:text="16-12-2021"
+            android:textColor="@color/palette_200"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
@@ -42,6 +45,9 @@
 
         <EditText
             android:id="@+id/edt_deadline_of_borrowed"
+            android:enabled="false"
+            android:text="18-12-2021"
+            android:textColor="@color/palette_200"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress" />
