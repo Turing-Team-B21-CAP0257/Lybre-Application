@@ -28,6 +28,9 @@ import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookAc
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
+import com.chaquo.python.PyObject
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
@@ -77,8 +80,21 @@ class HomeFragment : Fragment(), CoroutineScope {
         reqActivity.setSupportActionBar(binding.layoutHeaderHome.homeToolbar)
         reqActivity.setTitle("")
 
+//        if (! Python.isStarted()) {
+//            Python.start(AndroidPlatform(requireContext()))
+//        }
+//
+//        val py: Python = Python.getInstance()
+//
+//        val pyObj: PyObject = py.getModule("myscript")
+//
+//        val obj: PyObject = pyObj.callAttr("name", "Yossy")
+//
         val textView: TextView = binding.layoutHeaderHome.tvUsername
-        homeViewModel.text.observe(viewLifecycleOwner, Observer {
+
+//        textView.text = obj.toString()
+
+        homeViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
         })
 
