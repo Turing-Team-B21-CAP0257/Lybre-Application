@@ -50,5 +50,6 @@
     <string name="date_of_borrowed_title">Date of Borrowed</string>
     <string name="borrow_the_book_title">Borrow the book</string>
     <string name="deadline_of_borrowed_title">Deadline of Borrowed</string>
+    <string name="return_now_title">Return now</string>
 
 </resources>
