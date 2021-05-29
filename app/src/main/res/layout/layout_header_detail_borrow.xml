@@ -18,7 +18,7 @@
             android:id="@+id/img_result_capture"
             android:layout_width="250dp"
             android:layout_height="300dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             tools:src="@drawable/background_splashscreen" />
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
