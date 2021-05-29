@@ -21,12 +21,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <ToggleButton
         android:id="@+id/ib_bookmark"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/icon_bookmark_navbar"
+        android:textOn=" "
+        android:textOff=" "
+        android:background="@drawable/state_button_bookmark"
         app:layout_constraintBottom_toBottomOf="@+id/tv_book_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tv_book_title" />

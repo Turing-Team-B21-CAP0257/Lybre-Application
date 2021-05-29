@@ -10,7 +10,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "book_tb")
 data class BookEntity(
-    @PrimaryKey()
+    @PrimaryKey
     @NonNull
     @ColumnInfo
     var bookId: String,

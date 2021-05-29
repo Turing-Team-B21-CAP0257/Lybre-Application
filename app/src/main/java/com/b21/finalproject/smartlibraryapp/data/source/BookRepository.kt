@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.b21.finalproject.smartlibraryapp.data.source.local.LocalDataSource
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import kotlinx.coroutines.Dispatchers
@@ -60,5 +62,12 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         return result
     }
 
+    override fun insertBorrowBook(borrowBookEntity: BorrowBookEntity) {
+        localDataSource.insertBorrowBook(borrowBookEntity)
+    }
+
+    override fun insertFavoriteBook(favoriteBookEntity: FavoriteBookEntity) {
+        localDataSource.insertFavoriteBook(favoriteBookEntity)
+    }
 
 }

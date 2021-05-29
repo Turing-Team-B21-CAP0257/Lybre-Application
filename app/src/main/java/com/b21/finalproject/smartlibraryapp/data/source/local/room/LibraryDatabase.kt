@@ -4,11 +4,9 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.UserEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.*
 
-@Database(entities = [BookEntity::class, RatingEntity::class, UserEntity::class],
+@Database(entities = [BookEntity::class, RatingEntity::class, UserEntity::class, BorrowBookEntity::class, FavoriteBookEntity::class],
             version = 1,
             exportSchema = false)
 abstract class LibraryDatabase : RoomDatabase(){
