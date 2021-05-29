@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityDetailBorrowBookBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
@@ -61,6 +62,16 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         })
 
         binding.btnBorrow.setOnClickListener {
+            val borrowBook = BorrowBookEntity(
+                1,
+                "1",
+                "1",
+                "18-05-2021",
+                "22-05-2021",
+                true,
+                false
+            )
+            viewModel.insertBorrowBook(borrowBook)
             val intent = Intent(this@DetailBorrowBookActivity, HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)

@@ -2,9 +2,7 @@ package com.b21.finalproject.smartlibraryapp.data.source.local.room
 
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteQuery
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.UserEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.*
 
 @Dao
 interface LibraryDao {
@@ -26,4 +24,10 @@ interface LibraryDao {
 
     @Query("SELECT * FROM book_tb WHERE bookId = :bookId")
     fun getBookById(bookId: Int): BookEntity
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertBorrowBook(borrowBookEntity: BorrowBookEntity)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertFavoriteBook(favoriteBookEntity: FavoriteBookEntity)
 }
