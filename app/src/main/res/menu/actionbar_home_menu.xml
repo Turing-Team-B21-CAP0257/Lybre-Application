@@ -11,7 +11,7 @@
         android:title="Search"
         app:showAsAction="collapseActionView|always"/>
     <item
-        android:id="@+id/action_done"
+        android:id="@+id/action_setting"
         android:icon="@drawable/ic_baseline_settings_white"
         android:title="Setting"
         app:showAsAction="ifRoom|withText"/>
