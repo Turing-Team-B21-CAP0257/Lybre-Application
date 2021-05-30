@@ -48,8 +48,8 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         binding.rvWrongBooks.setHasFixedSize(true)
 
         val imageCapture = intent.getParcelableExtra<Bitmap>(IMAGE_CAPTURE)
-        val rotateImage = rotateImage(imageCapture!!)
-        binding.layoutHeaderDetailBorrow.imgResultCapture.setImageBitmap(rotateImage)
+//        val rotateImage = rotateImage(imageCapture!!) // Jika SDK dibawah 30 atau versi android 10
+        binding.layoutHeaderDetailBorrow.imgResultCapture.setImageBitmap(imageCapture)
 
         viewModel.getBookById(1).observe(this, { book ->
             showPopulate(book)
@@ -113,11 +113,14 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         binding.layoutHeaderRecommended.tvRecommendedBooks.text = "Wrong book? might you mean these book!"
     }
 
-    private fun rotateImage(img: Bitmap): Bitmap? {
-        val matrix = Matrix()
-        matrix.postRotate(90f)
-        val rotatedImg = Bitmap.createBitmap(img, 0, 0, img.width, img.height, matrix, true)
-        img.recycle()
-        return rotatedImg
-    }
+    /**
+     *  Jika ingin digunakan untuk dibawah SDK 30
+     */
+//    private fun rotateImage(img: Bitmap): Bitmap? {
+//        val matrix = Matrix()
+//        matrix.postRotate(90f)
+//        val rotatedImg = Bitmap.createBitmap(img, 0, 0, img.width, img.height, matrix, true)
+//        img.recycle()
+//        return rotatedImg
+//    }
 }
