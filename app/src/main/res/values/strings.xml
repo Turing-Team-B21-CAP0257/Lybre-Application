@@ -49,10 +49,6 @@
     <string name="all_books_title">All books</string>
 
 
-
-
-
-
     <!--  Profile  -->
 
 
@@ -112,4 +108,19 @@
     <string name="cc_member_2">- Orel Revo Sakchi Usdelivian</string>
     <string name="ml_member_2">- Ergina Kamilia Putri</string>
 
+
+    <!--  Settings  -->
+    <string name="change_language">Change Languages</string>
+    <string name="logout">Logout</string>
+    <string name="account">Account</string>
+    <string name="androidDevName">- M Ramdhan Syahputra <br/>- Yossy Syahida</string>
+    <string name="cloudCompName">- Arif Wicaksono <br/>- Orel Revo Sakchi Usdelivian</string>
+    <string name="machineLearningName">- Afgani Fajar Rizky <br/>- Ergina Kamilia Putri</string>
+    <string name="android_developer_title">Android Developer</string>
+    <string name="cloud_computing_title">Cloud Computing</string>
+    <string name="machine_learning_title">Machine Learning</string>
+    <string name="language">Language</string>
+    <string name="about_application_title">About Application</string>
+    <string name="smart_library_version_1_0">Smart Library version 1.0</string>
+    <string name="copy_right_smart_library_system">Copy right smart library system</string>
 </resources>

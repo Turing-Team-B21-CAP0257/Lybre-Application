@@ -21,6 +21,10 @@
 
     <TextView
         style="@style/textViewProfile"
+        android:text="@string/androidDevName"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_android_dev_title" />
         android:text="@string/md_member_2"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"

@@ -12,6 +12,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        style="@style/textViewProfile"
+        android:text="@string/machineLearningName"
         android:id="@+id/tv_member1"
         style="@style/textViewProfile"
         android:text="@string/ml_member_1"

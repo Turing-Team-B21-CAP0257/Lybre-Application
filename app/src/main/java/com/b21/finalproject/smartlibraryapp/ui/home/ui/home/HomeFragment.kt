@@ -35,6 +35,7 @@ import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import com.chaquo.python.PyObject
 import com.chaquo.python.Python
@@ -368,6 +369,15 @@ class HomeFragment : Fragment(), CoroutineScope {
         }
         return super.onOptionsItemSelected(item)
     }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.action_done -> {
+//                }
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
