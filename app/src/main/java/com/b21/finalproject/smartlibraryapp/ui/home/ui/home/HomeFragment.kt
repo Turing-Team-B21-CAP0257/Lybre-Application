@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 
 class HomeFragment : Fragment() {
@@ -107,6 +108,15 @@ class HomeFragment : Fragment() {
 
         super.onCreateOptionsMenu(menu, inflater)
     }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.action_done -> {
+//                }
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
