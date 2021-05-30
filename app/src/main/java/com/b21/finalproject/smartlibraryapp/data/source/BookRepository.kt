@@ -70,4 +70,57 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         localDataSource.insertFavoriteBook(favoriteBookEntity)
     }
 
+    override fun getAllFavoriteBook(userId: String): LiveData<List<BookEntity>> {
+        val favoriteBooks = MutableLiveData<List<BookEntity>>()
+        localDataSource.getAllFavoriteBook(userId, object : LocalDataSource.LoadFavoriteBooksCallback {
+            override fun onAllFavoriteBooksReceived(favoriteBookEntity: List<FavoriteBookEntity>) {
+                val bookEntities = ArrayList<BookEntity>()
+                for (favoriteBook in favoriteBookEntity) {
+                    val bookById = localDataSource.getBookById(favoriteBook.bookId.toInt())
+                    val bookEntity = BookEntity(
+                        bookById.bookId,
+                        bookById.ISBN,
+                        bookById.book_title,
+                        bookById.book_author,
+                        bookById.year_publication,
+                        bookById.publisher,
+                        bookById.imageUrl_s,
+                        bookById.imageUrl_m,
+                        bookById.imageUrl_l,
+                        bookById.rating
+                    )
+                    bookEntities.add(bookEntity)
+                }
+                favoriteBooks.postValue(bookEntities)
+            }
+        })
+        return favoriteBooks
+    }
+
+    override fun getAllBorrowBook(userId: String): LiveData<List<BookEntity>> {
+       val borrowBooks = MutableLiveData<List<BookEntity>>()
+        localDataSource.getAllBorrowBook(userId, object : LocalDataSource.LoadBorrowBooksCallback {
+            override fun onAllBorrowBooksReceived(borrowBookEntity: List<BorrowBookEntity>) {
+                val bookEntities = ArrayList<BookEntity>()
+                for (borrowBook in borrowBookEntity) {
+                    val bookById = localDataSource.getBookById(borrowBook.bookId.toInt())
+                    val bookEntity = BookEntity(
+                        bookById.bookId,
+                        bookById.ISBN,
+                        bookById.book_title,
+                        bookById.book_author,
+                        bookById.year_publication,
+                        bookById.publisher,
+                        bookById.imageUrl_s,
+                        bookById.imageUrl_m,
+                        bookById.imageUrl_l,
+                        bookById.rating
+                    )
+                    bookEntities.add(bookEntity)
+                }
+                borrowBooks.postValue(bookEntities)
+            }
+        })
+        return borrowBooks
+    }
 }

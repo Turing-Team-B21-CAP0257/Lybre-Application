@@ -63,9 +63,9 @@ class DetailBorrowBookActivity : AppCompatActivity() {
 
         binding.btnBorrow.setOnClickListener {
             val borrowBook = BorrowBookEntity(
-                1,
+                0,
                 "1",
-                "1",
+                "113",
                 "18-05-2021",
                 "22-05-2021",
                 true,

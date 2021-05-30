@@ -32,7 +32,7 @@ class ReturnBookActivity : AppCompatActivity() {
         binding.rvReturnBooks.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvReturnBooks.setHasFixedSize(true)
 
-        viewModel.getAllBooks(SortUtils.RANDOM).observe(this, { books ->
+        viewModel.getAllBorrowBooks("1").observe(this, { books ->
             adapter.setAllbooks(books)
             binding.rvReturnBooks.adapter = adapter
         })
