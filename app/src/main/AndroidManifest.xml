@@ -3,6 +3,7 @@
     package="com.b21.finalproject.smartlibraryapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -15,6 +16,9 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:theme="@style/Theme.SmartLibraryApp">
+        <activity android:name=".ui.home.ui.settings.SettingsActivity"></activity>
+
         android:theme="@style/Theme.SmartLibraryApp"
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.home.ui.returnbook.ReturnBookActivity"
