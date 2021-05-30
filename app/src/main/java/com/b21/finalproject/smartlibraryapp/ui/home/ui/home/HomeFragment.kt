@@ -7,8 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Matrix
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import android.view.*
 import android.widget.TextView
@@ -18,7 +22,6 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
@@ -32,6 +35,10 @@ import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import kotlinx.coroutines.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment(), CoroutineScope {
@@ -42,6 +49,8 @@ class HomeFragment : Fragment(), CoroutineScope {
     private lateinit var recommendedAdapter: HomeAdapter
     private lateinit var resultAdapter: HomeAdapter
     private var _binding: FragmentHomeBinding? = null
+
+    private lateinit var outputStream: OutputStream
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + Job()
@@ -54,8 +63,8 @@ class HomeFragment : Fragment(), CoroutineScope {
 
     companion object {
         const val CAMERA_REQUEST_CODE = 100
+        const val WRITE_EXTERNAL_REQUEST_CODE = 101
         const val CAMERA_PERMISSION_CODE = 200
-        const val CAMERA_RETURN_BOOK_CODE = 101
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,19 +89,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         reqActivity.setSupportActionBar(binding.layoutHeaderHome.homeToolbar)
         reqActivity.setTitle("")
 
-//        if (! Python.isStarted()) {
-//            Python.start(AndroidPlatform(requireContext()))
-//        }
-//
-//        val py: Python = Python.getInstance()
-//
-//        val pyObj: PyObject = py.getModule("myscript")
-//
-//        val obj: PyObject = pyObj.callAttr("name", "Yossy")
-//
         val textView: TextView = binding.layoutHeaderHome.tvUsername
-
-//        textView.text = obj.toString()
 
         homeViewModel.text.observe(viewLifecycleOwner, {
             textView.text = it
@@ -120,8 +117,16 @@ class HomeFragment : Fragment(), CoroutineScope {
 
         binding.layoutHeaderHome.cardMenuBorrowed.setOnClickListener {
             if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(intent, CAMERA_REQUEST_CODE)
+                } else {
+                    ActivityCompat.requestPermissions(
+                        requireActivity(),
+                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                        WRITE_EXTERNAL_REQUEST_CODE
+                    )
+                }
             } else {
                 ActivityCompat.requestPermissions(
                     requireActivity(),
@@ -181,9 +186,17 @@ class HomeFragment : Fragment(), CoroutineScope {
             if (requestCode == CAMERA_REQUEST_CODE) {
                 val image: Bitmap = data?.extras?.get("data") as Bitmap
                 Log.i("MYTAG", image.toString())
+
                 val intent = Intent(requireContext(), DetailBorrowBookActivity::class.java)
                 intent.putExtra(DetailBorrowBookActivity.IMAGE_CAPTURE, image)
                 startActivity(intent)
+
+                val currentTime = saveImage(image)
+
+                val filePath = context?.getExternalFilesDir("CaptureImage")
+                val dir = "${filePath}/BorrowBookCapture/${currentTime}.jpg"
+
+                Log.d("dir", dir)
             }
         }
     }
@@ -214,6 +227,65 @@ class HomeFragment : Fragment(), CoroutineScope {
         })
 
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun saveImage(image: Bitmap): Long {
+        // Untuk mengambil alamat storage android
+        val filePath = context?.getExternalFilesDir("CaptureImage")
+        // Membuat folder pada alamat filepath
+        val dir = File(filePath, "/BorrowBookCapture/")
+        dir.mkdir()
+        // Membuat waktu sekarang
+        val currentTimeMillis = System.currentTimeMillis()
+        // Membuat file image
+        val file = File(dir, "${currentTimeMillis}.jpg")
+        outputStream = FileOutputStream(file)
+        image.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        Toast.makeText(requireContext(), "Image Save To Internal!!!", Toast.LENGTH_SHORT).show()
+        outputStream.flush()
+        outputStream.close()
+
+        // Menembalikan nilai currentTimeMillis untuk dikirim ke python
+        return currentTimeMillis
+    }
+
+    /**
+     * Jika sdk dibawah 30 atau android versi 10 maka gunakan rotate image
+     */
+//    private fun rotateImage(img: Bitmap): Bitmap? {
+//        val matrix = Matrix()
+//        matrix.postRotate(90f)
+//        val rotatedImg = Bitmap.createBitmap(img, 0, 0, img.width, img.height, matrix, true)
+//        img.recycle()
+//        return rotatedImg
+//    }
+
+    private fun pythonOperate() {
+        //                if (! Python.isStarted()) {
+//                    Python.start(AndroidPlatform(requireContext()))
+//                }
+//
+//                val py: Python = Python.getInstance()
+//
+//                val pyObj = py.getModule("myscript")
+//                val obj = pyObj.callAttr("ocr_core", dir)
+//
+//                Log.d("obj", obj.toString())
+
+//                val stream = ByteArrayOutputStream()
+//                image.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+//                val byteArray: ByteArray = stream.toByteArray()
+//                image.recycle()
+
+//                val imageString = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+//                Log.d("MYTAG_BYTEARRAY", byteArray.toString())
+//                Log.d("MYTAG_IMAGE", image.toString())
+
+//                val array1: PyObject =  PyObject.fromJava(byteArray)
+
+//                val obj: PyObject = pyObj.callAttr("ocr_core", imageString)
+//                binding.layoutHeaderHome.tvUsername.text = obj.toString()
     }
 
     override fun onDestroyView() {
