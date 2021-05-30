@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey
 data class BorrowBookEntity(
     @PrimaryKey(autoGenerate = true)
     @NonNull
-    val id: Int,
+    val id: Int = 0,
     val userId: String,
     val bookId: String,
     val borrowDayTime: String,

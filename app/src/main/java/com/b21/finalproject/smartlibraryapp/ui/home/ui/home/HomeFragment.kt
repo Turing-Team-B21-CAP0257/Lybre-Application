@@ -260,17 +260,17 @@ class HomeFragment : Fragment(), CoroutineScope {
 //        return rotatedImg
 //    }
 
-    private fun pythonOperate() {
-        //                if (! Python.isStarted()) {
-//                    Python.start(AndroidPlatform(requireContext()))
-//                }
+//    private fun pythonOperate() {
+//        if (! Python.isStarted()) {
+//            Python.start(AndroidPlatform(requireContext()))
+//        }
 //
-//                val py: Python = Python.getInstance()
+//        val py: Python = Python.getInstance()
 //
-//                val pyObj = py.getModule("myscript")
-//                val obj = pyObj.callAttr("ocr_core", dir)
+//        val pyObj = py.getModule("myscript")
+//        val obj = pyObj.callAttr("name", "Yossy Taher")
 //
-//                Log.d("obj", obj.toString())
+//        Log.d("obj", obj.toString())
 
 //                val stream = ByteArrayOutputStream()
 //                image.compress(Bitmap.CompressFormat.JPEG, 100, stream)
@@ -286,7 +286,7 @@ class HomeFragment : Fragment(), CoroutineScope {
 
 //                val obj: PyObject = pyObj.callAttr("ocr_core", imageString)
 //                binding.layoutHeaderHome.tvUsername.text = obj.toString()
-    }
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

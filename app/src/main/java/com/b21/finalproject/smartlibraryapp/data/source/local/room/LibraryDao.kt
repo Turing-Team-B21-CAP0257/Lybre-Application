@@ -31,6 +31,9 @@ interface LibraryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertFavoriteBook(favoriteBookEntity: FavoriteBookEntity)
 
-//    @Query("SELECT * FROM favorite_tb WHERE userId = :userId")
-//    fun getAllFavoriteBook(userId: String): List<FavoriteBookEntity>
+    @Query("SELECT * FROM favorite_tb WHERE userId = :userId")
+    fun getAllFavoriteBook(userId: String): List<FavoriteBookEntity>
+
+    @Query("SELECT * FROM borrow_tb WHERE userId = :userId")
+    fun getAllBorrowBook(userId: String): List<BorrowBookEntity>
 }
