@@ -31,6 +31,7 @@ import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ml.Model
 import com.b21.finalproject.smartlibraryapp.ml.Model2
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
@@ -349,6 +350,15 @@ class HomeFragment : Fragment(), CoroutineScope {
         // Releases model resources if no longer used.
         model.close()
     }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        when(item.itemId){
+//            R.id.action_done -> {
+//                }
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     override fun onDestroyView() {
         super.onDestroyView()
