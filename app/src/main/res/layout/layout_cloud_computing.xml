@@ -12,9 +12,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_member1"
         style="@style/textViewProfile"
-        android:text="@string/cloudCompName"
+        android:text="@string/cc_member_1"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_cloud_computing_title" />
+
+    <TextView
+        style="@style/textViewProfile"
+        android:text="@string/cc_member_2"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_member1" />
 </androidx.constraintlayout.widget.ConstraintLayout>
