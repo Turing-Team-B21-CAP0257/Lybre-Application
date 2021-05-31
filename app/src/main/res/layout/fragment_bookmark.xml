@@ -24,7 +24,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Favorite Books"
+                    android:text="@string/title_bar_favorite_books"
                     android:textColor="@color/palette_200"
                     android:textSize="16sp"
                     android:fontFamily="@font/poppins_regular"
