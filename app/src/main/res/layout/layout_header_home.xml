@@ -100,7 +100,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Borrow a book"
+                    android:text="@string/borrow_a_book"
                     android:textAlignment="center"
                     android:textColor="@color/palette_200"
                     android:textSize="12sp" />
@@ -129,7 +129,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Return a book"
+                    android:text="@string/return_a_book"
                     android:textAlignment="center"
                     android:textColor="@color/palette_200"
                     android:textSize="12sp" />

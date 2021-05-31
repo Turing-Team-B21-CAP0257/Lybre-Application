@@ -32,6 +32,8 @@
     <string name="all_books_header_title">All Books</string>
     <string name="recomended_header_title">Recommended Books</string>
     <string name="welcome_home_title">Welcome,</string>
+    <string name="borrow_a_book">Borrow a book</string>
+    <string name="return_a_book">Return a book</string>
     <string name="title_activity_books">BooksActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -39,6 +41,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="title_bar_favorite_books">Favorite Books</string>
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
@@ -88,4 +91,5 @@
     <string name="md_member_2">- Yossy Syahida</string>
     <string name="cc_member_2">- Orel Revo Sakchi Usdelivian</string>
     <string name="ml_member_2">- Ergina Kamilia Putri</string>
+
 </resources>
