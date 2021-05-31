@@ -12,7 +12,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_address"
         android:id="@+id/tv_language"
         style="@style/textViewProfile"
         android:text="@string/language"
