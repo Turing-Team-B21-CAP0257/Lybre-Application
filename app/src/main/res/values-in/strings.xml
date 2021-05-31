@@ -1,2 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Aplikasi Smart Library</string>
+
+    <!--  AUTH  -->
+    <string name="login_title">Masuk</string>
+    <string name="register_title">Daftar</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_login_title">Selamat Datang di Aplikasi Smart Library</string>
+    <string name="welcome_login_title2">Ayo masuk dengan akun perpustakaan kamu !</string>
+    <string name="username_title">Nama Pengguna</string>
+    <string name="password_title">Kata Sandi</string>
+    <string name="forgot_password_title">Lupa kata sandi ?</string>
+    <string name="email_smartlibrary_title">SmartLibrary_Officiall@gmail.com</string>
+    <string name="copyright_title">Hak Cipta oleh Smart Library System 2021</string>
+    <string name="welcome_register_title">Ayo daftarkan akun kamu di sini !</string>
+    <string name="email_title">Email</string>
+    <string name="address_title">Alamat</string>
+    <string name="birthday_title">Ulang Tahun</string>
+    <string name="male_title">Pria</string>
+    <string name="female_title">Wanita</string>
+    <string name="smartlibrary_application_title">Aplikasi Smart Library</string>
+    <string name="finalproject_title">Proyek Akhir Bangkit 2021</string>
+
+    <!--  Home  -->
+    <string name="title_activity_home">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifikasi</string>
+    <string name="title_bookmark">Penanda Buku</string>
+    <string name="title_history">Riwayat</string>
+    <string name="title_profile">Profil</string>
+    <string name="all_books_header_title">Semua Buku</string>
+    <string name="recomended_header_title">Buku yang direkomendasikan</string>
+    <string name="welcome_home_title">Selamat Datang,</string>
+    <string name="borrow_a_book">Pinjam buku</string>
+    <string name="return_a_book">Kembalikan buku</string>
+    <string name="title_activity_books">BooksActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Pengaturan</string>
+    <string name="title_bar_favorite_books">Buku Favorit</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="all_books_title">Semua Buku</string>
+    <string name="loading">Memuat data dari lokal</string>
+    <string name="loading2">Ini akan memakan waktu cukup lama untuk pertama kalinya ...</string>
+
+    <!--  Profile  -->
+    <string name="my_profile">Profil Saya</string>
+    <string name="smart_library">Smart Library System</string>
+    <string name="fullname_title">Nama Lengkap</string>
+    <string name="smartlbr_username">smartlbr</string>
+    <string name="address_profile">Jl.Angkasa</string>
+    <string name="email_profile">SmartLibrary_Officiall@gmail.com</string>
+    <string name="birthday_profile">01 - Mei - 2021</string>
+    <string name="sex_profile">Wanita</string>
+    <string name="sex_title">Jenis Kelamin</string>
+    <string name="password_profile">s********</string>
+    <string name="history_borrowed_toolbar">Riwayat Peminjaman</string>
+
+    <!--  Settings  -->
+    <string name="change_language">Ubah Bahasa</string>
+    <string name="logout">Keluar</string>
+    <string name="account">Akun</string>
+    <string name="md_member_1">- M Ramdhan Syahputra</string>
+    <string name="cc_member_1">- Arif Wicaksono</string>
+    <string name="ml_member_1">- Afgani Fajar Rizky</string>
+    <string name="android_developer_title">Android Developer</string>
+    <string name="cloud_computing_title">Cloud Computing</string>
+    <string name="machine_learning_title">Machine Learning</string>
+    <string name="language">Bahasa</string>
+    <string name="about_application_title">Tentang Aplikasi</string>
+    <string name="smart_library_version_1_0">Smart Library version 1.0</string>
+    <string name="copy_right_smart_library_system">Copy right smart library system</string>
+    <string name="md_member_2">- Yossy Syahida</string>
+    <string name="cc_member_2">- Orel Revo Sakchi Usdelivian</string>
+    <string name="ml_member_2">- Ergina Kamilia Putri</string>
+</resources>
