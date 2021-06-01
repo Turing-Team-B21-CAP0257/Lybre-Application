@@ -27,7 +27,6 @@ import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ml.Model
 import com.b21.finalproject.smartlibraryapp.ml.Model2
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
-import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
@@ -374,15 +373,6 @@ class HomeFragment : Fragment(), CoroutineScope {
 //        }
 //        return super.onOptionsItemSelected(item)
 //    }
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.action_setting -> {
-                val intent = Intent(requireContext(), SettingsActivity::class.java)
-                startActivity(intent)
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()
