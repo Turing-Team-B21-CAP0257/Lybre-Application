@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
+import com.b21.finalproject.smartlibraryapp.ml.Model
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
@@ -35,10 +36,13 @@ import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import kotlinx.coroutines.*
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
+import org.tensorflow.lite.DataType
+import org.tensorflow.lite.Interpreter
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
+import java.io.*
+import java.nio.ByteBuffer
+import java.nio.MappedByteBuffer
+import java.nio.channels.FileChannel
 import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment(), CoroutineScope {
@@ -162,6 +166,7 @@ class HomeFragment : Fragment(), CoroutineScope {
             job.start()
         }
 
+        loadModel()
     }
 
     override fun onRequestPermissionsResult(
@@ -287,6 +292,38 @@ class HomeFragment : Fragment(), CoroutineScope {
 //                val obj: PyObject = pyObj.callAttr("ocr_core", imageString)
 //                binding.layoutHeaderHome.tvUsername.text = obj.toString()
 //    }
+
+    private fun loadModel() {
+        val model = Model.newInstance(requireContext())
+
+        val byteBuffer: ByteBuffer = ByteBuffer.allocateDirect(4)
+        byteBuffer.putFloat(33f)
+
+//        val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect(4)
+//        byteBuffer.putFloat(2966f)
+
+        // Creates inputs for reference.
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+        inputFeature0.loadBuffer(byteBuffer)
+
+        val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+        inputFeature1.loadBuffer(ByteBuffer.allocateDirect(4).putFloat(2966f))
+
+        // Runs model inference and gets result.
+        val outputs = model.process(inputFeature0, inputFeature1)
+        val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
+
+//        Log.d("outputs", outputFeature0[0].toString() + " " + outputFeature0[1].toString() + " " + outputFeature0[2].toString() + " " + outputFeature0[3].toString())
+        Log.d("outputs", outputFeature0[1].toString())
+//        Log.d("outputs", outputFeature0.toString())
+
+        //828359
+        //cb97fff
+
+        // Releases model resources if no longer used.
+        model.close()
+
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

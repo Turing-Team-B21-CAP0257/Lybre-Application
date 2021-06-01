@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "195916880489",
+    "project_id": "recognizingtextfrombook",
+    "storage_bucket": "recognizingtextfrombook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:195916880489:android:1aac8ec75124bc14dd60f8",
+        "android_client_info": {
+          "package_name": "com.b21.finalproject.smartlibraryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "195916880489-4j45q8u4ojhkk1ik9heflki7u1fuug3u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyaFOxNrn_-0p3bKz4UMaeer9Via308Lg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "195916880489-4j45q8u4ojhkk1ik9heflki7u1fuug3u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

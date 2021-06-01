@@ -4,7 +4,9 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +21,10 @@ import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.mlkit.vision.common.InputImage
+import com.google.mlkit.vision.text.Text
+import com.google.mlkit.vision.text.TextRecognition
+import com.google.mlkit.vision.text.TextRecognizerOptions
 
 class DetailBorrowBookActivity : AppCompatActivity() {
 
@@ -44,7 +50,8 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
         adapter = HomeAdapter()
 
-        binding.rvWrongBooks.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        binding.rvWrongBooks.layoutManager =
+            LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvWrongBooks.setHasFixedSize(true)
 
         val imageCapture = intent.getParcelableExtra<Bitmap>(IMAGE_CAPTURE)
@@ -75,6 +82,28 @@ class DetailBorrowBookActivity : AppCompatActivity() {
             val intent = Intent(this@DetailBorrowBookActivity, HomeActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
+        }
+
+        val image = InputImage.fromBitmap(imageCapture, 0)
+        val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
+        val result = recognizer.process(image)
+            .addOnSuccessListener { visionText ->
+                displayTextFromImage(visionText)
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    private fun displayTextFromImage(visionText: Text) {
+        val blockList = visionText.textBlocks
+        if (blockList.size == 0) {
+
+        } else {
+            for (block in visionText.textBlocks) {
+                val blockText = block.text
+                Log.d("recognization: ", blockText)
+            }
         }
     }
 
@@ -110,7 +139,8 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         }
 
         binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
-        binding.layoutHeaderRecommended.tvRecommendedBooks.text = "Wrong book? might you mean these book!"
+        binding.layoutHeaderRecommended.tvRecommendedBooks.text =
+            "Wrong book? might you mean these book!"
     }
 
     /**
