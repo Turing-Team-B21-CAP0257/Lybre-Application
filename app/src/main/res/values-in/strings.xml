@@ -44,6 +44,12 @@
     <string name="action_settings">Pengaturan</string>
     <string name="title_bar_favorite_books">Buku Favorit</string>
 
+    <string name="popular_books_title">Buku Popular</string>
+    <string name="date_of_borrowed_title">Tanggal pinjam</string>
+    <string name="borrow_the_book_title">Pinjam Buku</string>
+    <string name="deadline_of_borrowed_title">Tenggat waktu peminjaman</string>
+    <string name="return_now_title">Kembalikan buku sekarang</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
