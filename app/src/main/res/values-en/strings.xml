@@ -44,6 +44,12 @@
     <string name="action_settings">Settings</string>
     <string name="title_bar_favorite_books">Favorite Books</string>
 
+    <string name="popular_books_title">Popular Books</string>
+    <string name="date_of_borrowed_title">Date of Borrowed</string>
+    <string name="borrow_the_book_title">Borrow the book</string>
+    <string name="deadline_of_borrowed_title">Deadline of Borrowed</string>
+    <string name="return_now_title">Return now</string>
+
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
