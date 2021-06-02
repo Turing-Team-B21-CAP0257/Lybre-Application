@@ -25,6 +25,7 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizerOptions
+import java.lang.StringBuilder
 
 class DetailBorrowBookActivity : AppCompatActivity() {
 
@@ -58,32 +59,6 @@ class DetailBorrowBookActivity : AppCompatActivity() {
 //        val rotateImage = rotateImage(imageCapture!!) // Jika SDK dibawah 30 atau versi android 10
         binding.layoutHeaderDetailBorrow.imgResultCapture.setImageBitmap(imageCapture)
 
-        viewModel.getBookById(1).observe(this, { book ->
-            showPopulate(book)
-        })
-
-        viewModel.getRecommendedBooks(SortUtils.RECOMMENDED).observe(this, { books ->
-            adapter.setAllbooks(books)
-            adapter.notifyDataSetChanged()
-            binding.rvWrongBooks.adapter = adapter
-        })
-
-        binding.btnBorrow.setOnClickListener {
-            val borrowBook = BorrowBookEntity(
-                0,
-                "1",
-                "113",
-                "18-05-2021",
-                "22-05-2021",
-                true,
-                false
-            )
-            viewModel.insertBorrowBook(borrowBook)
-            val intent = Intent(this@DetailBorrowBookActivity, HomeActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-        }
-
         val image = InputImage.fromBitmap(imageCapture, 0)
         val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
         val result = recognizer.process(image)
@@ -98,13 +73,37 @@ class DetailBorrowBookActivity : AppCompatActivity() {
     private fun displayTextFromImage(visionText: Text) {
         val blockList = visionText.textBlocks
         if (blockList.size == 0) {
-
+            Toast.makeText(this, "Sorry your book can't find :(", Toast.LENGTH_SHORT).show()
         } else {
+            val result = StringBuilder()
             for (block in visionText.textBlocks) {
                 val blockText = block.text
-                Log.d("recognization: ", blockText)
+                Log.d("recognation: ", blockText)
+                result.append("${blockText} ")
             }
+            val resultToArray = result.split("\\s".toRegex()).toTypedArray()
+            val resultArray = ArrayList<String>()
+            for (i in 0..resultToArray.size - 1) {
+                resultArray.add(resultToArray[i])
+            }
+            Log.d("recognation2", resultArray.toString())
+            getResultFromDb(resultArray)
         }
+    }
+
+    private fun getResultFromDb(result: ArrayList<String>) {
+        viewModel.setResultBook(result)
+        viewModel.getBookByTitle().observe(this, { books ->
+            if (!books.isEmpty()) {
+                showPopulate(books[0])
+                adapter.setAllbooks(books)
+                adapter.notifyDataSetChanged()
+                binding.rvWrongBooks.adapter = adapter
+            } else {
+                Toast.makeText(this, "Sorry your book can't find :(", Toast.LENGTH_SHORT).show()
+            }
+            Log.d("result: ", books.toString())
+        })
     }
 
     private fun showPopulate(book: BookEntity) {
@@ -141,6 +140,22 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
         binding.layoutHeaderRecommended.tvRecommendedBooks.text =
             "Wrong book? might you mean these book!"
+
+        binding.btnBorrow.setOnClickListener {
+            val borrowBook = BorrowBookEntity(
+                0,
+                "1",
+                "${book.bookId}",
+                "18-05-2021",
+                "22-05-2021",
+                true,
+                false
+            )
+            viewModel.insertBorrowBook(borrowBook)
+            val intent = Intent(this@DetailBorrowBookActivity, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
     }
 
     /**

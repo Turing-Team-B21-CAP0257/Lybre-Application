@@ -3,6 +3,7 @@ package com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.b21.finalproject.smartlibraryapp.R
@@ -10,6 +11,7 @@ import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ItemListRecommendedBooksBinding
 import com.b21.finalproject.smartlibraryapp.databinding.ItemListReturnBookBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBookActivity
+import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -43,8 +45,7 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = allBooks.size
 
-    inner class ViewHolder(private val binding: ItemListReturnBookBinding) :
-        RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemListReturnBookBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(bookEntity: BookEntity) {
             with(binding) {
                 val url = bookEntity.imageUrl_l.split("\"", "/").toTypedArray()

@@ -9,17 +9,38 @@
         android:id="@+id/nav_all_books"
         android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.allBooks.AllBooksFragment"
         android:label="@string/all_books_title"
-        tools:layout="@layout/fragment_all_books" />
+        tools:layout="@layout/fragment_all_books" >
+        <action
+            android:id="@+id/action_nav_all_books_to_nav_recommended_books"
+            app:destination="@id/nav_recommended_books" />
+        <action
+            android:id="@+id/action_nav_all_books_to_nav_most_books"
+            app:destination="@id/nav_most_books" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_recommended_books"
         android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.RecommendedBooks.RecommendedBooksFragment"
         android:label="@string/recomended_header_title"
-        tools:layout="@layout/fragment_recommended_books" />
+        tools:layout="@layout/fragment_recommended_books" >
+        <action
+            android:id="@+id/action_nav_recommended_books_to_nav_all_books"
+            app:destination="@id/nav_all_books" />
+        <action
+            android:id="@+id/action_nav_recommended_books_to_nav_most_books"
+            app:destination="@id/nav_most_books" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_most_books"
         android:name="com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.MostBooks.MostBooksFragment"
         android:label="@string/popular_books_title"
-        tools:layout="@layout/fragment_most_books" />
+        tools:layout="@layout/fragment_most_books" >
+        <action
+            android:id="@+id/action_nav_most_books_to_nav_recommended_books"
+            app:destination="@id/nav_recommended_books" />
+        <action
+            android:id="@+id/action_nav_most_books_to_nav_all_books"
+            app:destination="@id/nav_all_books" />
+    </fragment>
 </navigation>

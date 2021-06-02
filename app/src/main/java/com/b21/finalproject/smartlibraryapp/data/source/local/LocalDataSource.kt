@@ -4,7 +4,6 @@ import androidx.sqlite.db.SupportSQLiteQuery
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.room.LibraryDao
 
 class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
@@ -18,8 +17,6 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
     }
 
     fun getAllBooks(sort: SupportSQLiteQuery): List<BookEntity> = mLibraryDao.getAllbooks(sort)
-
-    fun getAllRatings(): List<RatingEntity> = mLibraryDao.getAllRatings()
 
     fun getBookById(bookId: Int): BookEntity = mLibraryDao.getBookById(bookId)
 

@@ -6,7 +6,6 @@ import android.os.*
 import android.util.Log
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.UserEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.room.LibraryDatabase
 import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
@@ -101,19 +100,17 @@ class DataManagerService : Service(), CoroutineScope {
 
         if (firstRun) {
             val bookModels = preLoadRawBooks()
-            val ratingModels = preLoadRawRatings()
             val userModels = preLoadRawUsers()
 
             var progress = 30.0
             publishProgress(progress.toInt())
             val progressMaxInsert = 100.0
-            val progressDiff = (progressMaxInsert - progress / ratingModels.size)
+            val progressDiff = (progressMaxInsert - progress / bookModels.size)
 
             var isInsertSucccess: Boolean
 
             try {
                 databaseHelper.libraryDao().insertBookEntities(bookModels)
-                databaseHelper.libraryDao().insertRatingEntities(ratingModels)
                 databaseHelper.libraryDao().insertUserEntities(userModels)
                 for (i in 0..100) {
                     progress += progressDiff
@@ -189,35 +186,6 @@ class DataManagerService : Service(), CoroutineScope {
         return bookModels
     }
 
-    private fun preLoadRawRatings(): ArrayList<RatingEntity> {
-        val ratingModels = ArrayList<RatingEntity>()
-        var line: String?
-        val reader: BufferedReader
-        try {
-            val rawText = resources.openRawResource(R.raw.ratings)
-
-            reader = BufferedReader(InputStreamReader(rawText))
-
-            reader.readLine()
-
-            do {
-                line = reader.readLine()
-
-                val splitstr = line.split(",").toTypedArray()
-
-                val ratingModel = RatingEntity(
-                    splitstr[0],
-                    splitstr[1],
-                    splitstr[2]
-                )
-                ratingModels.add(ratingModel)
-            } while (line != null)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return ratingModels
-    }
-
     private fun preLoadRawUsers(): ArrayList<UserEntity> {
         val userModels = ArrayList<UserEntity>()
         var line: String?
@@ -239,13 +207,13 @@ class DataManagerService : Service(), CoroutineScope {
                     splitstr[0],
                     location,
                     splitstr[4],
-                    "Lorem ipsum",
+                    "Loremipsum",
                     "Female",
-                    "Lorem ipsum",
+                    "Loremipsum",
                     "2000/01/01",
                     "Lorem ipsum",
-                    "Lorem ipsum",
-                    "LoremIpsum"
+                    "Loremipsum@gmail.com",
+                    "Loremipsum123"
                 )
                 userModels.add(userModel)
             } while (line != null)

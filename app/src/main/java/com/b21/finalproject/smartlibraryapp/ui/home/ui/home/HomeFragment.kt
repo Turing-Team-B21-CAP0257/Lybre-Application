@@ -23,10 +23,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ml.Model
+import com.b21.finalproject.smartlibraryapp.ml.Model2
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
@@ -110,6 +113,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         //go to recommended books fragment in Books Activity
         binding.layoutHeaderRecommended.imgItemMore.setOnClickListener {
             val intent = Intent(requireContext(), BooksActivity::class.java)
+            intent.putExtra(BooksActivity.GOTO_NAV, "recommended")
             startActivity(intent)
         }
 
@@ -167,6 +171,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         }
 
         loadModel()
+        loadModel2()
     }
 
     override fun onRequestPermissionsResult(
@@ -313,8 +318,8 @@ class HomeFragment : Fragment(), CoroutineScope {
         val outputs = model.process(inputFeature0, inputFeature1)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
 
-//        Log.d("outputs", outputFeature0[0].toString() + " " + outputFeature0[1].toString() + " " + outputFeature0[2].toString() + " " + outputFeature0[3].toString())
-        Log.d("outputs", outputFeature0[1].toString())
+        Log.d("outputs", outputFeature0[0].toString() + " " + outputFeature0[1].toString() + " " + outputFeature0[2].toString() + " " + outputFeature0[3].toString())
+//        Log.d("outputs", outputFeature0.toString())
 //        Log.d("outputs", outputFeature0.toString())
 
         //828359
@@ -323,6 +328,26 @@ class HomeFragment : Fragment(), CoroutineScope {
         // Releases model resources if no longer used.
         model.close()
 
+    }
+
+    private fun loadModel2() {
+        val model = Model2.newInstance(requireContext())
+
+        val byteBuffer: ByteBuffer = ByteBuffer.allocateDirect(4)
+        byteBuffer.putFloat(125f)
+
+        // Creates inputs for reference.
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+        inputFeature0.loadBuffer(byteBuffer)
+
+        // Runs model inference and gets result.
+        val outputs = model.process(inputFeature0)
+        val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
+
+        Log.d("outputs", outputFeature0[0].toString() + " " + outputFeature0[1].toString() + " " + outputFeature0[2].toString() + " " + outputFeature0[3].toString())
+
+        // Releases model resources if no longer used.
+        model.close()
     }
 
     override fun onDestroyView() {

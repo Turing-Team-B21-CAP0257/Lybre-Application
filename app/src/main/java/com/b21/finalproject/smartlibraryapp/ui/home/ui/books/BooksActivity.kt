@@ -1,5 +1,6 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.books
 
+import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
@@ -22,6 +23,11 @@ class BooksActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityBooksBinding
 
+    companion object {
+        const val GOTO_NAV = "goto_nav"
+    }
+
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,6 +48,14 @@ class BooksActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val extra = intent.getStringExtra(GOTO_NAV)
+        when (extra) {
+            "recommended" -> {
+                navView.setCheckedItem(R.id.nav_recommended_books)
+            }
+            else -> navView.setCheckedItem(R.id.nav_all_books)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

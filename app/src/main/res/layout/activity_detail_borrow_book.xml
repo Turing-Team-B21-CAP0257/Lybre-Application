@@ -24,6 +24,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp" />
 
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="75dp"
+            android:visibility="gone" />
+
         <include
             android:id="@+id/layout_header_detail_book"
             layout="@layout/layout_header_detail_book"

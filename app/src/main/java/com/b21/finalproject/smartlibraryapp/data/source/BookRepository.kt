@@ -6,7 +6,6 @@ import com.b21.finalproject.smartlibraryapp.data.source.local.LocalDataSource
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -42,6 +41,15 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         return result
     }
 
+    override fun getBookByTitle(text: String): List<BookEntity> {
+        val query = SortUtils.getBookByQuery(text)
+        val result = ArrayList<BookEntity>()
+        GlobalScope.async(Dispatchers.IO) {
+            result.addAll(localDataSource.getAllBooks(query))
+        }
+        return result
+    }
+
     override fun getRecommendedBooks(sort: String): LiveData<List<BookEntity>> {
         val query = SortUtils.getSortedQuery(sort)
         val result = MutableLiveData<List<BookEntity>>()
@@ -50,9 +58,6 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         }
         return result
     }
-
-    override fun getAllRatings(): List<RatingEntity> =
-        localDataSource.getAllRatings()
 
     override fun getBookById(bookId: Int): LiveData<BookEntity> {
         val result = MutableLiveData<BookEntity>()
