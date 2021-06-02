@@ -1,6 +1,7 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,8 +34,15 @@ class ReturnBookActivity : AppCompatActivity() {
         binding.rvReturnBooks.setHasFixedSize(true)
 
         viewModel.getAllBorrowBooks("1").observe(this, { books ->
-            adapter.setAllbooks(books)
-            binding.rvReturnBooks.adapter = adapter
+            if (books.isNullOrEmpty()) {
+                binding.rvReturnBooks.visibility = View.GONE
+                binding.tvNotif.visibility = View.VISIBLE
+            } else {
+                adapter.setAllbooks(books)
+                binding.rvReturnBooks.adapter = adapter
+                binding.rvReturnBooks.visibility = View.VISIBLE
+                binding.tvNotif.visibility = View.GONE
+            }
         })
     }
 }

@@ -22,11 +22,10 @@
         <EditText
             android:id="@+id/edt_date_of_borrowed"
             android:enabled="false"
-            android:text="16-12-2021"
+            tools:text="16-12-2021"
             android:textColor="@color/palette_200"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -46,11 +45,10 @@
         <EditText
             android:id="@+id/edt_deadline_of_borrowed"
             android:enabled="false"
-            android:text="18-12-2021"
+            tools:text="18-12-2021"
             android:textColor="@color/palette_200"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" />
+            android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

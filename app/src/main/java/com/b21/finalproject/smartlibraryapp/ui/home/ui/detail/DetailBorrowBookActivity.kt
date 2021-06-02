@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -138,13 +139,16 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         }
 
         binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
-        binding.layoutHeaderRecommended.tvRecommendedBooks.text =
-            "Wrong book? might you mean these book!"
+        binding.layoutHeaderRecommended.tvRecommendedBooks.text = "Wrong book? might you mean these book!"
+
+        val sdf = SimpleDateFormat("dd/MM/yyyy")
+        val currentDate = sdf.format(Date()).split("/").toTypedArray()
+
+        binding.layoutContentBorrow.edtDateOfBorrowed.setText("${currentDate[0]}-${currentDate[1]}-${currentDate[2]}", TextView.BufferType.EDITABLE)
+        binding.layoutContentBorrow.edtDeadlineOfBorrowed.setText("0${currentDate[0].toInt() + 4}-${currentDate[1]}-${currentDate[2]}", TextView.BufferType.EDITABLE)
 
         binding.btnBorrow.setOnClickListener {
             if (binding.layoutContentBorrow.checkBox.isChecked == true) {
-                val sdf = SimpleDateFormat("dd/MM/yyyy")
-                val currentDate = sdf.format(Date()).split("/").toTypedArray()
                 val borrowBook = BorrowBookEntity(
                     0,
                     "1",
