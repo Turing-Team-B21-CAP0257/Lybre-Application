@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.b21.finalproject.smartlibraryapp.data.source.BookRepository
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.UserEntity
 
 class HomeViewModel(private val bookRepository: BookRepository) : ViewModel() {
 

@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentLoginBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
-import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 
 class LoginFragment : Fragment() {
 

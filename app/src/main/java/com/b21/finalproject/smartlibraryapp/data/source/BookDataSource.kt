@@ -1,10 +1,7 @@
 package com.b21.finalproject.smartlibraryapp.data.source
 
 import androidx.lifecycle.LiveData
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDeadlineEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.*
 
 interface BookDataSource {
 
@@ -34,4 +31,5 @@ interface BookDataSource {
 
     fun insertBookWithDeadline(bookWithDeadlineEntity: BookWithDeadlineEntity)
 
+    fun getUserByUsername(username: String): LiveData<UserEntity>
 }

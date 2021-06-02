@@ -3,10 +3,7 @@ package com.b21.finalproject.smartlibraryapp.data.source
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.b21.finalproject.smartlibraryapp.data.source.local.LocalDataSource
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDeadlineEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.*
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -151,5 +148,11 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
 
     override fun insertBookWithDeadline(bookWithDeadlineEntity: BookWithDeadlineEntity) {
         localDataSource.insertBookWithDeadline(bookWithDeadlineEntity)
+    }
+
+    override fun getUserByUsername(username: String): LiveData<UserEntity> {
+        val result = MutableLiveData<UserEntity>()
+        result.postValue(localDataSource.getUserByUsername(username))
+        return result
     }
 }

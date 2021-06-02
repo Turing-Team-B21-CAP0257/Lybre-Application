@@ -1,10 +1,7 @@
 package com.b21.finalproject.smartlibraryapp.data.source.local
 
 import androidx.sqlite.db.SupportSQLiteQuery
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDeadlineEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.*
 import com.b21.finalproject.smartlibraryapp.data.source.local.room.LibraryDao
 
 class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
@@ -42,6 +39,8 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
     fun getAllBookWithDeadline(userId: String): List<BookWithDeadlineEntity> = mLibraryDao.getAllBookWithDeadline(userId)
 
     fun insertBookWithDeadline(bookWithDeadlineEntity: BookWithDeadlineEntity) = mLibraryDao.insertBookWithDeadline(bookWithDeadlineEntity)
+
+    fun getUserByUsername(username: String): UserEntity = mLibraryDao.getUserByUsername(username)
 
     interface LoadFavoriteBooksCallback {
         fun onAllFavoriteBooksReceived(favoriteBookEntity: List<FavoriteBookEntity>)
