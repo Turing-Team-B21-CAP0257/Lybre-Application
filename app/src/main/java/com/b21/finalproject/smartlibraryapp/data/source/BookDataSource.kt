@@ -25,4 +25,8 @@ interface BookDataSource {
 
     fun getBookByTitle(text: String): List<BookEntity>
 
+    fun getFavoriteBookById(bookId: String): LiveData<FavoriteBookEntity>
+
+    fun deleteFavoriteBook(bookId: String)
+
 }

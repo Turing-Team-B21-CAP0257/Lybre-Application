@@ -29,6 +29,10 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
         onAllFavoriteBooksCallback.onAllFavoriteBooksReceived(favoriteBookEntity)
     }
 
+    fun getFavoriteBookByBookId(bookId: String): FavoriteBookEntity = mLibraryDao.getFavoriteBookByBookId(bookId)
+
+    fun deleteFavoriteBook(bookId: String) = mLibraryDao.deleteFavoriteBook(bookId)
+
     fun getAllBorrowBook(userId: String, onAllBorrowBooksCallback: LoadBorrowBooksCallback) {
         val borrowBookEntity = mLibraryDao.getAllBorrowBook(userId)
         onAllBorrowBooksCallback.onAllBorrowBooksReceived(borrowBookEntity)

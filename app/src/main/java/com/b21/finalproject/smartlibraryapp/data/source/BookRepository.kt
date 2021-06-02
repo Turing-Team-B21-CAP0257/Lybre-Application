@@ -128,4 +128,14 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         })
         return borrowBooks
     }
+
+    override fun getFavoriteBookById(bookId: String): LiveData<FavoriteBookEntity> {
+        val result = MutableLiveData<FavoriteBookEntity>()
+        result.postValue(localDataSource.getFavoriteBookByBookId(bookId))
+        return result
+    }
+
+    override fun deleteFavoriteBook(bookId: String) {
+        localDataSource.deleteFavoriteBook(bookId)
+    }
 }

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityDetailBookBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
@@ -29,6 +30,8 @@ class DetailBookActivity : AppCompatActivity() {
         private var TAG = DetailBookActivity::class.java.simpleName
     }
 
+    private var isBookmarked = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,6 +50,20 @@ class DetailBookActivity : AppCompatActivity() {
 
         factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
+
+        viewModel.getFavoriteBookByBookId(bookId.toString()).observe(this, { bookFavorite ->
+            if (bookFavorite == null) {
+                isBookmarked = false
+                binding.layoutHeaderDetailBook.tbBookmark.isChecked = false
+                Log.d("isBookmarked: ", isBookmarked.toString() + " false")
+            } else {
+                isBookmarked = true
+                binding.layoutHeaderDetailBook.tbBookmark.isChecked = true
+                Log.d("isBookmarked: ", isBookmarked.toString() + " true")
+            }
+        })
+
+        bookmarked()
 
         viewModel.getBookById(bookId).observe(this, { book ->
             showPopulate(book)
@@ -94,6 +111,34 @@ class DetailBookActivity : AppCompatActivity() {
         binding.layoutHeaderRecommended.imgItemMore.setOnClickListener {
             val intent = Intent(this@DetailBookActivity, BooksActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.layoutHeaderDetailBook.tbBookmark.setOnCheckedChangeListener { buttonView, isChecked ->
+            isBookmarked = !isBookmarked
+            if (isChecked) {
+                isBookmarked = false
+                val favoriteBookEntity = FavoriteBookEntity(
+                    0,
+                    "1",
+                    book.bookId,
+                    true)
+                viewModel.insertFavoriteBook(favoriteBookEntity)
+                Log.d("save: ", "true")
+            } else {
+                isBookmarked = true
+                viewModel.deleteFavoriteBook(book.bookId)
+                Log.d("Save: ", "false")
+            }
+        }
+    }
+
+    private fun bookmarked() {
+        if (isBookmarked) {
+            binding.layoutHeaderDetailBook.tbBookmark.isChecked = true
+            isBookmarked = true
+        } else {
+            binding.layoutHeaderDetailBook.tbBookmark.isChecked = false
+            isBookmarked = false
         }
     }
 }

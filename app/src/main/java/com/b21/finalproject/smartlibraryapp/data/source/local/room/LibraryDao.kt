@@ -22,11 +22,17 @@ interface LibraryDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertBorrowBook(borrowBookEntity: BorrowBookEntity)
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavoriteBook(favoriteBookEntity: FavoriteBookEntity)
 
     @Query("SELECT * FROM favorite_tb WHERE userId = :userId")
     fun getAllFavoriteBook(userId: String): List<FavoriteBookEntity>
+
+    @Query("SELECT * FROM favorite_tb WHERE bookId = :bookId")
+    fun getFavoriteBookByBookId(bookId: String): FavoriteBookEntity
+
+    @Query("DELETE FROM favorite_tb WHERE bookId = :bookId")
+    fun deleteFavoriteBook(bookId: String)
 
     @Query("SELECT * FROM borrow_tb WHERE userId = :userId")
     fun getAllBorrowBook(userId: String): List<BorrowBookEntity>

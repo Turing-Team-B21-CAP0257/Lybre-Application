@@ -32,6 +32,10 @@ class DetailViewModel(private val bookRepository: BookRepository) : ViewModel() 
     fun insertFavoriteBook(favoriteBookEntity: FavoriteBookEntity) =
         bookRepository.insertFavoriteBook(favoriteBookEntity)
 
+    fun getFavoriteBookByBookId(bookId: String): LiveData<FavoriteBookEntity> = bookRepository.getFavoriteBookById(bookId)
+
+    fun deleteFavoriteBook(bookId: String) = bookRepository.deleteFavoriteBook(bookId)
+
     fun getBookByTitle(): LiveData<List<BookEntity>> {
         var notEmpty: Boolean
         val result = bookRepository.getBookByQuery(resultBook[0] + " " + resultBook[1])

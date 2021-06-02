@@ -17,12 +17,12 @@
         android:text="The Name of Book"
         android:textColor="@color/palette_200"
         android:textSize="18dp"
-        app:layout_constraintEnd_toStartOf="@+id/ib_bookmark"
+        app:layout_constraintEnd_toStartOf="@+id/tb_bookmark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
-        android:id="@+id/ib_bookmark"
+        android:id="@+id/tb_bookmark"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginEnd="32dp"

@@ -3,6 +3,7 @@ package com.b21.finalproject.smartlibraryapp.ui.home.ui.bookmark
 import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
@@ -11,13 +12,19 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentBookmarkBinding
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 
 class BookmarkFragment : Fragment() {
 
+    private lateinit var factory: ViewModelFactory
     private lateinit var bookmarkViewModel: BookmarkViewModel
+    private lateinit var adapter: HomeAdapter
     private var _binding: FragmentBookmarkBinding? = null
 
     // This property is only valid between onCreateView and
@@ -47,6 +54,17 @@ class BookmarkFragment : Fragment() {
         return root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        adapter = HomeAdapter()
+
+        binding.rvFavoriteBooks.layoutManager = GridLayoutManager(requireContext(), 3)
+        binding.rvFavoriteBooks.setHasFixedSize(true)
+
+        factory = ViewModelFactory.getInstance(requireContext())
+        bookmarkViewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.actionbar_bookmark_menu, menu)
 
@@ -73,5 +91,19 @@ class BookmarkFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        bookmarkViewModel.getAllFavoriteBook("1").observe(viewLifecycleOwner, { books ->
+            if (books.isNullOrEmpty()) {
+                binding.tvNotif.visibility = View.VISIBLE
+                binding.rvFavoriteBooks.visibility = View.GONE
+            } else {
+                adapter.setAllbooks(books)
+                binding.rvFavoriteBooks.adapter = adapter
+                binding.tvNotif.visibility = View.GONE
+            }
+        })
     }
 }
