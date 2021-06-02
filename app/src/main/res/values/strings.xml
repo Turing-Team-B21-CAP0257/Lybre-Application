@@ -57,15 +57,7 @@
     <string name="address_profile">Jl.Angkasa</string>
     <string name="email_profile">SmartLibrary_Officiall@gmail.com</string>
     <string name="birthday_profile">01 - Mei - 2021</string>
-    <string name="email_profile">yossysyahida@gmail.com</string>
     <string name="full_name">Full Name</string>
-    <string name="my_profile">My Profile</string>
-    <string name="smart_library">Smart Library System</string>
-    <string name="fullname_title">Full Name</string>
-    <string name="smartlbr_username">smartlbr</string>
-    <string name="address_profile">Jl.Angkasa</string>
-    <string name="email_profile">SmartLibrary_Officiall@gmail.com</string>
-    <string name="birthday_profile">01 - Mei - 2021</string>
     <string name="sex_profile">Female</string>
     <string name="sex_title">Sex</string>
     <string name="password_profile">s********</string>
@@ -96,38 +88,4 @@
     <string name="md_member_2">- Yossy Syahida</string>
     <string name="cc_member_2">- Orel Revo Sakchi Usdelivian</string>
     <string name="ml_member_2">- Ergina Kamilia Putri</string>
-
-
-    <!--  Profile  -->
-    <string name="my_profile">My Profile</string>
-    <string name="smart_library">Smart Library System</string>
-    <string name="fullname_title">Full Name</string>
-    <string name="smartlbr_username">smartlbr</string>
-    <string name="address_profile">Jl.Angkasa</string>
-    <string name="email_profile">SmartLibrary_Officiall@gmail.com</string>
-    <string name="birthday_profile">01 - Mei - 2021</string>
-    <string name="sex_profile">Female</string>
-    <string name="sex_title">Sex</string>
-    <string name="password_profile">s********</string>
-    <string name="history_borrowed_toolbar">History Borrowed</string>
-
-
-    <!--  Settings  -->
-    <string name="change_language">Change Languages</string>
-    <string name="logout">Logout</string>
-    <string name="account">Account</string>
-    <string name="md_member_1">- M Ramdhan Syahputra</string>
-    <string name="cc_member_1">- Arif Wicaksono</string>
-    <string name="ml_member_1">- Afgani Fajar Rizky</string>
-    <string name="android_developer_title">Android Developer</string>
-    <string name="cloud_computing_title">Cloud Computing</string>
-    <string name="machine_learning_title">Machine Learning</string>
-    <string name="language">Language</string>
-    <string name="about_application_title">About Application</string>
-    <string name="smart_library_version_1_0">Smart Library version 1.0</string>
-    <string name="copy_right_smart_library_system">Copy right smart library system</string>
-    <string name="md_member_2">- Yossy Syahida</string>
-    <string name="cc_member_2">- Orel Revo Sakchi Usdelivian</string>
-    <string name="ml_member_2">- Ergina Kamilia Putri</string>
-
 </resources>

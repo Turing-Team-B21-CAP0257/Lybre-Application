@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentLoginBinding
+import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
 import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 
 class LoginFragment : Fragment() {

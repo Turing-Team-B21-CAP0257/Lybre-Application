@@ -15,10 +15,6 @@
         android:id="@+id/tv_member1"
         style="@style/textViewProfile"
         android:text="@string/ml_member_1"
-        android:text="@string/machineLearningName"
-        android:id="@+id/tv_member1"
-        style="@style/textViewProfile"
-        android:text="@string/ml_member_1"
         android:layout_marginTop="5dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_machine_learning_title" />

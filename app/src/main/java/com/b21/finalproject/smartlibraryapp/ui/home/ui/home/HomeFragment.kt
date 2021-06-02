@@ -19,8 +19,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
@@ -33,16 +31,10 @@ import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import kotlinx.coroutines.*
-import java.io.File
-import java.io.FileOutputStream
-import java.io.OutputStream
 import org.tensorflow.lite.DataType
-import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.*
 import java.nio.ByteBuffer
-import java.nio.MappedByteBuffer
-import java.nio.channels.FileChannel
 import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment(), CoroutineScope {

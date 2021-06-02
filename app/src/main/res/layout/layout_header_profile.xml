@@ -7,11 +7,6 @@
 
     <ImageView
         android:id="@+id/imageView8"
-        android:id="@+id/imageView8"
-        android:layout_width="0dp"
-        android:layout_height="300dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background_profile"
         android:layout_width="0dp"
         android:layout_height="300dp"
         android:scaleType="centerCrop"
@@ -21,61 +16,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <ImageView
-        android:id="@+id/imageView10"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/fp_girls"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar"
-        app:layout_constraintVertical_bias="0.17000002" />
-
-    <TextView
-        android:id="@+id/tv_fullname_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/smart_library"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:textSize="16sp"
-        android:fontFamily="@font/poppins_regular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="0dp"
-        android:layout_height="?actionBarSize"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:background="@color/white"
-            app:titleTextColor="@color/palette_200"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/my_profile"
-                android:textColor="@color/palette_200"
-                android:textSize="16sp"
-                android:fontFamily="@font/poppins_regular"
-                android:textStyle="bold" />
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="90dp"
-        android:layout_height="90dp"
     <ImageView
         android:id="@+id/imageView10"
         android:layout_width="100dp"

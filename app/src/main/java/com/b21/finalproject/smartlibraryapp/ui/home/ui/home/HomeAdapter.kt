@@ -2,7 +2,6 @@ package com.b21.finalproject.smartlibraryapp.ui.home.ui.home
 
 import android.util.Log
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

@@ -69,6 +69,7 @@
     <string name="sex_title">Jenis Kelamin</string>
     <string name="password_profile">s********</string>
     <string name="history_borrowed_toolbar">Riwayat Peminjaman</string>
+    <string name="full_name">Nama Lengkap</string>
 
     <!--  Settings  -->
     <string name="change_language">Ubah Bahasa</string>

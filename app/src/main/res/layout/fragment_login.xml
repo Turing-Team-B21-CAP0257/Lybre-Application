@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:startIconDrawable="@drawable/ic_person_black_24dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/edt_username"
             android:inputType="textEmailAddress"
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@+id/til_username"
         app:startIconDrawable="@drawable/lock_black_24dp">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <EditText
             android:id="@+id/edt_password"
             android:inputType="textPassword"
             android:layout_width="match_parent"
@@ -131,5 +131,4 @@
         android:text="@string/copyright_title"
         app:layout_constraintStart_toStartOf="@+id/imageView5"
         app:layout_constraintTop_toBottomOf="@+id/imageView5" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
