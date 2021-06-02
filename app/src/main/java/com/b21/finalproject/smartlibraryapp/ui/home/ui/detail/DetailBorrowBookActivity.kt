@@ -2,7 +2,6 @@ package com.b21.finalproject.smartlibraryapp.ui.home.ui.detail
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Matrix
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -17,7 +16,6 @@ import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookE
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityDetailBorrowBookBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
-import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -25,7 +23,9 @@ import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.TextRecognizerOptions
-import java.lang.StringBuilder
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DetailBorrowBookActivity : AppCompatActivity() {
 
@@ -142,19 +142,26 @@ class DetailBorrowBookActivity : AppCompatActivity() {
             "Wrong book? might you mean these book!"
 
         binding.btnBorrow.setOnClickListener {
-            val borrowBook = BorrowBookEntity(
-                0,
-                "1",
-                "${book.bookId}",
-                "18-05-2021",
-                "22-05-2021",
-                true,
-                false
-            )
-            viewModel.insertBorrowBook(borrowBook)
-            val intent = Intent(this@DetailBorrowBookActivity, HomeActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            if (binding.layoutContentBorrow.checkBox.isChecked == true) {
+                val sdf = SimpleDateFormat("dd/MM/yyyy")
+                val currentDate = sdf.format(Date()).split("/").toTypedArray()
+                val borrowBook = BorrowBookEntity(
+                    0,
+                    "1",
+                    "${book.bookId}",
+                    "${currentDate[0]}-${currentDate[1]}-${currentDate[2]}",
+                    "0${currentDate[0].toInt() + 4}-${currentDate[1]}-${currentDate[2]}",
+                    true,
+                    false
+                )
+                viewModel.insertBorrowBook(borrowBook)
+                val intent = Intent(this@DetailBorrowBookActivity, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            } else {
+                binding.layoutContentBorrow.checkBox.error = "Check this checkbox for aggree"
+                Toast.makeText(this, "You must be aggree with rules!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

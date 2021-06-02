@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.b21.finalproject.smartlibraryapp.data.source.local.LocalDataSource
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDeadlineEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
@@ -102,15 +103,16 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         return favoriteBooks
     }
 
-    override fun getAllBorrowBook(userId: String): LiveData<List<BookEntity>> {
-       val borrowBooks = MutableLiveData<List<BookEntity>>()
+    override fun getAllBorrowBook(userId: String): LiveData<List<BookWithDeadlineEntity>> {
+       val borrowBooks = MutableLiveData<List<BookWithDeadlineEntity>>()
         localDataSource.getAllBorrowBook(userId, object : LocalDataSource.LoadBorrowBooksCallback {
             override fun onAllBorrowBooksReceived(borrowBookEntity: List<BorrowBookEntity>) {
-                val bookEntities = ArrayList<BookEntity>()
+                val bookEntities = ArrayList<BookWithDeadlineEntity>()
                 for (borrowBook in borrowBookEntity) {
                     val bookById = localDataSource.getBookById(borrowBook.bookId.toInt())
-                    val bookEntity = BookEntity(
+                    val bookEntity = BookWithDeadlineEntity(
                         bookById.bookId,
+                        borrowBook.userId,
                         bookById.ISBN,
                         bookById.book_title,
                         bookById.book_author,
@@ -119,7 +121,9 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
                         bookById.imageUrl_s,
                         bookById.imageUrl_m,
                         bookById.imageUrl_l,
-                        bookById.rating
+                        bookById.rating,
+                        borrowBook.deadline,
+                        borrowBook.returnBook
                     )
                     bookEntities.add(bookEntity)
                 }
@@ -137,5 +141,15 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
 
     override fun deleteFavoriteBook(bookId: String) {
         localDataSource.deleteFavoriteBook(bookId)
+    }
+
+    override fun getAllBookWithDeadline(userId: String): LiveData<List<BookWithDeadlineEntity>> {
+        val result = MutableLiveData<List<BookWithDeadlineEntity>>()
+        result.postValue(localDataSource.getAllBookWithDeadline(userId))
+        return result
+    }
+
+    override fun insertBookWithDeadline(bookWithDeadlineEntity: BookWithDeadlineEntity) {
+        localDataSource.insertBookWithDeadline(bookWithDeadlineEntity)
     }
 }

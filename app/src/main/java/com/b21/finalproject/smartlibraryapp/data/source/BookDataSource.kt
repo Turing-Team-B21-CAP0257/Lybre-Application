@@ -2,6 +2,7 @@ package com.b21.finalproject.smartlibraryapp.data.source
 
 import androidx.lifecycle.LiveData
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDeadlineEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
 
@@ -21,12 +22,16 @@ interface BookDataSource {
 
     fun getAllFavoriteBook(userId: String): LiveData<List<BookEntity>>
 
-    fun getAllBorrowBook(userId: String): LiveData<List<BookEntity>>
+    fun getAllBorrowBook(userId: String): LiveData<List<BookWithDeadlineEntity>>
 
     fun getBookByTitle(text: String): List<BookEntity>
 
     fun getFavoriteBookById(bookId: String): LiveData<FavoriteBookEntity>
 
     fun deleteFavoriteBook(bookId: String)
+
+    fun getAllBookWithDeadline(userId: String): LiveData<List<BookWithDeadlineEntity>>
+
+    fun insertBookWithDeadline(bookWithDeadlineEntity: BookWithDeadlineEntity)
 
 }

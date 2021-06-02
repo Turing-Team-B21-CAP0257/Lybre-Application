@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDeadlineEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ItemListRecommendedBooksBinding
 import com.b21.finalproject.smartlibraryapp.databinding.ItemListReturnBookBinding
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBookActivity
@@ -17,9 +18,9 @@ import com.bumptech.glide.request.RequestOptions
 
 class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
 
-    private var allBooks = ArrayList<BookEntity>()
+    private var allBooks = ArrayList<BookWithDeadlineEntity>()
 
-    fun setAllbooks(books: List<BookEntity>) {
+    fun setAllbooks(books: List<BookWithDeadlineEntity>) {
         if (allBooks.size != 0) {
             allBooks.clear()
             allBooks.addAll(books)
@@ -46,7 +47,7 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
     override fun getItemCount(): Int = allBooks.size
 
     inner class ViewHolder(private val binding: ItemListReturnBookBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(bookEntity: BookEntity) {
+        fun bind(bookEntity: BookWithDeadlineEntity) {
             with(binding) {
                 val url = bookEntity.imageUrl_l.split("\"", "/").toTypedArray()
                 val title = bookEntity.book_title.split("\"").toTypedArray()
@@ -64,7 +65,7 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
                     .into(imgItemBook)
 
                 tvBookTitle.text = title[1]
-                tvDueDate.text = author[1]
+                tvDueDate.text = bookEntity.deadline
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailBookActivity::class.java)

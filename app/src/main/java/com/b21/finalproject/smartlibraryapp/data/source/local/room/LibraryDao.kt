@@ -1,5 +1,6 @@
 package com.b21.finalproject.smartlibraryapp.data.source.local.room
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.*
@@ -36,4 +37,10 @@ interface LibraryDao {
 
     @Query("SELECT * FROM borrow_tb WHERE userId = :userId")
     fun getAllBorrowBook(userId: String): List<BorrowBookEntity>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertBookWithDeadline(bookWithDeadlineEntity: BookWithDeadlineEntity)
+
+    @Query("SELECT * FROM bookWithDeadline_tb WHERE user_id = :userId")
+    fun getAllBookWithDeadline(userId: String): List<BookWithDeadlineEntity>
 }
