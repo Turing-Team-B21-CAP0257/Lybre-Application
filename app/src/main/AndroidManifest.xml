@@ -15,12 +15,10 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.SmartLibraryApp">
         <activity android:name=".ui.home.ui.settings.SettingsActivity"></activity>
 
-
-        android:theme="@style/Theme.SmartLibraryApp"
-        android:usesCleartextTraffic="true">
         <activity android:name=".ui.home.ui.returnbook.ReturnBookActivity"
             android:parentActivityName=".ui.home.HomeActivity"></activity>
         <activity android:name=".ui.home.ui.detail.DetailBorrowBookActivity" />
