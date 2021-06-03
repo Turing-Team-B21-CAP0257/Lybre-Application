@@ -1,5 +1,6 @@
 package com.b21.finalproject.smartlibraryapp.data.source
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.b21.finalproject.smartlibraryapp.data.source.local.LocalDataSource
@@ -158,5 +159,36 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
 
     override fun updateBorrowBook(returnBook: Int, bookId: String) {
         localDataSource.updateBorrowBook(returnBook, bookId)
+    }
+
+    override fun getAllBorrowBookByRaw(sort: Int, userId: String): LiveData<List<BookWithDeadlineEntity>> {
+        val query = SortUtils.getBorrowBookByQuery(sort, userId)
+        val borrowBooks = MutableLiveData<List<BookWithDeadlineEntity>>()
+        localDataSource.getAllBorrowBookByRaw(query, object : LocalDataSource.LoadBorrowBooksCallback {
+            override fun onAllBorrowBooksReceived(borrowBookEntity: List<BorrowBookEntity>) {
+                val bookEntities = ArrayList<BookWithDeadlineEntity>()
+                for (borrowBook in borrowBookEntity) {
+                    val bookById = localDataSource.getBookById(borrowBook.bookId.toInt())
+                    val bookEntity = BookWithDeadlineEntity(
+                        bookById.bookId,
+                        borrowBook.userId,
+                        bookById.ISBN,
+                        bookById.book_title,
+                        bookById.book_author,
+                        bookById.year_publication,
+                        bookById.publisher,
+                        bookById.imageUrl_s,
+                        bookById.imageUrl_m,
+                        bookById.imageUrl_l,
+                        bookById.rating,
+                        borrowBook.deadline,
+                        borrowBook.returnBook
+                    )
+                    bookEntities.add(bookEntity)
+                }
+                borrowBooks.postValue(bookEntities)
+            }
+        })
+        return borrowBooks
     }
 }

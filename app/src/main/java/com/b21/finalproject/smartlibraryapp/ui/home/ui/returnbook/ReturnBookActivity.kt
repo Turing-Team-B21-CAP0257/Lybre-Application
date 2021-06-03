@@ -1,5 +1,6 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDeadlineEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityReturnBookBinding
 import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
+import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 
@@ -39,7 +41,7 @@ class ReturnBookActivity : AppCompatActivity() {
         binding.rvReturnBooks.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         binding.rvReturnBooks.setHasFixedSize(true)
 
-        viewModel.getAllBorrowBooks(appPreference.userId!!).observe(this, { books ->
+        viewModel.getAllborrowBooksByRaw(SortUtils.RETURN_BOOK, appPreference.userId!!).observe(this, { books ->
             if (books.isNullOrEmpty()) {
                 binding.rvReturnBooks.visibility = View.GONE
                 binding.tvNotif.visibility = View.VISIBLE
@@ -54,8 +56,10 @@ class ReturnBookActivity : AppCompatActivity() {
         adapter.setOnBtnReturnClickCallback(object : ReturnBookAdapter.OnBtnReturnClickCallback {
             override fun onBtnItemClickCallback(book: BookWithDeadlineEntity) {
                 viewModel.updateBorrowBook(1, book.bookId)
+                val intent = Intent(this@ReturnBookActivity, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                finish()
             }
-
         })
     }
 }

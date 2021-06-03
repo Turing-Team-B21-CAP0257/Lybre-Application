@@ -34,4 +34,6 @@ interface BookDataSource {
     fun getUserByUsername(username: String): LiveData<UserEntity>
 
     fun updateBorrowBook(returnBook: Int, bookId: String)
+
+    fun getAllBorrowBookByRaw(sort: Int, userId: String): LiveData<List<BookWithDeadlineEntity>>
 }

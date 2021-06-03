@@ -1,5 +1,6 @@
 package com.b21.finalproject.smartlibraryapp.data.source.local
 
+import android.util.Log
 import androidx.sqlite.db.SupportSQLiteQuery
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.*
 import com.b21.finalproject.smartlibraryapp.data.source.local.room.LibraryDao
@@ -43,6 +44,11 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
     fun getUserByUsername(username: String): UserEntity = mLibraryDao.getUserByUsername(username)
 
     fun updateBorrowBook(returnBook: Int, bookId: String) = mLibraryDao.updateBorrowBook(returnBook, bookId)
+
+    fun getAllBorrowBookByRaw(sort: SupportSQLiteQuery, onAllBorrowBooksCallback: LoadBorrowBooksCallback) {
+        val borrowBookEntity = mLibraryDao.getAllborrowBookByRaw(sort)
+        onAllBorrowBooksCallback.onAllBorrowBooksReceived(borrowBookEntity)
+    }
 
     interface LoadFavoriteBooksCallback {
         fun onAllFavoriteBooksReceived(favoriteBookEntity: List<FavoriteBookEntity>)

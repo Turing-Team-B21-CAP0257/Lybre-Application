@@ -16,11 +16,10 @@ import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDea
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHistoryBinding
 import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), CoroutineScope {
 
     private lateinit var adapterBorrowed: HistoryAdapter
     private lateinit var adapterStillBorrowed: HistoryAdapter
@@ -29,6 +28,11 @@ class HistoryFragment : Fragment() {
     private lateinit var appPreference: AppPreference
     private var _binding: FragmentHistoryBinding? = null
 
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + Job()
+
+    private lateinit var job : Job
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -36,6 +40,8 @@ class HistoryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        job = Job()
+        job.start()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,66 +72,73 @@ class HistoryFragment : Fragment() {
         binding.rvHistoryStillBorrowed.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvHistoryStillBorrowed.setHasFixedSize(true)
 
-        GlobalScope.launch(Dispatchers.Main) {
-            viewModel.getAllBorrowBook(appPreference.userId.toString()).observe(viewLifecycleOwner, { books ->
-                    if (books != null) {
-                        val borrowedBooks = ArrayList<BookWithDeadlineEntity>()
-                        val stillBorrowed = ArrayList<BookWithDeadlineEntity>()
-                        var isBorrowed = false
-                        var isStrillBorrowed = false
-                        for (book in books) {
-                            if (book.returnBook == true) {
-                                val borrowedBook = BookWithDeadlineEntity(
-                                    book.bookId,
-                                    appPreference.userId.toString(),
-                                    book.ISBN,
-                                    book.book_title,
-                                    book.book_author,
-                                    book.year_publication,
-                                    book.publisher,
-                                    book.imageUrl_s,
-                                    book.imageUrl_m,
-                                    book.imageUrl_l,
-                                    book.rating,
-                                    book.deadline,
-                                    book.returnBook
-                                )
-                                borrowedBooks.add(borrowedBook)
-                                isBorrowed = true
-                            }
-                            if (book.returnBook == false) {
-                                val stillBorrow = BookWithDeadlineEntity(
-                                    book.bookId,
-                                    appPreference.userId.toString(),
-                                    book.ISBN,
-                                    book.book_title,
-                                    book.book_author,
-                                    book.year_publication,
-                                    book.publisher,
-                                    book.imageUrl_s,
-                                    book.imageUrl_m,
-                                    book.imageUrl_l,
-                                    book.rating,
-                                    book.deadline,
-                                    book.returnBook
-                                )
-                                stillBorrowed.add(stillBorrow)
-                                isStrillBorrowed = true
-                            }
-                        }
-                        showLayoutHeader(isBorrowed, isStrillBorrowed)
-                        Log.d("borrowData", borrowedBooks.toString())
-                        Log.d("stillBorrowData", stillBorrowed.toString())
-                        Log.d("stillBorrowData", books.toString())
-                        adapterBorrowed.setAllbooks(borrowedBooks)
-                        adapterStillBorrowed.setAllbooks(stillBorrowed)
-                        binding.rvHistoryBorrowed.adapter = adapterBorrowed
-                        binding.rvHistoryStillBorrowed.adapter = adapterStillBorrowed
-                    } else {
-                        unShowLayoutHeader()
-                    }
-                })
+        job = launch {
+            val getData = async(Dispatchers.Main){ getDataFromViewModel() }
+            getData.await()
         }
+        job.start()
+
+    }
+
+    private fun getDataFromViewModel() {
+            viewModel.getAllBorrowBook(appPreference.userId.toString()).observe(viewLifecycleOwner, { books ->
+                if (books != null) {
+                    val borrowedBooks = ArrayList<BookWithDeadlineEntity>()
+                    val stillBorrowed = ArrayList<BookWithDeadlineEntity>()
+                    var isBorrowed = false
+                    var isStrillBorrowed = false
+                    for (book in books) {
+                        if (book.returnBook == true) {
+                            val borrowedBook = BookWithDeadlineEntity(
+                                book.bookId,
+                                appPreference.userId.toString(),
+                                book.ISBN,
+                                book.book_title,
+                                book.book_author,
+                                book.year_publication,
+                                book.publisher,
+                                book.imageUrl_s,
+                                book.imageUrl_m,
+                                book.imageUrl_l,
+                                book.rating,
+                                book.deadline,
+                                book.returnBook
+                            )
+                            borrowedBooks.add(borrowedBook)
+                            isBorrowed = true
+                        }
+                        if (book.returnBook == false) {
+                            val stillBorrow = BookWithDeadlineEntity(
+                                book.bookId,
+                                appPreference.userId.toString(),
+                                book.ISBN,
+                                book.book_title,
+                                book.book_author,
+                                book.year_publication,
+                                book.publisher,
+                                book.imageUrl_s,
+                                book.imageUrl_m,
+                                book.imageUrl_l,
+                                book.rating,
+                                book.deadline,
+                                book.returnBook
+                            )
+                            stillBorrowed.add(stillBorrow)
+                            isStrillBorrowed = true
+                        }
+                    }
+                    showLayoutHeader(isBorrowed, isStrillBorrowed)
+                    Log.d("borrowData", borrowedBooks.toString())
+                    Log.d("stillBorrowData", stillBorrowed.toString())
+                    Log.d("stillBorrowData", books.toString())
+                    adapterBorrowed.setAllbooks(borrowedBooks)
+                    adapterStillBorrowed.setAllbooks(stillBorrowed)
+                    binding.rvHistoryBorrowed.adapter = adapterBorrowed
+                    binding.rvHistoryStillBorrowed.adapter = adapterStillBorrowed
+                } else {
+                    unShowLayoutHeader()
+                }
+            })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -187,5 +200,6 @@ class HistoryFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        job.cancel()
     }
 }
