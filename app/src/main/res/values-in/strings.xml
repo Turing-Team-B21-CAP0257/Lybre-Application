@@ -69,7 +69,7 @@
     <string name="sex_title">Jenis Kelamin</string>
     <string name="password_profile">s********</string>
     <string name="history_borrowed_toolbar">Riwayat Peminjaman</string>
-    <string name="full_name">Nama Lengkap</string>
+<!--    <string name="full_name">Nama Lengkap</string>-->
 
     <!--  Settings  -->
     <string name="change_language">Ubah Bahasa</string>
@@ -88,4 +88,7 @@
     <string name="md_member_2">- Yossy Syahida</string>
     <string name="cc_member_2">- Orel Revo Sakchi Usdelivian</string>
     <string name="ml_member_2">- Ergina Kamilia Putri</string>
+
+    <string name="tv_notif_favorite_empty">Kamu belum menambahkan buku favorit apapun</string>
+    <string name="tv_not_added_borrow_yet">Kamu belum meminjam buku apapun</string>
 </resources>

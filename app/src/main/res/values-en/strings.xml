@@ -70,7 +70,7 @@
     <string name="sex_title">Sex</string>
     <string name="password_profile">s********</string>
     <string name="history_borrowed_toolbar">History Borrowed</string>
-    <string name="full_name">Full Name</string>
+<!--    <string name="full_name">Full Name</string>-->
 
 
     <!--  Settings  -->
@@ -90,4 +90,7 @@
     <string name="md_member_2">- Yossy Syahida</string>
     <string name="cc_member_2">- Orel Revo Sakchi Usdelivian</string>
     <string name="ml_member_2">- Ergina Kamilia Putri</string>
+
+    <string name="tv_notif_favorite_empty">You haven\'t added any favorite the book yet</string>
+    <string name="tv_not_added_borrow_yet">You haven\'t added any borrow the book yet</string>
 </resources>

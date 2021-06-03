@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/tv_notif"
-        android:text="You haven't added any favorite the book yet"
+        android:text="@string/tv_notif_favorite_empty"
         android:fontFamily="@font/poppins_medium"
         android:textSize="14sp"
         android:textColor="@color/palette_200"

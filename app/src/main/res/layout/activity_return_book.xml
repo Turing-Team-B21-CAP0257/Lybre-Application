@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/tv_notif"
-        android:text="You haven't added any borrow the book yet"
+        android:text="@string/tv_not_added_borrow_yet"
         android:fontFamily="@font/poppins_medium"
         android:textSize="14sp"
         android:layout_marginTop="150dp"
