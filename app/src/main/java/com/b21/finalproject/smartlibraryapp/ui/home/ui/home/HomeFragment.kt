@@ -22,8 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
-import com.b21.finalproject.smartlibraryapp.ml.Model
-import com.b21.finalproject.smartlibraryapp.ml.Model2
+import com.b21.finalproject.smartlibraryapp.ml.Model1
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
@@ -33,7 +32,9 @@ import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import kotlinx.coroutines.*
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 import java.nio.ByteBuffer
 import kotlin.coroutines.CoroutineContext
 
@@ -160,7 +161,6 @@ class HomeFragment : Fragment(), CoroutineScope {
         }
 
         loadModel()
-        loadModel2()
     }
 
     override fun onRequestPermissionsResult(
@@ -288,65 +288,36 @@ class HomeFragment : Fragment(), CoroutineScope {
 //    }
 
     private fun loadModel() {
-        val model = Model.newInstance(requireContext())
+        val model = Model1.newInstance(requireContext())
 
         val byteBuffer: ByteBuffer = ByteBuffer.allocateDirect(4)
-        byteBuffer.putFloat(33f)
-
-//        val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect(4)
-//        byteBuffer.putFloat(2966f)
+        byteBuffer.putFloat(5.0.toFloat())
 
         // Creates inputs for reference.
         val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
         inputFeature0.loadBuffer(byteBuffer)
 
         val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-        inputFeature1.loadBuffer(ByteBuffer.allocateDirect(4).putFloat(2966f))
+        inputFeature1.loadBuffer(ByteBuffer.allocateDirect(4).putFloat(10264.0.toFloat()))
 
         // Runs model inference and gets result.
         val outputs = model.process(inputFeature0, inputFeature1)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
 
-        Log.d("outputs", outputFeature0[0].toString() + " " + outputFeature0[1].toString() + " " + outputFeature0[2].toString() + " " + outputFeature0[3].toString())
-//        Log.d("outputs", outputFeature0.toString())
-//        Log.d("outputs", outputFeature0.toString())
+        Log.d("outputs", outputFeature0[0].toString())
 
-        //828359
-        //cb97fff
+        //38 73 55 64
+        //@49cf0fd
+        //@b1379c1
+        //@8ede1f2
+        //@765b463
+        //2.430129
 
         // Releases model resources if no longer used.
         model.close()
 
     }
 
-    private fun loadModel2() {
-        val model = Model2.newInstance(requireContext())
-
-        val byteBuffer: ByteBuffer = ByteBuffer.allocateDirect(4)
-        byteBuffer.putFloat(125f)
-
-        // Creates inputs for reference.
-        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-        inputFeature0.loadBuffer(byteBuffer)
-
-        // Runs model inference and gets result.
-        val outputs = model.process(inputFeature0)
-        val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
-
-        Log.d("outputs", outputFeature0[0].toString() + " " + outputFeature0[1].toString() + " " + outputFeature0[2].toString() + " " + outputFeature0[3].toString())
-
-        // Releases model resources if no longer used.
-        model.close()
-    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId){
-//            R.id.action_done -> {
-//                }
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_setting -> {
@@ -356,15 +327,6 @@ class HomeFragment : Fragment(), CoroutineScope {
         }
         return super.onOptionsItemSelected(item)
     }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        when(item.itemId){
-//            R.id.action_done -> {
-//                }
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

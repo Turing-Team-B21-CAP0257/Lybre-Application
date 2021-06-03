@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.provider.Settings
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.ActivitySettingsBinding
+import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
 import com.b21.finalproject.smartlibraryapp.ui.auth.AuthenticationActivity
 import com.b21.finalproject.smartlibraryapp.ui.auth.LoginFragment
+import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 
 class SettingsActivity : AppCompatActivity() {
 
@@ -21,10 +23,17 @@ class SettingsActivity : AppCompatActivity() {
         setSupportActionBar(settingsBinding.layoutHeaderSettings.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val appPreference = AppPreference(this)
+
         settingsBinding.layoutLogout.tvLogoutTitle.setOnClickListener {
+            appPreference.isLogin = false
+            appPreference.userId = "0"
+            appPreference.username = "null"
+            HomeActivity.STATE_ACTIVITY = 1
             val intent = Intent(this@SettingsActivity, AuthenticationActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            finish()
         }
 
         settingsBinding.layoutHeaderChangeLanguage.tvChangeLanguageTitle.setOnClickListener {

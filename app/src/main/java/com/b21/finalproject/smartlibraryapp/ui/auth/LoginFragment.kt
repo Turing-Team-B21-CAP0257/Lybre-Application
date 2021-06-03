@@ -2,6 +2,7 @@ package com.b21.finalproject.smartlibraryapp.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +21,8 @@ class LoginFragment : Fragment() {
     private lateinit var viewModel: AuthViewModel
     private lateinit var viewModelFactory: ViewModelFactory
 
+    private lateinit var appPreference: AppPreference
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -31,7 +34,9 @@ class LoginFragment : Fragment() {
 
         viewModelFactory = ViewModelFactory.getInstance(requireContext())
         viewModel = ViewModelProvider(this, viewModelFactory)[AuthViewModel::class.java]
-        val appPreference = AppPreference(requireContext())
+        appPreference = AppPreference(requireContext())
+
+        Log.d("login", appPreference.isLogin.toString() + " " + appPreference.username + " " + appPreference.userId)
 
         binding.btnLogin.setOnClickListener {
 
@@ -53,6 +58,7 @@ class LoginFragment : Fragment() {
                             appPreference.username = user.username
                             val intent = Intent(activity, HomeActivity::class.java)
                             startActivity(intent)
+                            activity?.finish()
                         } else {
                             Toast.makeText(requireContext(), "Wrong password !", Toast.LENGTH_SHORT).show()
                         }
@@ -68,5 +74,15 @@ class LoginFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (appPreference.isLogin == true) {
+            val intent = Intent(requireContext(), HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+            activity?.finish()
+        }
     }
 }
