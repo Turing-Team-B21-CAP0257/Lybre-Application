@@ -11,4 +11,6 @@ class ReturnBookViewModel(private val bookRepository: BookRepository) : ViewMode
     fun getAllBooks(sort: String): LiveData<List<BookEntity>> = bookRepository.getAllBooks(sort)
 
     fun getAllBorrowBooks(userId: String): LiveData<List<BookWithDeadlineEntity>> = bookRepository.getAllBorrowBook(userId)
+
+    fun updateBorrowBook(returnBook: Int, bookId: String) = bookRepository.updateBorrowBook(returnBook, bookId)
 }

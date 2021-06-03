@@ -26,7 +26,6 @@ class HistoryFragment : Fragment() {
     private lateinit var adapterStillBorrowed: HistoryAdapter
     private lateinit var factory: ViewModelFactory
     private lateinit var viewModel: HistoryViewModel
-    private lateinit var historyViewModel: HistoryViewModel
     private lateinit var appPreference: AppPreference
     private var _binding: FragmentHistoryBinding? = null
 

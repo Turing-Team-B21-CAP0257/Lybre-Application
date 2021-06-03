@@ -75,7 +75,7 @@
         tools:text="The book" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_return"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

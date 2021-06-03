@@ -37,6 +37,9 @@ interface LibraryDao {
     @Query("SELECT * FROM borrow_tb WHERE userId = :userId")
     fun getAllBorrowBook(userId: String): List<BorrowBookEntity>
 
+    @Query("UPDATE borrow_tb SET returnBook = :returnBook WHERE bookId = :bookId")
+    fun updateBorrowBook(returnBook: Int, bookId: String)
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBookWithDeadline(bookWithDeadlineEntity: BookWithDeadlineEntity)
 

@@ -20,6 +20,12 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
 
     private var allBooks = ArrayList<BookWithDeadlineEntity>()
 
+    private lateinit var onBtnReturnClickCallback: OnBtnReturnClickCallback
+
+    fun setOnBtnReturnClickCallback(onBtnReturnClickCallback: OnBtnReturnClickCallback) {
+        this.onBtnReturnClickCallback = onBtnReturnClickCallback
+    }
+
     fun setAllbooks(books: List<BookWithDeadlineEntity>) {
         if (allBooks.size != 0) {
             allBooks.clear()
@@ -46,7 +52,8 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int = allBooks.size
 
-    inner class ViewHolder(private val binding: ItemListReturnBookBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: ItemListReturnBookBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(bookEntity: BookWithDeadlineEntity) {
             with(binding) {
                 val url = bookEntity.imageUrl_l.split("\"", "/").toTypedArray()
@@ -61,7 +68,9 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
 
                 Glide.with(itemView.context)
                     .load("http://images.amazon.com/images/P/${url[6]}")
-                    .apply(RequestOptions.placeholderOf(circularProgressBar).error(R.drawable.ic_error))
+                    .apply(
+                        RequestOptions.placeholderOf(circularProgressBar).error(R.drawable.ic_error)
+                    )
                     .into(imgItemBook)
 
                 tvBookTitle.text = title[1]
@@ -72,7 +81,15 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
                     intent.putExtra(DetailBookActivity.BOOK_ID, bookEntity.bookId.toInt())
                     itemView.context.startActivity(intent)
                 }
+
+                btnReturn.setOnClickListener {
+                    onBtnReturnClickCallback.onBtnItemClickCallback(bookEntity)
+                }
             }
         }
+    }
+
+    interface OnBtnReturnClickCallback {
+        fun onBtnItemClickCallback(book: BookWithDeadlineEntity)
     }
 }

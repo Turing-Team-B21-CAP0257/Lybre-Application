@@ -32,4 +32,6 @@ interface BookDataSource {
     fun insertBookWithDeadline(bookWithDeadlineEntity: BookWithDeadlineEntity)
 
     fun getUserByUsername(username: String): LiveData<UserEntity>
+
+    fun updateBorrowBook(returnBook: Int, bookId: String)
 }

@@ -155,4 +155,8 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         result.postValue(localDataSource.getUserByUsername(username))
         return result
     }
+
+    override fun updateBorrowBook(returnBook: Int, bookId: String) {
+        localDataSource.updateBorrowBook(returnBook, bookId)
+    }
 }
