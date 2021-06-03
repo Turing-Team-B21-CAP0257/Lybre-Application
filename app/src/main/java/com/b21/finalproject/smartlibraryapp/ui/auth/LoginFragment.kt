@@ -54,8 +54,8 @@ class LoginFragment : Fragment() {
                     if (user != null){
                         if (password == user.password) {
                             appPreference.isLogin = true
-                            appPreference.userId = user.userId
                             appPreference.username = user.username
+                            appPreference.userId = user.userId
                             val intent = Intent(activity, HomeActivity::class.java)
                             startActivity(intent)
                             activity?.finish()

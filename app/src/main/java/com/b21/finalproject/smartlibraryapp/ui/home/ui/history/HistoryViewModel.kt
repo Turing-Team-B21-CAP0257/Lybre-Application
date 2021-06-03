@@ -1,13 +1,12 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.history
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.b21.finalproject.smartlibraryapp.data.source.BookRepository
+import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookWithDeadlineEntity
 
-class HistoryViewModel : ViewModel() {
+class HistoryViewModel(private val bookRepository: BookRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is history Fragment"
-    }
-    val text: LiveData<String> = _text
+    fun getAllBorrowBook(userId: String): LiveData<List<BookWithDeadlineEntity>> = bookRepository.getAllBorrowBook(userId)
+
 }

@@ -9,6 +9,7 @@ import com.b21.finalproject.smartlibraryapp.ui.auth.AuthViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.bookmark.BookmarkViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.allBooks.AllBooksViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailViewModel
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.history.HistoryViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookViewModel
 
@@ -43,6 +44,9 @@ class ViewModelFactory private constructor(private val bookRepository: BookRepos
             }
             modelClass.isAssignableFrom(AuthViewModel::class.java) -> {
                 return AuthViewModel(bookRepository) as T
+            }
+            modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
+                return HistoryViewModel(bookRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel Class : ${modelClass.name}")
         }

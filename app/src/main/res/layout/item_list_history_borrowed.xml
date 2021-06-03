@@ -23,8 +23,8 @@
             <!-- Media -->
             <ImageView
                 android:id="@+id/img_item_book"
-                android:layout_width="200dp"
-                android:layout_height="300dp"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/background_splashscreen" />
 
@@ -33,14 +33,15 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_marginTop="-18dp"
-                android:layout_marginStart="160dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="4dp"
                 app:srcCompat="@drawable/ic_baseline_access_time_24" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="8dp">
 
                 <!-- Title, secondary and supporting text -->
                 <TextView
@@ -48,29 +49,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="Name of book"
-                    android:textAppearance="?attr/textAppearanceHeadline6" />
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    android:textSize="12sp"/>
 
                 <TextView
                     android:id="@+id/tv_desc_of_book"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     tools:text="Description"
-                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="10sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     android:textColor="?android:attr/textColorSecondary" />
 
-                <TextView
+                <RatingBar
                     android:id="@+id/tv_rating_of_book"
+                    style = "?android:attr/ratingBarStyleSmall"
+                    android:numStars="5"
+                    android:stepSize="0.1"
+                    android:progressTint="@color/palette_gold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="4dp"
                     tools:text="Ratings"
-                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textSize="10sp"
                     android:textColor="?android:attr/textColorSecondary" />
 
             </LinearLayout>
 
         </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

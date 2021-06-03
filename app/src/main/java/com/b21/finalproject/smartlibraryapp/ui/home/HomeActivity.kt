@@ -44,6 +44,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun authenthication() {
         val appPreference = AppPreference(this)
+        Log.d("userIdHome: ", appPreference.userId.toString() + " " + appPreference.isLogin)
         if (appPreference.isLogin == false && STATE_ACTIVITY == 1) {
             val intent = Intent(this@HomeActivity, AuthenticationActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

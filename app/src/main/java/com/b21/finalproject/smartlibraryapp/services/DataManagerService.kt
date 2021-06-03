@@ -197,6 +197,8 @@ class DataManagerService : Service(), CoroutineScope {
 
             reader.readLine()
 
+            var sumUsername = 1
+
             do {
                 line = reader.readLine()
 
@@ -207,7 +209,7 @@ class DataManagerService : Service(), CoroutineScope {
                     splitstr[0],
                     location,
                     splitstr[4],
-                    "Loremipsum",
+                    "Loremipsum"+sumUsername++,
                     "Female",
                     "Loremipsum",
                     "2000/01/01",
