@@ -52,6 +52,9 @@ class DetailBookActivity : AppCompatActivity() {
         factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
 
+        binding.progressBar.visibility = View.VISIBLE
+        binding.rvRecommendedBooks.visibility = View.GONE
+
         viewModel.getFavoriteBookByBookId(bookId.toString()).observe(this, { bookFavorite ->
             if (bookFavorite == null) {
                 isBookmarked = false
@@ -66,23 +69,26 @@ class DetailBookActivity : AppCompatActivity() {
 
         bookmarked()
 
-        binding.progressBar.visibility = View.VISIBLE
-        binding.rvRecommendedBooks.visibility = View.GONE
-
         viewModel.getBookById(bookId).observe(this, { book ->
             if (book != null) showPopulate(book)
             else binding.progressBar.visibility = View.VISIBLE
         })
 
         viewModel.getRecommendedBooks(SortUtils.RECOMMENDED).observe(this, { books ->
-            adapter.setAllbooks(books)
-            binding.rvRecommendedBooks.adapter = adapter
+            binding.progressBar.visibility = View.VISIBLE
+            if (!books.isNullOrEmpty()) {
+                binding.progressBar.visibility = View.GONE
+                binding.rvRecommendedBooks.visibility = View.VISIBLE
+                adapter.setAllbooks(books)
+                binding.rvRecommendedBooks.adapter = adapter
+            } else {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.rvRecommendedBooks.visibility = View.GONE
+            }
         })
     }
 
     private fun showPopulate(book: BookEntity) {
-        binding.progressBar.visibility = View.GONE
-        binding.rvRecommendedBooks.visibility = View.VISIBLE
         val url = book.imageUrl_l.split("\"", "/").toTypedArray()
         val title = book.book_title.split("\"").toTypedArray()
         val isbn = book.ISBN.split("\"").toTypedArray()
