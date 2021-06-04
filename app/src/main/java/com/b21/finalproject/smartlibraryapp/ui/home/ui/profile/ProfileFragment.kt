@@ -43,12 +43,21 @@ class ProfileFragment : Fragment() {
 
         viewModel.getUserByUsername(appPreference.username.toString()).observe(viewLifecycleOwner, { user ->
             binding.layoutHeaderProfile.tvFullnameProfile.text = user.full_name
+            binding.layoutFullnameEditProfile.tvFullname.text = user.full_name
+            binding.layoutUsernameEditProfile.tvUsername.text = user.username
             binding.layoutAddressEditProfile.tvAddress.text = user.address
             binding.layoutBirthdayEditProfile.tvBirthday.text = user.birthday
             binding.layoutEmailEditProfile.tvEmail.text = user.email
             binding.layoutSexEditProfile.tvSex.text = user.sex
 
-            val password = user.password.take(5) + "xxxx"
+            val sizePassword = user.password.count() - 5
+            val suffixOfPassword = StringBuilder().append("")
+
+            for (i in 0..sizePassword) {
+                suffixOfPassword.append("*")
+            }
+
+            val password = user.password.take(5) + suffixOfPassword
             binding.layoutPasswordEditProfile.tvPassword.text = password
         })
     }
