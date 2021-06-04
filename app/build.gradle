@@ -112,5 +112,9 @@ dependencies {
     // CardView
     implementation "androidx.cardview:cardview:1.0.0"
 
+    // ML Kit recognation
     implementation 'com.google.android.gms:play-services-mlkit-text-recognition:16.2.0'
+
+    // GPS
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
 }
