@@ -11,6 +11,7 @@ import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.allBooks.AllBo
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.history.HistoryViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeViewModel
+import com.b21.finalproject.smartlibraryapp.ui.home.ui.profile.ProfileViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookViewModel
 
 class ViewModelFactory private constructor(private val bookRepository: BookRepository) : ViewModelProvider.NewInstanceFactory() {
@@ -47,6 +48,9 @@ class ViewModelFactory private constructor(private val bookRepository: BookRepos
             }
             modelClass.isAssignableFrom(HistoryViewModel::class.java) -> {
                 return HistoryViewModel(bookRepository) as T
+            }
+            modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
+                return ProfileViewModel(bookRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel Class : ${modelClass.name}")
         }
