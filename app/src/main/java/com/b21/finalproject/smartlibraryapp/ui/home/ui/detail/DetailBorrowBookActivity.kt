@@ -142,10 +142,17 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         binding.layoutHeaderRecommended.tvRecommendedBooks.text = "Wrong book? might you mean these book!"
 
         val sdf = SimpleDateFormat("dd/MM/yyyy")
-        val currentDate = sdf.format(Date()).split("/").toTypedArray()
+        val date = Date()
+
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.add(Calendar.DATE, 6)
+
+        val currentDate = sdf.format(date).split("/").toTypedArray()
+        val deadline    = sdf.format(calendar.time).split("/").toTypedArray()
 
         binding.layoutContentBorrow.edtDateOfBorrowed.setText("${currentDate[0]}-${currentDate[1]}-${currentDate[2]}", TextView.BufferType.EDITABLE)
-        binding.layoutContentBorrow.edtDeadlineOfBorrowed.setText("0${currentDate[0].toInt() + 4}-${currentDate[1]}-${currentDate[2]}", TextView.BufferType.EDITABLE)
+        binding.layoutContentBorrow.edtDeadlineOfBorrowed.setText("${deadline[0]}-${deadline[1]}-${deadline[2]}", TextView.BufferType.EDITABLE)
 
         binding.btnBorrow.setOnClickListener {
             if (binding.layoutContentBorrow.checkBox.isChecked == true) {
