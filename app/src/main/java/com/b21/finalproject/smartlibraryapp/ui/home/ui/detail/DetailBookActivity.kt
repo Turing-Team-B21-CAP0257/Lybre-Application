@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -65,8 +66,12 @@ class DetailBookActivity : AppCompatActivity() {
 
         bookmarked()
 
+        binding.progressBar.visibility = View.VISIBLE
+        binding.rvRecommendedBooks.visibility = View.GONE
+
         viewModel.getBookById(bookId).observe(this, { book ->
-            showPopulate(book)
+            if (book != null) showPopulate(book)
+            else binding.progressBar.visibility = View.VISIBLE
         })
 
         viewModel.getRecommendedBooks(SortUtils.RECOMMENDED).observe(this, { books ->
@@ -76,6 +81,8 @@ class DetailBookActivity : AppCompatActivity() {
     }
 
     private fun showPopulate(book: BookEntity) {
+        binding.progressBar.visibility = View.GONE
+        binding.rvRecommendedBooks.visibility = View.VISIBLE
         val url = book.imageUrl_l.split("\"", "/").toTypedArray()
         val title = book.book_title.split("\"").toTypedArray()
         val isbn = book.ISBN.split("\"").toTypedArray()

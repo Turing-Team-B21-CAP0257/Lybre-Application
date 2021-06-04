@@ -16,7 +16,6 @@ class ProfileFragment : Fragment() {
     private lateinit var factory: ViewModelFactory
     private lateinit var viewModel: ProfileViewModel
     private lateinit var appPreference: AppPreference
-    private lateinit var profileViewModel: ProfileViewModel
     private var _binding: FragmentProfileBinding? = null
 
     // This property is only valid between onCreateView and
