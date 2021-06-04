@@ -15,6 +15,7 @@ import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BorrowBookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityDetailBorrowBookBinding
+import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
 import com.b21.finalproject.smartlibraryapp.ui.home.HomeActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
@@ -34,6 +35,7 @@ class DetailBorrowBookActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailViewModel
     private lateinit var factory: ViewModelFactory
     private lateinit var binding: ActivityDetailBorrowBookBinding
+    private lateinit var appPreference: AppPreference
 
     companion object {
         const val IMAGE_CAPTURE = "image_capture"
@@ -51,6 +53,8 @@ class DetailBorrowBookActivity : AppCompatActivity() {
         factory = ViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[DetailViewModel::class.java]
         adapter = HomeAdapter()
+
+        appPreference = AppPreference(this)
 
         binding.rvWrongBooks.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -158,7 +162,7 @@ class DetailBorrowBookActivity : AppCompatActivity() {
             if (binding.layoutContentBorrow.checkBox.isChecked == true) {
                 val borrowBook = BorrowBookEntity(
                     0,
-                    "1",
+                    appPreference.userId.toString(),
                     "${book.bookId}",
                     "${currentDate[0]}-${currentDate[1]}-${currentDate[2]}",
                     "0${currentDate[0].toInt() + 4}-${currentDate[1]}-${currentDate[2]}",
