@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ml.Model1
+import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
@@ -86,11 +87,8 @@ class HomeFragment : Fragment(), CoroutineScope {
         reqActivity.setSupportActionBar(binding.layoutHeaderHome.homeToolbar)
         reqActivity.setTitle("")
 
-        val textView: TextView = binding.layoutHeaderHome.tvUsername
-
-        homeViewModel.text.observe(viewLifecycleOwner, {
-            textView.text = it
-        })
+        val appPreference = AppPreference(requireContext())
+        binding.layoutHeaderHome.tvUsername.text = appPreference.username
 
         return root
     }
@@ -119,18 +117,10 @@ class HomeFragment : Fragment(), CoroutineScope {
                     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
                     startActivityForResult(intent, CAMERA_REQUEST_CODE)
                 } else {
-                    ActivityCompat.requestPermissions(
-                        requireActivity(),
-                        arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                        WRITE_EXTERNAL_REQUEST_CODE
-                    )
+                    ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_EXTERNAL_REQUEST_CODE)
                 }
             } else {
-                ActivityCompat.requestPermissions(
-                    requireActivity(),
-                    arrayOf(Manifest.permission.CAMERA),
-                    CAMERA_REQUEST_CODE
-                )
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
             }
         }
 
@@ -271,40 +261,44 @@ class HomeFragment : Fragment(), CoroutineScope {
 //
 //        Log.d("obj", obj.toString())
 
-//                val stream = ByteArrayOutputStream()
-//                image.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-//                val byteArray: ByteArray = stream.toByteArray()
-//                image.recycle()
-
-//                val imageString = Base64.encodeToString(byteArray, Base64.DEFAULT)
-
-//                Log.d("MYTAG_BYTEARRAY", byteArray.toString())
-//                Log.d("MYTAG_IMAGE", image.toString())
-
-//                val array1: PyObject =  PyObject.fromJava(byteArray)
-
-//                val obj: PyObject = pyObj.callAttr("ocr_core", imageString)
-//                binding.layoutHeaderHome.tvUsername.text = obj.toString()
+//        val stream = ByteArrayOutputStream()
+//        image.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+//        val byteArray: ByteArray = stream.toByteArray()
+//        image.recycle()
+//
+//        val imageString = Base64.encodeToString(byteArray, Base64.DEFAULT)
+//
+//        Log.d("MYTAG_BYTEARRAY", byteArray.toString())
+//        Log.d("MYTAG_IMAGE", image.toString())
+//
+//        val array1: PyObject =  PyObject.fromJava(byteArray)
+//
+//        val obj: PyObject = pyObj.callAttr("ocr_core", imageString)
+//        binding.layoutHeaderHome.tvUsername.text = obj.toString()
 //    }
 
     private fun loadModel() {
-        val model = Model1.newInstance(requireContext())
 
         val byteBuffer: ByteBuffer = ByteBuffer.allocateDirect(4)
-        byteBuffer.putFloat(5.0.toFloat())
+        byteBuffer.putFloat(87f)
+
+        val model = Model1.newInstance(requireContext())
 
         // Creates inputs for reference.
         val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
         inputFeature0.loadBuffer(byteBuffer)
 
         val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-        inputFeature1.loadBuffer(ByteBuffer.allocateDirect(4).putFloat(10264.0.toFloat()))
+        inputFeature0.loadBuffer(byteBuffer)
 
         // Runs model inference and gets result.
         val outputs = model.process(inputFeature0, inputFeature1)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
 
-        Log.d("outputs", outputFeature0[0].toString())
+        // Releases model resources if no longer used.
+        model.close()
+
+        Log.d("outputs", outputFeature0[0].toString() + " " + outputFeature0[1].toString() + " " + outputFeature0[2].toString() + " " + outputFeature0[3].toString())
 
         //38 73 55 64
         //@49cf0fd
@@ -315,7 +309,6 @@ class HomeFragment : Fragment(), CoroutineScope {
 
         // Releases model resources if no longer used.
         model.close()
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -373,18 +366,6 @@ class HomeFragment : Fragment(), CoroutineScope {
         binding.layoutHeaderResult.imgItemMore.visibility = View.VISIBLE
         binding.layoutHeaderResult.tvRecommendedBooks.visibility = View.VISIBLE
         binding.rvSearchBooks.visibility = View.VISIBLE
-    }
-
-    private fun unShowItemSearchPopulate() {
-        binding.progressBar.visibility = View.GONE
-        binding.rvAllbooks.visibility = View.GONE
-        binding.rvRecommendedBooks.visibility = View.GONE
-        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.GONE
-        binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
-        binding.layoutHeaderRecommended.tvRecommendedBooks.text = "Result The Search"
-        binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.GONE
-        binding.layoutHeaderAllbooks.imgItemMore.visibility = View.GONE
-        binding.rvSearchBooks.visibility = View.GONE
     }
 
 }

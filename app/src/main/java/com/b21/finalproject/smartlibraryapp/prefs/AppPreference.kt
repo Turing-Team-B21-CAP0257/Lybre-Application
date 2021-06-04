@@ -7,6 +7,7 @@ import androidx.core.content.edit
 class AppPreference(context: Context) {
     companion object {
         private const val PREFS_NAME = "LibraryPref"
+        private const val PREFS_USER = "UserPref"
         private const val PREFS_LOGIN = "LoginPref"
         private const val PREFS_USERID = "UserPref"
         private const val PREFS_USERNAME = "UserPref"
@@ -14,6 +15,7 @@ class AppPreference(context: Context) {
     }
 
     private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+    private val prefsUser: SharedPreferences = context.getSharedPreferences(PREFS_USER, Context.MODE_PRIVATE)
 
     var firstRun: Boolean?
         get() = prefs.getBoolean(APP_FIRST_RUN, true)
@@ -40,9 +42,9 @@ class AppPreference(context: Context) {
         }
 
     var username: String?
-        get() = prefs.getString(PREFS_USERNAME, "loremipsum")
+        get() = prefsUser.getString(PREFS_USERNAME, "loremipsum")
         set(value) {
-            prefs.edit {
+            prefsUser.edit {
                 putString(PREFS_USERNAME, value)
             }
         }

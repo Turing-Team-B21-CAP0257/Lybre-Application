@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentBookmarkBinding
+import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 
@@ -26,6 +27,8 @@ class BookmarkFragment : Fragment() {
     private lateinit var bookmarkViewModel: BookmarkViewModel
     private lateinit var adapter: HomeAdapter
     private var _binding: FragmentBookmarkBinding? = null
+
+    private lateinit var appPreference: AppPreference
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -57,6 +60,7 @@ class BookmarkFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = HomeAdapter()
+        appPreference = AppPreference(requireContext())
 
         binding.rvFavoriteBooks.layoutManager = GridLayoutManager(requireContext(), 3)
         binding.rvFavoriteBooks.setHasFixedSize(true)
@@ -95,7 +99,7 @@ class BookmarkFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        bookmarkViewModel.getAllFavoriteBook("1").observe(viewLifecycleOwner, { books ->
+        bookmarkViewModel.getAllFavoriteBook(appPreference.userId.toString()).observe(viewLifecycleOwner, { books ->
             if (books.isNullOrEmpty()) {
                 binding.tvNotif.visibility = View.VISIBLE
                 binding.rvFavoriteBooks.visibility = View.GONE
