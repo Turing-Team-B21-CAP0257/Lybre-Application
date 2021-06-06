@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.location.Location
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -30,6 +31,9 @@ import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActi
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.*
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
@@ -55,14 +59,17 @@ class HomeFragment : Fragment(), CoroutineScope {
 
     private lateinit var job : Job
 
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var task: Task<Location>
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
     companion object {
         const val CAMERA_REQUEST_CODE = 100
+        const val GPS_REQUEST_CODE = 110
         const val WRITE_EXTERNAL_REQUEST_CODE = 101
-        const val CAMERA_PERMISSION_CODE = 200
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,6 +96,8 @@ class HomeFragment : Fragment(), CoroutineScope {
 
         val appPreference = AppPreference(requireContext())
         binding.layoutHeaderHome.tvUsername.text = appPreference.username
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
         return root
     }
@@ -125,8 +134,22 @@ class HomeFragment : Fragment(), CoroutineScope {
         }
 
         binding.layoutHeaderHome.cardMenuReturn.setOnClickListener {
-            val intent = Intent(requireContext(), ReturnBookActivity::class.java)
-            startActivity(intent)
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_REQUEST_CODE)
+                task = fusedLocationProviderClient.lastLocation
+            } else {
+                task = fusedLocationProviderClient.lastLocation
+                task.addOnSuccessListener {
+                    if (it != null) {
+                        val intent = Intent(requireContext(), ReturnBookActivity::class.java)
+                        intent.putExtra("lat", it.latitude)
+                        intent.putExtra("long", it.longitude)
+                        startActivity(intent)
+                        Log.d("Location", it.latitude.toString() + " " + it.longitude.toString())
+                    }
+                }
+            }
         }
 
         if (activity != null) {
@@ -159,12 +182,14 @@ class HomeFragment : Fragment(), CoroutineScope {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == CAMERA_PERMISSION_CODE) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                startActivityForResult(intent, CAMERA_REQUEST_CODE)
-            } else {
-                Toast.makeText(requireContext(), "You must allow the permission for camera !", Toast.LENGTH_SHORT).show()
+        when (requestCode) {
+            CAMERA_REQUEST_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                    startActivityForResult(intent, CAMERA_REQUEST_CODE)
+                } else {
+                    Toast.makeText(requireContext(), "You must be allow the permission for camera!", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
