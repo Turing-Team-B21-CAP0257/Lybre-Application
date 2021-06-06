@@ -22,6 +22,8 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
 
     private lateinit var onBtnReturnClickCallback: OnBtnReturnClickCallback
 
+    var IS_RETURN = false
+
     fun setOnBtnReturnClickCallback(onBtnReturnClickCallback: OnBtnReturnClickCallback) {
         this.onBtnReturnClickCallback = onBtnReturnClickCallback
     }
@@ -58,7 +60,6 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
             with(binding) {
                 val url = bookEntity.imageUrl_l.split("\"", "/").toTypedArray()
                 val title = bookEntity.book_title.split("\"").toTypedArray()
-                val author = bookEntity.book_author.split("\"").toTypedArray()
 
                 val circularProgressBar = CircularProgressDrawable(itemView.context).apply {
                     strokeWidth = 5f
@@ -81,6 +82,8 @@ class ReturnBookAdapter : RecyclerView.Adapter<ReturnBookAdapter.ViewHolder>() {
                     intent.putExtra(DetailBookActivity.BOOK_ID, bookEntity.bookId.toInt())
                     itemView.context.startActivity(intent)
                 }
+
+                btnReturn.isEnabled = IS_RETURN != false
 
                 btnReturn.setOnClickListener {
                     onBtnReturnClickCallback.onBtnItemClickCallback(bookEntity)

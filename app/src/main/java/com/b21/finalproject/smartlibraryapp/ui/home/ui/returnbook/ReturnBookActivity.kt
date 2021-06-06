@@ -1,7 +1,9 @@
 package com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -18,6 +20,7 @@ import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.tasks.Task
 
 class ReturnBookActivity : AppCompatActivity() {
 
@@ -27,12 +30,13 @@ class ReturnBookActivity : AppCompatActivity() {
     private lateinit var appPreference: AppPreference
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var task: Task<Location>
 
     private lateinit var binding: ActivityReturnBookBinding
 
     companion object {
         private val GPS_REQUEST = 100
-        private val GPS_RESULT = 101
+        private var IS_RETURN = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +71,8 @@ class ReturnBookActivity : AppCompatActivity() {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
+        task = fusedLocationProviderClient.lastLocation
+
         checkLocationPermission()
 
         adapter.setOnBtnReturnClickCallback(object : ReturnBookAdapter.OnBtnReturnClickCallback {
@@ -80,18 +86,46 @@ class ReturnBookActivity : AppCompatActivity() {
     }
 
     private fun checkLocationPermission() {
-        val task = fusedLocationProviderClient.lastLocation
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-            != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), GPS_REQUEST)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_REQUEST)
             return
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_REQUEST)
         }
+
         task.addOnSuccessListener {
-            if (it != null) {
-                Log.d("Location", " ${it.latitude} ${it.longitude}")
-            }
+            Log.d("Location", " ${it.latitude} ${it.longitude}")
+            calculateDistance(it.latitude, it.longitude)
+        }
+    }
+
+    private fun calculateDistance(lat2: Double, lng2: Double) {
+        val earthRadius = 3958.75
+
+        val lat1 = -6.180933877022023
+        val lng1 = 106.82702035590873
+
+        val dLat = Math.toRadians(lat1 - lat2)
+        val dLng = Math.toRadians(lng1 - lng2)
+        val a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(lat1)) *
+                Math.sin(dLng / 2) * Math.sin(dLng / 2)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+        val dist = earthRadius * c
+
+        val distConst = 0.026748954252747134
+
+        Log.d("Location distance", dist.toString())
+
+        if (dist > distConst || dist < distConst) {
+            IS_RETURN = false
+            adapter.IS_RETURN = false
+            Log.d("Location result", "False")
+        } else {
+            IS_RETURN = true
+            adapter.IS_RETURN = true
+            Log.d("Location result", "True")
         }
     }
 }

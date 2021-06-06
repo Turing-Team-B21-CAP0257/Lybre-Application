@@ -165,7 +165,7 @@ class DetailBorrowBookActivity : AppCompatActivity() {
                     appPreference.userId.toString(),
                     "${book.bookId}",
                     "${currentDate[0]}-${currentDate[1]}-${currentDate[2]}",
-                    "0${currentDate[0].toInt() + 4}-${currentDate[1]}-${currentDate[2]}",
+                    "${deadline[0]}-${deadline[1]}-${deadline[2]}",
                     true,
                     false
                 )
