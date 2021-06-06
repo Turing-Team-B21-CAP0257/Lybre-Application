@@ -121,24 +121,18 @@ class HomeFragment : Fragment(), CoroutineScope {
         }
 
         binding.layoutHeaderHome.cardMenuBorrowed.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(intent, CAMERA_REQUEST_CODE)
-                } else {
-                    ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_EXTERNAL_REQUEST_CODE)
-                }
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, CAMERA_REQUEST_CODE)
             } else {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE), CAMERA_REQUEST_CODE)
             }
         }
 
         binding.layoutHeaderHome.cardMenuReturn.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_REQUEST_CODE)
-                task = fusedLocationProviderClient.lastLocation
-            } else {
+            if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 task = fusedLocationProviderClient.lastLocation
                 task.addOnSuccessListener {
                     if (it != null) {
@@ -149,6 +143,8 @@ class HomeFragment : Fragment(), CoroutineScope {
                         Log.d("Location", it.latitude.toString() + " " + it.longitude.toString())
                     }
                 }
+            } else {
+                ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), GPS_REQUEST_CODE)
             }
         }
 
@@ -182,17 +178,55 @@ class HomeFragment : Fragment(), CoroutineScope {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            CAMERA_REQUEST_CODE -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                    startActivityForResult(intent, CAMERA_REQUEST_CODE)
-                } else {
-                    Toast.makeText(requireContext(), "You must be allow the permission for camera!", Toast.LENGTH_SHORT).show()
+        if (requestCode == CAMERA_REQUEST_CODE && grantResults.isNotEmpty()) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                startActivityForResult(intent, CAMERA_REQUEST_CODE)
+            } else {
+                Toast.makeText(requireContext(), "You must be allow the permission for camera!", Toast.LENGTH_SHORT).show()
+            }
+        }
+        if (requestCode == GPS_REQUEST_CODE && grantResults.isNotEmpty()) {
+            task.addOnSuccessListener {
+                if (it != null) {
+                    val intent = Intent(requireContext(), ReturnBookActivity::class.java)
+                    intent.putExtra("lat", it.latitude)
+                    intent.putExtra("long", it.longitude)
+                    startActivity(intent)
+                    Log.d("Location", it.latitude.toString() + " " + it.longitude.toString())
                 }
             }
         }
-    }
+        }
+
+//    override fun onRequestPermissionsResult(
+//        requestCode: Int,
+//        permissions: Array<out String>,
+//        grantResults: IntArray
+//    ) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        when (requestCode) {
+//            CAMERA_REQUEST_CODE -> {
+//                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//                    startActivityForResult(intent, CAMERA_REQUEST_CODE)
+//                } else {
+//                    Toast.makeText(requireContext(), "You must be allow the permission for camera!", Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//            else -> {
+//                task.addOnSuccessListener {
+//                    if (it != null) {
+//                        val intent = Intent(requireContext(), ReturnBookActivity::class.java)
+//                        intent.putExtra("lat", it.latitude)
+//                        intent.putExtra("long", it.longitude)
+//                        startActivity(intent)
+//                        Log.d("Location", it.latitude.toString() + " " + it.longitude.toString())
+//                    }
+//                }
+//            }
+//        }
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

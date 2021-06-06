@@ -80,8 +80,8 @@ class ReturnBookActivity : AppCompatActivity() {
     }
 
     private fun calculateDistance(lat2: Double, lng2: Double): Boolean {
-        val lat1 = -6.180933877022023
-        val lng1 = 106.82702035590873
+        val lat1 = -6.1811
+        val lng1 = 106.8269
 
         val results = FloatArray(10)
         Location.distanceBetween(lat1, lng1, lat2, lng2, results)
@@ -90,7 +90,7 @@ class ReturnBookActivity : AppCompatActivity() {
 
         Log.d("Location Distance new2", result)
 
-        if (result.toDouble() > 1.0 || result.toDouble() < 0.0) {
+        if (result.toDouble() > 0.4 || result.toDouble() < 0.0) {
             Log.d("Location result", "False")
             return false
         } else {
