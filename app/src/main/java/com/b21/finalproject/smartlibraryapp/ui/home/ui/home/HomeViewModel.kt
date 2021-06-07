@@ -15,4 +15,6 @@ class HomeViewModel(private val bookRepository: BookRepository) : ViewModel() {
 
     fun getBookByQuery(query: String): LiveData<List<BookEntity>> =
         bookRepository.getBookByQuery(query)
+
+    fun getBookId(): LiveData<List<Int>> = bookRepository.getBookId()
 }

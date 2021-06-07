@@ -13,6 +13,9 @@ interface LibraryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUserEntities(users: List<UserEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertRatingEntities(ratings: List<RatingEntity>)
+
     @RawQuery(observedEntities = [BookEntity::class])
     fun getAllbooks(query: SupportSQLiteQuery): List<BookEntity>
 
@@ -51,4 +54,11 @@ interface LibraryDao {
 
     @Query("SELECT * FROM user_tb WHERE username = :username")
     fun getUserByUsername(username: String): UserEntity
+
+    @RawQuery(observedEntities = [RatingEntity::class])
+    fun getRatingsByRaw(query: SupportSQLiteQuery): List<RatingEntity>
+
+    @Ignore
+    @Query("SELECT * FROM rating_tb")
+    fun getBookId(): List<RatingEntity>
 }

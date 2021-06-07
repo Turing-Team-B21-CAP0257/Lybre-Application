@@ -9,6 +9,7 @@ import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class BookRepository private constructor(private val localDataSource: LocalDataSource) : BookDataSource{
 
@@ -190,5 +191,25 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
             }
         })
         return borrowBooks
+    }
+
+    override fun getBookId(): LiveData<List<Int>> {
+        val result = MutableLiveData<List<Int>>()
+        GlobalScope.async{
+            localDataSource.getAllBookIdByRaw(object : LocalDataSource.LoadBookIdCallback {
+                override fun onAllBookIdReceived(ratingEntity: List<RatingEntity>) {
+                    val bookIds = ArrayList<Int>()
+                    for (rating in ratingEntity) {
+                        bookIds.add(rating.bookId.toInt())
+                    }
+                    result.postValue(bookIds)
+//                    Log.d("bookIds", ratingEntity.toString() + " " + ratingEntity[0].bookId)
+//                    Log.d("bookIdsSize", ratingEntity.size.toString())
+//                    Log.d("bookIds2", bookIds.size.toString())
+                }
+            })
+        }
+        Log.d("bookIds3", result.toString())
+        return result
     }
 }

@@ -12,7 +12,6 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -23,7 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
-import com.b21.finalproject.smartlibraryapp.ml.Model1
+import com.b21.finalproject.smartlibraryapp.ml.Model3
 import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
@@ -31,16 +30,20 @@ import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActi
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.settings.SettingsActivity
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
 import com.b21.finalproject.smartlibraryapp.viewModel.ViewModelFactory
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.Task
 import kotlinx.coroutines.*
+import org.checkerframework.checker.nullness.qual.NonNull
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.nio.ByteBuffer
+import java.util.*
 import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment(), CoroutineScope {
@@ -98,6 +101,18 @@ class HomeFragment : Fragment(), CoroutineScope {
         binding.layoutHeaderHome.tvUsername.text = appPreference.username
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+
+        val list1 = listOf(0, 1, 2, 1, 4, 4, 6, 7, 8, 8, 9)
+        if (! Python.isStarted()) {
+            Python.start(AndroidPlatform(requireContext()))
+        }
+
+        val py: Python = Python.getInstance()
+
+        val pyObj = py.getModule("myscript")
+        val obj = pyObj.callAttr("unique", list1.toTypedArray())
+
+        Log.d("testinggg", obj.toString())
 
         return root
     }
@@ -199,35 +214,6 @@ class HomeFragment : Fragment(), CoroutineScope {
         }
         }
 
-//    override fun onRequestPermissionsResult(
-//        requestCode: Int,
-//        permissions: Array<out String>,
-//        grantResults: IntArray
-//    ) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-//        when (requestCode) {
-//            CAMERA_REQUEST_CODE -> {
-//                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-//                    startActivityForResult(intent, CAMERA_REQUEST_CODE)
-//                } else {
-//                    Toast.makeText(requireContext(), "You must be allow the permission for camera!", Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//            else -> {
-//                task.addOnSuccessListener {
-//                    if (it != null) {
-//                        val intent = Intent(requireContext(), ReturnBookActivity::class.java)
-//                        intent.putExtra("lat", it.latitude)
-//                        intent.putExtra("long", it.longitude)
-//                        startActivity(intent)
-//                        Log.d("Location", it.latitude.toString() + " " + it.longitude.toString())
-//                    }
-//                }
-//            }
-//        }
-//    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
@@ -308,47 +294,18 @@ class HomeFragment : Fragment(), CoroutineScope {
 //        return rotatedImg
 //    }
 
-//    private fun pythonOperate() {
-//        if (! Python.isStarted()) {
-//            Python.start(AndroidPlatform(requireContext()))
-//        }
-//
-//        val py: Python = Python.getInstance()
-//
-//        val pyObj = py.getModule("myscript")
-//        val obj = pyObj.callAttr("name", "Yossy Taher")
-//
-//        Log.d("obj", obj.toString())
-
-//        val stream = ByteArrayOutputStream()
-//        image.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-//        val byteArray: ByteArray = stream.toByteArray()
-//        image.recycle()
-//
-//        val imageString = Base64.encodeToString(byteArray, Base64.DEFAULT)
-//
-//        Log.d("MYTAG_BYTEARRAY", byteArray.toString())
-//        Log.d("MYTAG_IMAGE", image.toString())
-//
-//        val array1: PyObject =  PyObject.fromJava(byteArray)
-//
-//        val obj: PyObject = pyObj.callAttr("ocr_core", imageString)
-//        binding.layoutHeaderHome.tvUsername.text = obj.toString()
-//    }
-
     private fun loadModel() {
 
         val byteBuffer: ByteBuffer = ByteBuffer.allocateDirect(4)
-        byteBuffer.putFloat(87f)
+        byteBuffer.putFloat(45f)
 
-        val model = Model1.newInstance(requireContext())
+        val model = Model3.newInstance(requireContext())
 
         // Creates inputs for reference.
         val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
         inputFeature0.loadBuffer(byteBuffer)
-
         val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-        inputFeature0.loadBuffer(byteBuffer)
+        inputFeature1.loadBuffer(ByteBuffer.allocateDirect(4).putFloat(25f))
 
         // Runs model inference and gets result.
         val outputs = model.process(inputFeature0, inputFeature1)
@@ -357,17 +314,37 @@ class HomeFragment : Fragment(), CoroutineScope {
         // Releases model resources if no longer used.
         model.close()
 
-        Log.d("outputs", outputFeature0[0].toString() + " " + outputFeature0[1].toString() + " " + outputFeature0[2].toString() + " " + outputFeature0[3].toString())
+        val outputArray = outputFeature0
 
-        //38 73 55 64
-        //@49cf0fd
-        //@b1379c1
-        //@8ede1f2
-        //@765b463
-        //2.430129
+//        pythonOperate(outputArray)
+        Log.d("outputs", outputFeature0[0].toString())
+        Log.d("inputFeatures", inputFeature0.toString())
 
         // Releases model resources if no longer used.
         model.close()
+
+        homeViewModel.getBookId().observe(viewLifecycleOwner, { bookIds ->
+            getdataToArray(bookIds)
+        })
+    }
+
+    private fun getdataToArray(bookIds: List<Int>?) {
+        Log.d("bookIdsNew", bookIds.toString())
+        Log.d("bookIdsNew", bookIds?.size.toString())
+        Log.d("bookIdsNew", bookIds?.get(0).toString())
+    }
+
+    private fun pythonOperate(outputArray: @NonNull ByteBuffer) {
+        if (! Python.isStarted()) {
+            Python.start(AndroidPlatform(requireContext()))
+        }
+
+        val py: Python = Python.getInstance()
+
+        val pyObj = py.getModule("myscript")
+        val obj = pyObj.callAttr("postprecessing", outputArray)
+
+        Log.d("pythonResult", obj.toString())
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -1,20 +1,15 @@
-import pytesseract
 import numpy as np
 
-try:
-    from PIL import Image
-except ImportError:
-    import Image
+def postprocessing(predictions):
+    # predictions = [i[0] for i in predictions]
+    predictions = np.array(predictions)
 
-def main():
-    return "Hello World..."
+    book_id = (-predictions).argsort()[:25]
+    book_id = book_id.tolist()
 
-def name(name):
-    return name
+    return book_id
 
-def ocr_core(fileimage):
-    # text = pytesseract.image_to_string(Image.open(fileimage))
-    text = fileimage
-    return text
-
-# print(ocr_core('/content/ImageTest/CM-1.jpg'))
+def unique(list1):
+    list1 = list(list1)
+    list2 = list(set(list1))
+    return list2

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.*
 
-@Database(entities = [BookEntity::class, UserEntity::class, BorrowBookEntity::class, FavoriteBookEntity::class, BookWithDeadlineEntity::class],
+@Database(entities = [BookEntity::class, UserEntity::class, RatingEntity::class, BorrowBookEntity::class, FavoriteBookEntity::class, BookWithDeadlineEntity::class],
             version = 1,
             exportSchema = false)
 abstract class LibraryDatabase : RoomDatabase(){
