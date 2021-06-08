@@ -184,7 +184,7 @@ class HomeFragment : Fragment(), CoroutineScope {
             job.start()
         }
 
-        loadModel()
+        loadModel3(1, 271360)
     }
 
     override fun onRequestPermissionsResult(
@@ -294,44 +294,76 @@ class HomeFragment : Fragment(), CoroutineScope {
 //        return rotatedImg
 //    }
 
-    private fun loadModel() {
 
-        val byteBuffer: ByteBuffer = ByteBuffer.allocateDirect(4)
-        byteBuffer.putFloat(45f)
+    private fun loadModel3(userid:Int, datalength:Int) {
+
+//        // defining and allocating ByteBuffer
+//        // using allocate() method
+//        val byteBuffer = ByteBuffer.allocate(5)
+//
+//        // put byte value in byteBuffer
+//        // using put() method
+//        byteBuffer.put(20.toByte())
+//        byteBuffer.put(30.toByte())
+//        byteBuffer.put(40.toByte())
+//        byteBuffer.put(50.toByte())
+//        byteBuffer.put(70.toByte())
+//
+//        // print the buffer
+//        System.out.println(
+//            ("Buffer before operation: "
+//                    + Arrays.toString(byteBuffer.array())
+//                    ) + "\nPosition: " + byteBuffer.position()
+//                .toString() + "\nLimit: " + byteBuffer.limit()
+//        )
+//
+//        // Rewind the Buffer
+//        // using rewind() method
+//        byteBuffer.rewind()
+//
+//        // print the buffer
+//        System.out.println(
+//            (("\nBuffer after operation: "
+//                    + Arrays.toString(byteBuffer.array())
+//                    ) + "\nPosition: " + byteBuffer.position()
+//                .toString() + "\nLimit: " + byteBuffer.limit())
+//        )
 
         val model = Model3.newInstance(requireContext())
 
-        // Creates inputs for reference.
-        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-        inputFeature0.loadBuffer(byteBuffer)
-        val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-        inputFeature1.loadBuffer(ByteBuffer.allocateDirect(4).putFloat(25f))
+//        val byteBuffer1: ByteBuffer = ByteBuffer.allocate( 4)
+//        byteBuffer1.put(6.toByte())
+//        byteBuffer1.put(7.toByte())
+//        byteBuffer1.put(9.toByte())
+//        byteBuffer1.put(3.toByte())
 
-        // Runs model inference and gets result.
+        var count = 0
+
+        val byteBuffer1: ByteBuffer = ByteBuffer.allocateDirect((datalength+1) * 4)
+        for (i in 0 until datalength) {
+            byteBuffer1.putInt(userid)
+            count += 1
+        }
+
+        Log.d("count", count.toString())
+
+        val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect((datalength+1) * 4)
+        for (i in 0 until datalength) {
+            byteBuffer2.putInt(i)
+        }
+
+        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+        inputFeature0.loadBuffer(byteBuffer1)
+        val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+        inputFeature1.loadBuffer(byteBuffer1)
+
         val outputs = model.process(inputFeature0, inputFeature1)
         val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
 
-        // Releases model resources if no longer used.
+        Log.d("output", outputFeature0[0].toString())
+
         model.close()
 
-        val outputArray = outputFeature0
-
-//        pythonOperate(outputArray)
-        Log.d("outputs", outputFeature0[0].toString())
-        Log.d("inputFeatures", inputFeature0.toString())
-
-        // Releases model resources if no longer used.
-        model.close()
-
-        homeViewModel.getBookId().observe(viewLifecycleOwner, { bookIds ->
-            getdataToArray(bookIds)
-        })
-    }
-
-    private fun getdataToArray(bookIds: List<Int>?) {
-        Log.d("bookIdsNew", bookIds.toString())
-        Log.d("bookIdsNew", bookIds?.size.toString())
-        Log.d("bookIdsNew", bookIds?.get(0).toString())
     }
 
     private fun pythonOperate(outputArray: @NonNull ByteBuffer) {

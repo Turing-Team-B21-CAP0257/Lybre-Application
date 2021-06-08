@@ -6,7 +6,6 @@ import android.os.*
 import android.util.Log
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
-import com.b21.finalproject.smartlibraryapp.data.source.local.entity.RatingEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.UserEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.room.LibraryDatabase
 import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
@@ -102,7 +101,6 @@ class DataManagerService : Service(), CoroutineScope {
         if (firstRun) {
             val bookModels = preLoadRawBooks()
             val userModels = preLoadRawUsers()
-            val ratingsModels = preLoadRawRatings()
 
             var progress = 30.0
             publishProgress(progress.toInt())
@@ -114,7 +112,6 @@ class DataManagerService : Service(), CoroutineScope {
             try {
                 databaseHelper.libraryDao().insertBookEntities(bookModels)
                 databaseHelper.libraryDao().insertUserEntities(userModels)
-                databaseHelper.libraryDao().insertRatingEntities(ratingsModels)
                 for (i in 0..100) {
                     progress += progressDiff
                 }
@@ -226,34 +223,5 @@ class DataManagerService : Service(), CoroutineScope {
             e.printStackTrace()
         }
         return userModels
-    }
-
-    private fun preLoadRawRatings(): ArrayList<RatingEntity> {
-        val ratingModels = ArrayList<RatingEntity>()
-        var line: String?
-        val reader: BufferedReader
-        try {
-            val rawText = resources.openRawResource(R.raw.newrating)
-
-            reader = BufferedReader(InputStreamReader(rawText))
-
-            reader.readLine()
-
-            do {
-                line = reader.readLine()
-                val splitstr = line.split(",").toTypedArray()
-
-                val ratingModel = RatingEntity(
-                    splitstr[0],
-                    splitstr[1],
-                    splitstr[2],
-                    splitstr[3]
-                )
-                ratingModels.add(ratingModel)
-            } while (line != null)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return ratingModels
     }
 }

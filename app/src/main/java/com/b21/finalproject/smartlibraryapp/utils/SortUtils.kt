@@ -32,9 +32,4 @@ object SortUtils {
         val simpleQuery = "SELECT * FROM borrow_tb WHERE userId = ${userId.toInt()} AND returnBook = $query"
         return SimpleSQLiteQuery(simpleQuery)
     }
-
-    fun getAllBookId(): SimpleSQLiteQuery {
-        val simpleQuery = "SELECT bookId FROM rating_tb"
-        return SimpleSQLiteQuery(simpleQuery)
-    }
 }

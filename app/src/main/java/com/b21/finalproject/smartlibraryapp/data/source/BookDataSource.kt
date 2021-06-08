@@ -36,6 +36,4 @@ interface BookDataSource {
     fun updateBorrowBook(returnBook: Int, bookId: String)
 
     fun getAllBorrowBookByRaw(sort: Int, userId: String): LiveData<List<BookWithDeadlineEntity>>
-
-    fun getBookId(): LiveData<List<Int>>
 }

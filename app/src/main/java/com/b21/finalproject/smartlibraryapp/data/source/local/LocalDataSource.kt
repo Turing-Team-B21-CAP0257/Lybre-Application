@@ -50,10 +50,6 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
         onAllBorrowBooksCallback.onAllBorrowBooksReceived(borrowBookEntity)
     }
 
-    fun getAllBookIdByRaw(onBookIdCallback: LoadBookIdCallback) {
-        onBookIdCallback.onAllBookIdReceived(mLibraryDao.getBookId())
-    }
-
     interface LoadFavoriteBooksCallback {
         fun onAllFavoriteBooksReceived(favoriteBookEntity: List<FavoriteBookEntity>)
     }
@@ -62,7 +58,4 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
         fun onAllBorrowBooksReceived(borrowBookEntity: List<BorrowBookEntity>)
     }
 
-    interface LoadBookIdCallback {
-        fun onAllBookIdReceived(ratingEntity: List<RatingEntity>)
-    }
 }
