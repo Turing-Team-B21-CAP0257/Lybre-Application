@@ -13,6 +13,7 @@ import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityDetailBookBinding
 import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
+import com.b21.finalproject.smartlibraryapp.services.ModelService
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils

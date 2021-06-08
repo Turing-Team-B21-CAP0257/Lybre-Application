@@ -19,11 +19,13 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
 import com.b21.finalproject.smartlibraryapp.ml.Model3
 import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
+import com.b21.finalproject.smartlibraryapp.services.ModelService
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailBorrowBookActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.returnbook.ReturnBookActivity
@@ -44,6 +46,7 @@ import java.io.FileOutputStream
 import java.io.OutputStream
 import java.nio.ByteBuffer
 import java.util.*
+import java.util.concurrent.Executors
 import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment(), CoroutineScope {
@@ -102,17 +105,17 @@ class HomeFragment : Fragment(), CoroutineScope {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
-        val list1 = listOf(0, 1, 2, 1, 4, 4, 6, 7, 8, 8, 9)
-        if (! Python.isStarted()) {
-            Python.start(AndroidPlatform(requireContext()))
-        }
-
-        val py: Python = Python.getInstance()
-
-        val pyObj = py.getModule("myscript")
-        val obj = pyObj.callAttr("unique", list1.toTypedArray())
-
-        Log.d("testinggg", obj.toString())
+//        val list1 = listOf(0, 1, 2, 1, 4, 4, 6, 7, 8, 8, 9)
+//        if (! Python.isStarted()) {
+//            Python.start(AndroidPlatform(requireContext()))
+//        }
+//
+//        val py: Python = Python.getInstance()
+//
+//        val pyObj = py.getModule("myscript")
+//        val obj = pyObj.callAttr("unique", list1.toTypedArray())
+//
+//        Log.d("testinggg", obj.toString())
 
         return root
     }
@@ -181,10 +184,11 @@ class HomeFragment : Fragment(), CoroutineScope {
                 val getData = async(Dispatchers.Main) {  getDataFromViewModel() }
                 getData.await()
             }
+
             job.start()
         }
 
-        loadModel3(1, 271360)
+//        loadModel3(1, 200)
     }
 
     override fun onRequestPermissionsResult(
@@ -297,72 +301,36 @@ class HomeFragment : Fragment(), CoroutineScope {
 
     private fun loadModel3(userid:Int, datalength:Int) {
 
-//        // defining and allocating ByteBuffer
-//        // using allocate() method
-//        val byteBuffer = ByteBuffer.allocate(5)
-//
-//        // put byte value in byteBuffer
-//        // using put() method
-//        byteBuffer.put(20.toByte())
-//        byteBuffer.put(30.toByte())
-//        byteBuffer.put(40.toByte())
-//        byteBuffer.put(50.toByte())
-//        byteBuffer.put(70.toByte())
-//
-//        // print the buffer
-//        System.out.println(
-//            ("Buffer before operation: "
-//                    + Arrays.toString(byteBuffer.array())
-//                    ) + "\nPosition: " + byteBuffer.position()
-//                .toString() + "\nLimit: " + byteBuffer.limit()
-//        )
-//
-//        // Rewind the Buffer
-//        // using rewind() method
-//        byteBuffer.rewind()
-//
-//        // print the buffer
-//        System.out.println(
-//            (("\nBuffer after operation: "
-//                    + Arrays.toString(byteBuffer.array())
-//                    ) + "\nPosition: " + byteBuffer.position()
-//                .toString() + "\nLimit: " + byteBuffer.limit())
-//        )
-
+        val array = ArrayList<Float>()
         val model = Model3.newInstance(requireContext())
+        for (j in 0 until datalength) {
 
-//        val byteBuffer1: ByteBuffer = ByteBuffer.allocate( 4)
-//        byteBuffer1.put(6.toByte())
-//        byteBuffer1.put(7.toByte())
-//        byteBuffer1.put(9.toByte())
-//        byteBuffer1.put(3.toByte())
+//            var count = 0
 
-        var count = 0
+            val byteBuffer1: ByteBuffer = ByteBuffer.allocateDirect(1 * 4)
+            byteBuffer1.putInt(userid)
 
-//        val byteBuffer1: ByteBuffer = ByteBuffer.allocateDirect((datalength+1) * 4)
-//        for (i in 0 until datalength) {
-//            byteBuffer1.putInt(userid)
-//            count += 1
-//        }
-//
-//        Log.d("count", count.toString())
-//
-//        val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect((datalength+1) * 4)
-//        for (i in 0 until datalength) {
-//            byteBuffer2.putInt(i)
-//        }
-//
-//        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-//        inputFeature0.loadBuffer(byteBuffer1)
-//        val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-//        inputFeature1.loadBuffer(byteBuffer1)
-//
-//        val outputs = model.process(inputFeature0, inputFeature1)
-//        val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
-//
-//        Log.d("output", outputFeature0[0].toString())
-//
-//        model.close()
+//            Log.d("count", count.toString())
+
+            val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect(1 * 4)
+            byteBuffer2.putInt(j)
+
+            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+            inputFeature0.loadBuffer(byteBuffer1)
+            val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+            inputFeature1.loadBuffer(byteBuffer2)
+
+            val outputs = model.process(inputFeature0, inputFeature1)
+            val outputFeature0 = outputs.outputFeature0AsTensorBuffer.floatArray
+
+//            Log.d("output", outputFeature0[0].toString())
+//            Log.d("output2", inputFeature1.shape.size.toString())
+
+            array.add(outputFeature0[0])
+
+        }
+        Log.d("output", array.size.toString() + " " + array[0].toString())
+        model.close()
 
     }
 

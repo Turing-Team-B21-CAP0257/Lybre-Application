@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityHomeBinding
 import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
+import com.b21.finalproject.smartlibraryapp.services.ModelService
 import com.b21.finalproject.smartlibraryapp.ui.auth.AuthenticationActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -40,6 +41,9 @@ class HomeActivity : AppCompatActivity() {
 //        )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        val mStartModelService = Intent(this, ModelService::class.java)
+        ModelService.enqueueWork(this, mStartModelService)
     }
 
     private fun authenthication() {
