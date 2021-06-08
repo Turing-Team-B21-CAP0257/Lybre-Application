@@ -90,7 +90,7 @@ class ReturnBookActivity : AppCompatActivity() {
 
         Log.d("Location Distance new2", result)
 
-        if (result.toDouble() > 1.0 || result.toDouble() < 0.0) {
+        if (result.toDouble() > 1.5 || result.toDouble() < 0.0) {
             Log.d("Location result", "False")
             return false
         } else {

@@ -12,6 +12,7 @@ import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.BookEntity
 import com.b21.finalproject.smartlibraryapp.data.source.local.entity.FavoriteBookEntity
 import com.b21.finalproject.smartlibraryapp.databinding.ActivityDetailBookBinding
+import com.b21.finalproject.smartlibraryapp.prefs.AppPreference
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.BooksActivity
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeAdapter
 import com.b21.finalproject.smartlibraryapp.utils.SortUtils
@@ -24,6 +25,7 @@ class DetailBookActivity : AppCompatActivity() {
     private lateinit var factory: ViewModelFactory
     private lateinit var viewModel: DetailViewModel
     private lateinit var adapter: HomeAdapter
+    private lateinit var appPreference: AppPreference
     private lateinit var binding: ActivityDetailBookBinding
 
     companion object {
@@ -43,6 +45,8 @@ class DetailBookActivity : AppCompatActivity() {
         supportActionBar?.title = "Detail Book"
 
         adapter = HomeAdapter()
+
+        appPreference = AppPreference(this)
 
         val bookId = intent.getIntExtra(BOOK_ID, 0)
 
@@ -132,7 +136,7 @@ class DetailBookActivity : AppCompatActivity() {
                 isBookmarked = false
                 val favoriteBookEntity = FavoriteBookEntity(
                     0,
-                    "1",
+                    appPreference.userId.toString(),
                     book.bookId,
                     true)
                 viewModel.insertFavoriteBook(favoriteBookEntity)
