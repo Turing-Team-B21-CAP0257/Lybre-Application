@@ -339,30 +339,30 @@ class HomeFragment : Fragment(), CoroutineScope {
 
         var count = 0
 
-        val byteBuffer1: ByteBuffer = ByteBuffer.allocateDirect((datalength+1) * 4)
-        for (i in 0 until datalength) {
-            byteBuffer1.putInt(userid)
-            count += 1
-        }
-
-        Log.d("count", count.toString())
-
-        val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect((datalength+1) * 4)
-        for (i in 0 until datalength) {
-            byteBuffer2.putInt(i)
-        }
-
-        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-        inputFeature0.loadBuffer(byteBuffer1)
-        val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-        inputFeature1.loadBuffer(byteBuffer1)
-
-        val outputs = model.process(inputFeature0, inputFeature1)
-        val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
-
-        Log.d("output", outputFeature0[0].toString())
-
-        model.close()
+//        val byteBuffer1: ByteBuffer = ByteBuffer.allocateDirect((datalength+1) * 4)
+//        for (i in 0 until datalength) {
+//            byteBuffer1.putInt(userid)
+//            count += 1
+//        }
+//
+//        Log.d("count", count.toString())
+//
+//        val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect((datalength+1) * 4)
+//        for (i in 0 until datalength) {
+//            byteBuffer2.putInt(i)
+//        }
+//
+//        val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+//        inputFeature0.loadBuffer(byteBuffer1)
+//        val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
+//        inputFeature1.loadBuffer(byteBuffer1)
+//
+//        val outputs = model.process(inputFeature0, inputFeature1)
+//        val outputFeature0 = outputs.outputFeature0AsTensorBuffer.buffer
+//
+//        Log.d("output", outputFeature0[0].toString())
+//
+//        model.close()
 
     }
 

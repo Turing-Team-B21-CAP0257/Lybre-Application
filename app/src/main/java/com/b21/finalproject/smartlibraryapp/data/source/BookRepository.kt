@@ -192,4 +192,8 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
         })
         return borrowBooks
     }
+
+    override fun insertNewUser(user: UserEntity) {
+        localDataSource.insertNewUser(user)
+    }
 }

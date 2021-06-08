@@ -13,7 +13,7 @@ data class UserEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "user_id")
-    var userId: String,
+    var userId: String = "",
 
     @ColumnInfo(name = "location")
     var location: String,

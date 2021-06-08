@@ -50,6 +50,10 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
         onAllBorrowBooksCallback.onAllBorrowBooksReceived(borrowBookEntity)
     }
 
+    fun insertNewUser(user: UserEntity) {
+        mLibraryDao.insertNewUser(user)
+    }
+
     interface LoadFavoriteBooksCallback {
         fun onAllFavoriteBooksReceived(favoriteBookEntity: List<FavoriteBookEntity>)
     }

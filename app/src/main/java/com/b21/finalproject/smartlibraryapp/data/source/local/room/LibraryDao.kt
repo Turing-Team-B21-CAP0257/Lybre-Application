@@ -13,6 +13,12 @@ interface LibraryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUserEntities(users: List<UserEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    fun insertNewUser(user: UserEntity)
+
+    @Query("SELECT * FROM user_tb WHERE username = :username")
+    fun checkUserByUsername(username: String): UserEntity
+
     @RawQuery(observedEntities = [BookEntity::class])
     fun getAllbooks(query: SupportSQLiteQuery): List<BookEntity>
 
