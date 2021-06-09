@@ -53,3 +53,7 @@
 * Machine Learning Developer
   * <b>Afgani Fajar Rizky</b> - https://www.linkedin.com/in/afganifajar/
   * <b>Ergina Kamilia Putri</b> - https://www.linkedin.com/in/ergina-kamilia-putri-74665a1b6/
+
+* Cloud Computing
+  * <b>Orel Revo Sackhi Usdelivian</b> - https://www.linkedin.com/in/orelrevo/
+  * <b>Arif Wicaksono</b> - https://www.linkedin.com/in/arifwicaksono501/
