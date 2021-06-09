@@ -34,6 +34,7 @@ class ModelService : JobIntentService() {
 
     override fun onHandleWork(intent: Intent) {
         Log.d(TAG, "service model has started...")
+        val userId = intent.getStringExtra("userId")
         val dataLength = 271360
 
         val array = ArrayList<Float>()
@@ -41,7 +42,7 @@ class ModelService : JobIntentService() {
         val model = Model.newInstance(baseContext)
         for (j in 0 until dataLength-1) {
             val byteBuffer1: ByteBuffer = ByteBuffer.allocateDirect(1 * 4)
-            byteBuffer1.putFloat(590f)
+            byteBuffer1.putFloat(userId!!.toFloat())
 
             val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect(1 * 4)
             byteBuffer2.putFloat(j.toFloat())

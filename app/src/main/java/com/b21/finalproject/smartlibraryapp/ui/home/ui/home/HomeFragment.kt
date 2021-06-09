@@ -69,6 +69,7 @@ class HomeFragment : Fragment(), CoroutineScope {
     private lateinit var downloadReceiver: BroadcastReceiver
 
     private lateinit var dataRecommended: ArrayList<Int>
+    private lateinit var appPreference: AppPreference
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + Job()
@@ -114,7 +115,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         reqActivity.setSupportActionBar(binding.layoutHeaderHome.homeToolbar)
         reqActivity.setTitle("")
 
-        val appPreference = AppPreference(requireContext())
+        appPreference = AppPreference(requireContext())
         binding.layoutHeaderHome.tvUsername.text = appPreference.username
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
@@ -131,6 +132,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         handler = Handler(Looper.getMainLooper())
 
         val mStartModelService = Intent(requireContext(), ModelService::class.java)
+        mStartModelService.putExtra("userId", appPreference.userId)
         ModelService.enqueueWork(requireContext(), mStartModelService)
 
         downloadReceiver = object : BroadcastReceiver() {
@@ -141,6 +143,7 @@ class HomeFragment : Fragment(), CoroutineScope {
                         showRecommended()
                         Log.d("HomeActivity2", books.toString())
                         Log.d("HomeActivity2", dataRecommended.toString())
+                        Log.d("HomeActivity2", "135679")
                         recommendedAdapter.setAllbooks(books)
                         binding.rvRecommendedBooks.adapter = recommendedAdapter
                     })
