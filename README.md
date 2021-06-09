@@ -39,6 +39,7 @@
 * <b>Belajar Android Jetpack Pro</b>, https://www.dicoding.com/academies/129
 
 <h2>Documentation & Installation:</h2>
+
 1. Install and Import libraries neede
 2. Download the dataset from Kaggle
 3. Preprocessing the dataset
