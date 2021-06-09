@@ -66,7 +66,7 @@ class HomeFragment : Fragment(), CoroutineScope {
     private var _binding: FragmentHomeBinding? = null
 
     private lateinit var outputStream: OutputStream
-    private lateinit var downloadReceiver: BroadcastReceiver
+    private lateinit var dataReceiver: BroadcastReceiver
 
     private lateinit var dataRecommended: ArrayList<Int>
     private lateinit var appPreference: AppPreference
@@ -134,7 +134,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         mStartModelService.putExtra("userId", appPreference.userId)
         ModelService.enqueueWork(requireContext(), mStartModelService)
 
-        downloadReceiver = object : BroadcastReceiver() {
+        dataReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {
                 dataRecommended = intent.getIntegerArrayListExtra("data_model")!!
                 lifecycleScope.launch(Dispatchers.Main) {
@@ -151,7 +151,7 @@ class HomeFragment : Fragment(), CoroutineScope {
             }
         }
 
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(downloadReceiver, IntentFilter("data"));
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(dataReceiver, IntentFilter("data"));
 
         //go to recommended books fragment in Books Activity
         binding.layoutHeaderRecommended.imgItemMore.setOnClickListener {
@@ -342,7 +342,7 @@ class HomeFragment : Fragment(), CoroutineScope {
         super.onDestroyView()
         _binding = null
         job.cancel()
-        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(downloadReceiver);
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(dataReceiver);
     }
 
     private fun getDataFromViewModel() {
