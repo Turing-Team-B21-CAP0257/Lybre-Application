@@ -7,7 +7,6 @@ import com.b21.finalproject.smartlibraryapp.data.source.BookRepository
 import com.b21.finalproject.smartlibraryapp.di.Injection
 import com.b21.finalproject.smartlibraryapp.ui.auth.AuthViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.bookmark.BookmarkViewModel
-import com.b21.finalproject.smartlibraryapp.ui.home.ui.books.menu.allBooks.AllBooksViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.detail.DetailViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.history.HistoryViewModel
 import com.b21.finalproject.smartlibraryapp.ui.home.ui.home.HomeViewModel
@@ -30,9 +29,6 @@ class ViewModelFactory private constructor(private val bookRepository: BookRepos
         when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 return HomeViewModel(bookRepository) as T
-            }
-            modelClass.isAssignableFrom(AllBooksViewModel::class.java) -> {
-                return AllBooksViewModel(bookRepository) as T
             }
             modelClass.isAssignableFrom(BookmarkViewModel::class.java) -> {
                 return BookmarkViewModel(bookRepository) as T

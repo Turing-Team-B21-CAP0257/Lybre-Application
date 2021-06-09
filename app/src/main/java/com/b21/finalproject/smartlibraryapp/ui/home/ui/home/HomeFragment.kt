@@ -88,7 +88,6 @@ class HomeFragment : Fragment(), CoroutineScope {
     companion object {
         const val CAMERA_REQUEST_CODE = 100
         const val GPS_REQUEST_CODE = 110
-        const val WRITE_EXTERNAL_REQUEST_CODE = 101
     }
 
     private var isLoadModel = false

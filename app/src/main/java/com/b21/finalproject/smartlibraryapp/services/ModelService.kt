@@ -78,7 +78,6 @@ class ModelService : JobIntentService() {
             for (i in resultIndexBook.indices) {
                 resultToArray.add(resultIndexBook[i].toInt())
             }
-//            Log.d("getToIndex4", resultToArray.toString())
             sendData(resultToArray)
         }
 

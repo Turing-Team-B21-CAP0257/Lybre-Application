@@ -23,7 +23,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private lateinit var downloadReceiver: BroadcastReceiver
 
     companion object {
         var STATE_ACTIVITY = 0
@@ -47,19 +46,6 @@ class HomeActivity : AppCompatActivity() {
 //        )
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-//        val mStartModelService = Intent(this, ModelService::class.java)
-//        ModelService.enqueueWork(this, mStartModelService)
-
-//        downloadReceiver = object : BroadcastReceiver() {
-//            override fun onReceive(context: Context, intent: Intent) {
-//                val data = intent.getIntegerArrayListExtra("data_model")
-//                Log.d("HomeActivity", "computing data from model was done $data")
-//                Toast.makeText(context, "computing data from model was done", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//
-//        LocalBroadcastManager.getInstance(this).registerReceiver(downloadReceiver, IntentFilter("data"));
     }
 
     private fun authenthication() {
