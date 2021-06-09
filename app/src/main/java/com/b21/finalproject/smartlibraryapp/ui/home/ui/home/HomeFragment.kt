@@ -3,12 +3,17 @@ package com.b21.finalproject.smartlibraryapp.ui.home.ui.home
 import android.Manifest
 import android.app.Activity
 import android.app.SearchManager
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.HandlerThread
+import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
 import android.view.*
@@ -20,6 +25,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.b21.finalproject.smartlibraryapp.R
 import com.b21.finalproject.smartlibraryapp.databinding.FragmentHomeBinding
@@ -47,6 +53,7 @@ import java.io.OutputStream
 import java.nio.ByteBuffer
 import java.util.*
 import java.util.concurrent.Executors
+import kotlin.collections.ArrayList
 import kotlin.coroutines.CoroutineContext
 
 class HomeFragment : Fragment(), CoroutineScope {
@@ -59,6 +66,9 @@ class HomeFragment : Fragment(), CoroutineScope {
     private var _binding: FragmentHomeBinding? = null
 
     private lateinit var outputStream: OutputStream
+    private lateinit var downloadReceiver: BroadcastReceiver
+
+    private lateinit var dataRecommended: ArrayList<Int>
 
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + Job()
@@ -67,6 +77,8 @@ class HomeFragment : Fragment(), CoroutineScope {
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var task: Task<Location>
+
+    private lateinit var handler: Handler
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -77,6 +89,8 @@ class HomeFragment : Fragment(), CoroutineScope {
         const val GPS_REQUEST_CODE = 110
         const val WRITE_EXTERNAL_REQUEST_CODE = 101
     }
+
+    private var isLoadModel = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,18 +119,6 @@ class HomeFragment : Fragment(), CoroutineScope {
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
 
-//        val list1 = listOf(0, 1, 2, 1, 4, 4, 6, 7, 8, 8, 9)
-//        if (! Python.isStarted()) {
-//            Python.start(AndroidPlatform(requireContext()))
-//        }
-//
-//        val py: Python = Python.getInstance()
-//
-//        val pyObj = py.getModule("myscript")
-//        val obj = pyObj.callAttr("unique", list1.toTypedArray())
-//
-//        Log.d("testinggg", obj.toString())
-
         return root
     }
 
@@ -124,6 +126,30 @@ class HomeFragment : Fragment(), CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
 
         unShowPopulate()
+
+        dataRecommended = ArrayList()
+        handler = Handler(Looper.getMainLooper())
+
+        val mStartModelService = Intent(requireContext(), ModelService::class.java)
+        ModelService.enqueueWork(requireContext(), mStartModelService)
+
+        downloadReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                dataRecommended = intent.getIntegerArrayListExtra("data_model")!!
+                lifecycleScope.launch(Dispatchers.Main) {
+                    homeViewModel.getBookRecommendedById(dataRecommended).observe(viewLifecycleOwner, { books ->
+                        showRecommended()
+                        Log.d("HomeActivity2", books.toString())
+                        Log.d("HomeActivity2", dataRecommended.toString())
+                        recommendedAdapter.setAllbooks(books)
+                        binding.rvRecommendedBooks.adapter = recommendedAdapter
+                    })
+                }
+                Log.d("HomeActivity", "computing data from model was done $dataRecommended")
+            }
+        }
+
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(downloadReceiver, IntentFilter("data"));
 
         //go to recommended books fragment in Books Activity
         binding.layoutHeaderRecommended.imgItemMore.setOnClickListener {
@@ -179,6 +205,8 @@ class HomeFragment : Fragment(), CoroutineScope {
 
             binding.rvSearchBooks.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             binding.rvSearchBooks.setHasFixedSize(true)
+
+            Log.d("HomeActivity3", isLoadModel.toString())
 
             job = launch {
                 val getData = async(Dispatchers.Main) {  getDataFromViewModel() }
@@ -298,55 +326,6 @@ class HomeFragment : Fragment(), CoroutineScope {
 //        return rotatedImg
 //    }
 
-
-    private fun loadModel3(userid:Int, datalength:Int) {
-
-        val array = ArrayList<Float>()
-        val model = Model3.newInstance(requireContext())
-        for (j in 0 until datalength) {
-
-//            var count = 0
-
-            val byteBuffer1: ByteBuffer = ByteBuffer.allocateDirect(1 * 4)
-            byteBuffer1.putInt(userid)
-
-//            Log.d("count", count.toString())
-
-            val byteBuffer2: ByteBuffer = ByteBuffer.allocateDirect(1 * 4)
-            byteBuffer2.putInt(j)
-
-            val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-            inputFeature0.loadBuffer(byteBuffer1)
-            val inputFeature1 = TensorBuffer.createFixedSize(intArrayOf(1, 1), DataType.FLOAT32)
-            inputFeature1.loadBuffer(byteBuffer2)
-
-            val outputs = model.process(inputFeature0, inputFeature1)
-            val outputFeature0 = outputs.outputFeature0AsTensorBuffer.floatArray
-
-//            Log.d("output", outputFeature0[0].toString())
-//            Log.d("output2", inputFeature1.shape.size.toString())
-
-            array.add(outputFeature0[0])
-
-        }
-        Log.d("output", array.size.toString() + " " + array[0].toString())
-        model.close()
-
-    }
-
-    private fun pythonOperate(outputArray: @NonNull ByteBuffer) {
-        if (! Python.isStarted()) {
-            Python.start(AndroidPlatform(requireContext()))
-        }
-
-        val py: Python = Python.getInstance()
-
-        val pyObj = py.getModule("myscript")
-        val obj = pyObj.callAttr("postprecessing", outputArray)
-
-        Log.d("pythonResult", obj.toString())
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.action_setting -> {
@@ -361,25 +340,21 @@ class HomeFragment : Fragment(), CoroutineScope {
         super.onDestroyView()
         _binding = null
         job.cancel()
+        LocalBroadcastManager.getInstance(requireContext()).unregisterReceiver(downloadReceiver);
     }
 
     private fun getDataFromViewModel() {
+        unShowRecommended()
         homeViewModel.getAllBooks(SortUtils.RANDOM).observe(viewLifecycleOwner, { books ->
             adapter.setAllbooks(books)
             binding.rvAllbooks.adapter = adapter
         })
 
-        homeViewModel.getRecommendedBooks(SortUtils.RECOMMENDED).observe(viewLifecycleOwner, { books ->
-            showPopulate()
-            recommendedAdapter.setAllbooks(books)
-            binding.rvRecommendedBooks.adapter = recommendedAdapter
-        })
+        showPopulate()
     }
 
     private fun showPopulate() {
         binding.progressBar.visibility = View.GONE
-        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.VISIBLE
-        binding.layoutHeaderRecommended.imgItemMore.visibility = View.VISIBLE
         binding.layoutHeaderAllbooks.tvAllbooks.visibility = View.VISIBLE
         binding.layoutHeaderAllbooks.imgItemMore.visibility = View.VISIBLE
         binding.layoutHeaderResult.tvRecommendedBooks.visibility = View.GONE
@@ -394,6 +369,16 @@ class HomeFragment : Fragment(), CoroutineScope {
         binding.layoutHeaderAllbooks.imgItemMore.visibility = View.GONE
         binding.layoutHeaderResult.tvRecommendedBooks.visibility = View.GONE
         binding.layoutHeaderResult.imgItemMore.visibility = View.GONE
+    }
+
+    private fun showRecommended() {
+        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.VISIBLE
+        binding.layoutHeaderRecommended.imgItemMore.visibility = View.VISIBLE
+    }
+
+    private fun unShowRecommended() {
+        binding.layoutHeaderRecommended.tvRecommendedBooks.visibility = View.GONE
+        binding.layoutHeaderRecommended.imgItemMore.visibility = View.GONE
     }
 
     private fun showItemSearchPopulate() {

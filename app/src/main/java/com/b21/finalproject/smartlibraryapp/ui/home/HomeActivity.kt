@@ -1,9 +1,14 @@
 package com.b21.finalproject.smartlibraryapp.ui.home
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -18,6 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private lateinit var downloadReceiver: BroadcastReceiver
 
     companion object {
         var STATE_ACTIVITY = 0
@@ -42,8 +48,18 @@ class HomeActivity : AppCompatActivity() {
 //        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        val mStartModelService = Intent(this, ModelService::class.java)
-        ModelService.enqueueWork(this, mStartModelService)
+//        val mStartModelService = Intent(this, ModelService::class.java)
+//        ModelService.enqueueWork(this, mStartModelService)
+
+//        downloadReceiver = object : BroadcastReceiver() {
+//            override fun onReceive(context: Context, intent: Intent) {
+//                val data = intent.getIntegerArrayListExtra("data_model")
+//                Log.d("HomeActivity", "computing data from model was done $data")
+//                Toast.makeText(context, "computing data from model was done", Toast.LENGTH_SHORT).show()
+//            }
+//        }
+//
+//        LocalBroadcastManager.getInstance(this).registerReceiver(downloadReceiver, IntentFilter("data"));
     }
 
     private fun authenthication() {

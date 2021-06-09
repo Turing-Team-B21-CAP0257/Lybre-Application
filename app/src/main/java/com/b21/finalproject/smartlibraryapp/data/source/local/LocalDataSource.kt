@@ -54,12 +54,37 @@ class LocalDataSource private constructor(private val mLibraryDao: LibraryDao) {
         mLibraryDao.insertNewUser(user)
     }
 
+    fun getBookReccomendedById(bookIds: ArrayList<Int>, onBooksCallback: LoadBooksCallback) {
+        val result = ArrayList<BookEntity>()
+        for (i in bookIds.indices) {
+            val getBook = mLibraryDao.getBookById(bookIds[i])
+            val book = BookEntity(
+                getBook.bookId,
+                getBook.ISBN,
+                getBook.book_title,
+                getBook.book_author,
+                getBook.year_publication,
+                getBook.publisher,
+                getBook.imageUrl_s,
+                getBook.imageUrl_m,
+                getBook.imageUrl_l,
+                getBook.rating
+            )
+            result.add(book)
+        }
+        onBooksCallback.onBooksReceived(result)
+    }
+
     interface LoadFavoriteBooksCallback {
         fun onAllFavoriteBooksReceived(favoriteBookEntity: List<FavoriteBookEntity>)
     }
 
     interface LoadBorrowBooksCallback {
         fun onAllBorrowBooksReceived(borrowBookEntity: List<BorrowBookEntity>)
+    }
+
+    interface LoadBooksCallback {
+        fun onBooksReceived(bookEntity: List<BookEntity>)
     }
 
 }

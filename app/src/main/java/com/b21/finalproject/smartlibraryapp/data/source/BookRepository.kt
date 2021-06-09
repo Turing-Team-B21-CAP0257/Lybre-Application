@@ -196,4 +196,14 @@ class BookRepository private constructor(private val localDataSource: LocalDataS
     override fun insertNewUser(user: UserEntity) {
         localDataSource.insertNewUser(user)
     }
+
+    override fun getBooksRecommended(data: ArrayList<Int>): LiveData<List<BookEntity>> {
+        val result = MutableLiveData<List<BookEntity>>()
+        localDataSource.getBookReccomendedById(data, object : LocalDataSource.LoadBooksCallback {
+            override fun onBooksReceived(bookEntity: List<BookEntity>) {
+                result.postValue(bookEntity)
+            }
+        })
+        return result
+    }
 }

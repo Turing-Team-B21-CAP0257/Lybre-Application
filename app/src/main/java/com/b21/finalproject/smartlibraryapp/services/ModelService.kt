@@ -5,8 +5,10 @@ import android.content.Intent
 import android.util.Log
 import androidx.core.app.JobIntentService
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.b21.finalproject.smartlibraryapp.ml.Model
 import com.b21.finalproject.smartlibraryapp.ml.Model3
+import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import kotlinx.coroutines.Dispatchers
@@ -70,6 +72,15 @@ class ModelService : JobIntentService() {
         Log.d("getToIndex2", resultIndexBook.toString())
         Log.d("getToIndex3", resultIndexBook[0].toString())
 
+        GlobalScope.launch {
+            val resultToArray = ArrayList<Int>()
+            for (i in resultIndexBook.indices) {
+                resultToArray.add(resultIndexBook[i].toInt())
+            }
+//            Log.d("getToIndex4", resultToArray.toString())
+            sendData(resultToArray)
+        }
+
         for (i in 0..50) {
             Log.d("output$i", array.size.toString() + " " + array[i].toString())
         }
@@ -86,6 +97,12 @@ class ModelService : JobIntentService() {
                 Log.d("output$i", newArray.size.toString() + " " + newArray[i].toString())
             }
         }
+    }
+
+    private fun sendData(resultIndexBook: ArrayList<Int>) {
+        val intent = Intent("data")
+        intent.putExtra("data_model", resultIndexBook)
+        LocalBroadcastManager.getInstance(baseContext).sendBroadcast(intent)
     }
 
     override fun onDestroy() {

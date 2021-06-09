@@ -38,4 +38,6 @@ interface BookDataSource {
     fun getAllBorrowBookByRaw(sort: Int, userId: String): LiveData<List<BookWithDeadlineEntity>>
 
     fun insertNewUser(user: UserEntity)
+
+    fun getBooksRecommended(data: ArrayList<Int>): LiveData<List<BookEntity>>
 }
