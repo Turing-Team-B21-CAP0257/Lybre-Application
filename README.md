@@ -38,11 +38,19 @@
 * <b>Belajar Fundamental Aplikasi Android</b>, https://www.dicoding.com/academies/14/tutorials
 * <b>Belajar Android Jetpack Pro</b>, https://www.dicoding.com/academies/129
 
-<h2>Installation:</h2>
+<h2>Documentation & Installation:</h2>
+1. Install and Import libraries neede
+2. Download the dataset from Kaggle
+3. Preprocessing the dataset
+4. Create the model
+5. Training the model with 5 epoch
+6. Predict the dataset
+7. Use the converter to convert the model into the tflite model
 
-1. Clone repository from https://github.com/ramdhanjr11/SmartLibraryApp
-2. Change python location in build.gradle[App] at python function to your python directory. 
-    buildPython "C:/Users/your_profile_directory/AppData/Local/Programs/Python/Python38/python.exe"
+Clone repository from https://github.com/ramdhanjr11/SmartLibraryApp
+Change python location in build.gradle[App] at python function to your python directory. 
+
+buildPython "C:/Users/your_profile_directory/AppData/Local/Programs/Python/Python38/python.exe"
 
 <h2>Contact:</h2>
 
