@@ -2,16 +2,16 @@
 
 <h2>Feature:</h2>
 
-1. <b>Splashcreen</b>, this is the beginning app before move to login activity
-2. <b>Login</b>, Login activity for user 
-3. <b>Register</b>, Register activity for user
-4. <b>Borrow the book</b>, User be able to borrowed the book with capture the book what will be borrowed
-5. <b>Return the book</b>, User be able to return the book with GPS
-6. <b>Bookmark the book</b>, User be able to save/marked the book anytime for added to list borrowed
-7. <b>History of borrowed book</b>, User be able to see history of borrowed
-8. <b>Change Language</b>, User can change language ID/ENG
-9. <b>Search the book</b>, User can search book 
-10. <b>Recommendation book for user</b>, User can see recommendation book after they borrowed the book
+1. <b>Splashcreen</b>, this is the beginning app before move to login activity.
+2. <b>Login</b>, Login activity for user.
+3. <b>Register</b>, Register activity for user.
+4. <b>Borrow the book</b>, User is able to borrowed the book with capture the book what will be borrowed.
+5. <b>Return the book</b>, User is able to return the book with GPS.
+6. <b>Bookmark the book</b>, User is able to save/marked the book anytime for added to list borrowed.
+7. <b>History of borrowed book</b>, User is able to see history of borrowed.
+8. <b>Change Language</b>, User can change language ID/ENG.
+9. <b>Search the book</b>, User can search book.
+10. <b>Recommendation book for user</b>, User can see recommendation book after they borrowed the book.
 
 <h2>Library/Depedencies:</h2>
 
@@ -40,7 +40,7 @@
 
 <h2>Documentation & Installation:</h2>
 
-1. Install and Import libraries neede
+1. Install and Import libraries needed
 2. Download the dataset from Kaggle
 3. Preprocessing the dataset
 4. Create the model
@@ -53,6 +53,21 @@ Change python location in build.gradle[App] at python function to your python di
 
 buildPython "C:/Users/your_profile_directory/AppData/Local/Programs/Python/Python38/python.exe"
 
+<h2>Usage:</h2>
+
+1. For login you can use this account : username (Loremipsum1), password (Loremipsum123).
+2. Wait 2 - 5 minutes for load data from local.
+3. In home you still not see the recommendation book, waiting until 2 - 5 minutes, because recommendation running in the background, if it's done recommendation be appears.
+4. Actived your connection before use the application.
+5. Allow the camera, files, and gps permission to application.
+6. Actived your gps location if you want to return back the book *if you are not actived you can't access feature from return book in home.
+
+<h2>Notes:</h2>
+
+1. Our application is not final, we still have more function that we must develop and improve.
+2. We not use cloud service for the application, therefore our application only use local data in android.
+3. Our application still have more bugs.
+
 <h2>Contact:</h2>
 
 * Android Developer
@@ -63,6 +78,7 @@ buildPython "C:/Users/your_profile_directory/AppData/Local/Programs/Python/Pytho
   * <b>Afgani Fajar Rizky</b> - https://www.linkedin.com/in/afganifajar/
   * <b>Ergina Kamilia Putri</b> - https://www.linkedin.com/in/ergina-kamilia-putri-74665a1b6/
 
+(Not usage cloud because inactive/responsive/contribute members)
 * Cloud Computing
   * <b>Orel Revo Sackhi Usdelivian</b> - https://www.linkedin.com/in/orelrevo/
   * <b>Arif Wicaksono</b> - https://www.linkedin.com/in/arifwicaksono501/
