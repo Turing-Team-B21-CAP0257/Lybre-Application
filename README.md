@@ -61,12 +61,14 @@ buildPython "C:/Users/your_profile_directory/AppData/Local/Programs/Python/Pytho
 4. Actived your connection before use the application.
 5. Allow the camera, files, and gps permission to application.
 6. Actived your gps location if you want to return back the book *if you are not actived you can't access feature from return book in home.
+7. You can borrowed the book with capture book, example cover book : http://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg, http://images.amazon.com/images/P/0002005018.01.LZZZZZZZ.jpg
 
 <h2>Notes:</h2>
 
 1. Our application is not final, we still have more function that we must develop and improve.
 2. We not use cloud service for the application, therefore our application only use local data in android.
 3. Our application still have more bugs.
+4. Our application didn't had license from chaquopy because we didn't pay for this, thus you just given 10 minutes for usage the application in home 
 
 <h2>Contact:</h2>
 
