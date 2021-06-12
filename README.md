@@ -18,7 +18,11 @@ This project use following library to support the program:
 8. Matplotlib Pyplot
 9. Sklearn
 
+Make sure to fully download it with pip command (if not available as default in your IDE) and import the library before running the program 
+
 <h3>Get Data</h3>
+
+
 
 <h3>Preprocessing Data</h3>
 
