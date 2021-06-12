@@ -1,5 +1,15 @@
 # Lybre-Application
 
+<h2>Machine Learning Documentation</h2>
+
+<h3>Library and Requirements</h3>
+
+<h3>Preprocessing Data</h3>
+
+<h3>Recommendation System Model</h3>
+
+<h3>Photo Detection (Unused)</h3>
+
 <h2>Mobile Development Documentation</h2>
 
 <h3>Feature:</h3>
