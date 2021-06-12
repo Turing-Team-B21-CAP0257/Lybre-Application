@@ -2,7 +2,23 @@
 
 <h2>Machine Learning Documentation</h2>
 
+The code was originally developed using google colab notebook due to its feature and the support of GPU computation
+here's the link for the notebook : https://colab.research.google.com/drive/1d1RmXX_G6G6Ltqx8D5t7Tw8reXcpVALG?usp=sharing
+
 <h3>Library and Requirements</h3>
+
+This project use following library to support the program:
+1. Python os
+2. Python re
+3. Python csv
+4. Python string
+5. Numpy
+6. Pandas
+7. Tensorflow
+8. Matplotlib Pyplot
+9. Sklearn
+
+<h3>Get Data</h3>
 
 <h3>Preprocessing Data</h3>
 
