@@ -1,8 +1,8 @@
 # Lybre-Application
 
-<h1>Mobile Development Documentation</h1>
+<h2>Mobile Development Documentation</h2>
 
-<h2>Feature:</h2>
+<h3>Feature:</h3>
 
 1. <b>Splashcreen</b>, this is the beginning app before move to login activity.
 2. <b>Login</b>, Login activity for user.
@@ -15,7 +15,7 @@
 9. <b>Search the book</b>, User can search book.
 10. <b>Recommendation book for user</b>, User can see recommendation book after they borrowed the book.
 
-<h2>Library/Depedencies:</h2>
+<h3>Library/Depedencies:</h3>
 
 1. <b>Kotlin Coroutines</b>, https://developer.android.com/kotlin/coroutines?hl=id
 2. <b>Materials</b>, https://material.io/
@@ -32,7 +32,7 @@
 13. <b>Fusedlocationprovider (GPS)</b>, https://developers.google.com/android/reference/com/google/android/gms/location/FusedLocationProviderApi
 14. <b>Chaquopy (Integrated python code)</b>, https://chaquo.com/chaquopy/
 
-<h2>Acknowledgements:</h2> 
+<h3>Acknowledgements:</h3> 
 
 * <b>Memulai Pemrograman Dengan Kotlin</b>, https://www.dicoding.com/academies/80
 * <b>Belajar Prinsip Pemrograman SOLID</b>, https://www.dicoding.com/academies/169
@@ -40,7 +40,9 @@
 * <b>Belajar Fundamental Aplikasi Android</b>, https://www.dicoding.com/academies/14/tutorials
 * <b>Belajar Android Jetpack Pro</b>, https://www.dicoding.com/academies/129
 
-<h2>Documentation & Installation:</h2>
+<h2>Project Detail</h2>
+
+<h3>Documentation & Installation:</h3>
 
 1. Install and Import libraries needed
 2. Download the dataset from Kaggle
@@ -55,7 +57,7 @@ Change python location in build.gradle[App] at python function to your python di
 
 buildPython "C:/Users/your_profile_directory/AppData/Local/Programs/Python/Python38/python.exe"
 
-<h2>Usage:</h2>
+<h3>Usage:</h3>
 
 1. For login you can use this account : username (Loremipsum1), password (Loremipsum123).
 2. Wait 2 - 5 minutes for load data from local.
@@ -65,14 +67,14 @@ buildPython "C:/Users/your_profile_directory/AppData/Local/Programs/Python/Pytho
 6. Actived your gps location if you want to return back the book *if you are not actived you can't access feature from return book in home.
 7. You can borrowed the book with capture book, example cover book : http://images.amazon.com/images/P/0195153448.01.LZZZZZZZ.jpg, http://images.amazon.com/images/P/0002005018.01.LZZZZZZZ.jpg
 
-<h2>Notes:</h2>
+<h3>Notes:</h3>
 
 1. Our application is not final, we still have more function that we must develop and improve.
 2. We not use cloud service for the application, therefore our application only use local data in android.
 3. Our application still have more bugs.
 4. Our application didn't had license from chaquopy because we didn't pay for this, thus you just given 10 minutes for usage the application in home 
 
-<h2>Contact:</h2>
+<h3>Contact:</h3>
 
 * Android Developer
   * <b>M Ramdhan Syahputra</b> - https://www.linkedin.com/in/m-ramdhan-syahputra-4a10731bb/
