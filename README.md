@@ -35,16 +35,29 @@ Here's the link for the original dataset: https://www.kaggle.com/arashnic/book-r
 
 <h3>Preprocessing Data</h3>
 
-Before we do the machine learning process, we need to do some preprocessing to the data to fit the data to machine learning process and to android database. We divided the preprocessing process to 4 section based on what thing and what data that we preprocess.
+Before we do the machine learning process, we need to do some preprocessing to the data to fit the data to machine learning process and to android database. We divided the preprocessing process to 4 section based on what thing and what data that we preprocess. Here's the detail about our data preprocessing :
 
 - Rating Section 1 :
-In this section, we fix the rating column name by change the title to lowercase and remove the punctuation, and we create new table called 'newrate' to get the average rating based on book ISBN. 
+  - Fix rating column name by change the title to lowercase and remove the punctuation
+  - Create new table called 'newrate' to get the average rating based on book ISBN. 
 - Book Section :
-In this section, we fix the book column name, and joining the book data with 'newrate' data to add average rating to the data, and add zero if there is none of it. We also removing invalid ISBN after data merge, then we make new bookid based on ISBN to make it easier for android team, and then removing comma from the data which can corrupt the csv file. Lastly, we make new csv file for android team which contains book data that has been preprocessed
+  - Fix the book column name
+  - Joining the book data with 'newrate' data to add average rating to the data
+  - Add zero data if there is no rating yet
+  - Remove invalid ISBN after data merge
+  - Make new book ID based on ISBN to make it easier for android team
+  - removing comma from the data which can corrupt the csv file
+  - Make new csv file for android team which contains book data that has been preprocessed
 - User Section :
-In this section, we fix the user column name, and add zero value to NaN data in the age column, and make new csv file which contains user data that has been preprocessed
+  - fix the user column name
+  - Add zero value to NaN data in the age column
+  - Make new csv file which contains user data that has been preprocessed
 - Rating Section 2 :
-In this section, we create new table called 'isbn_id' to get book ID based on book ISBN, and then we joining the rating data with 'isbn_id' to add book ID to rating data. Then, we remove the invalid ISBN and convert the book ID data type to Integer. Lastly, we make new csv file which contains rating data that has been preprocessed
+  - Create new table called 'isbn_id' to get book ID based on book ISBN
+  - Joining the rating data with 'isbn_id' to add book ID to rating data
+  - Remove the invalid ISBN
+  - Convert the book ID data type to Integer
+  - Make new csv file which contains rating data that has been preprocessed
 
 <h3>Recommendation System Model</h3>
 
