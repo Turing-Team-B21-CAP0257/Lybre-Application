@@ -8,17 +8,21 @@ here's the link for the notebook : https://colab.research.google.com/drive/1d1Rm
 <h3>Library and Requirements</h3>
 
 This project use following library to support the program:
-1. Python os                 6. Pandas
-2. Python re                 7. Tensorflow
-3. Python csv                8. Matplotlib Pyplot
-4. Python string             9. Train test split from Sklearn
+1. Python os                 
+2. Python re                 
+3. Python csv              
+4. Python string           
 5. Numpy
+6. Pandas
+7. Tensorflow
+8. Matplotlib Pyplot
+9. Train test split from Sklearn
 
 Make sure to fully download it with pip command (if not available as default in your IDE) and import the library before running the program 
 
 <h3>Get Data</h3>
 
-The dataset used for this application is the book recommendation dataset from Kaggle,collected by Cai – Nicolas Ziegler from Book – Crossing community. The dataset contains 278,858 users (anonymized but with demographic information) providing 1,149,780 ratings (explicit / implicit) about 271,379 books. The dataset comprises of 3 files:
+The dataset used for this application is the book recommendation dataset from Kaggle, collected by Cai – Nicolas Ziegler from Book – Crossing community. The dataset contains 278,858 users providing 1,149,780 ratings about 271,379 books. The dataset comprises of 3 files:
 
 - Users : 
 Contains the integer value of User-ID, and the location and the age of user if available.
@@ -30,6 +34,17 @@ Contains the book rating information based on User-ID and book ISBN. Ratings are
 Here's the link for the original dataset: https://www.kaggle.com/arashnic/book-recommendation-dataset
 
 <h3>Preprocessing Data</h3>
+
+Before we do the machine learning process, we need to do some preprocessing to the data to fit the data to machine learning process and to android database. We divided the preprocessing process to 4 section based on what thing and what data that we preprocess.
+
+- Rating Section 1 :
+In this section, we fix the rating column name by change the title to lowercase and remove the punctuation, and we create new table called 'newrate' to get the average rating based on book ISBN. 
+- Book Section :
+In this section, we fix the book column name, and joining the book data with 'newrate' data to add average rating to the data, and add zero if there is none of it. We also removing invalid ISBN after data merge, then we make new bookid based on ISBN to make it easier for android team, and then removing comma from the data which can corrupt the csv file. Lastly, we make new csv file for android team which contains book data that has been preprocessed
+- User Section :
+In this section, we fix the user column name, and add zero value to NaN data in the age column, and make new csv file which contains user data that has been preprocessed
+- Rating Section 2 :
+In this section, we create new table called 'isbn_id' to get book ID based on book ISBN, and then we joining the rating data with 'isbn_id' to add book ID to rating data. Then, we remove the invalid ISBN and convert the book ID data type to Integer. Lastly, we make new csv file which contains rating data that has been preprocessed
 
 <h3>Recommendation System Model</h3>
 
