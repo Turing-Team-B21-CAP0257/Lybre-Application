@@ -61,7 +61,28 @@ Before we do the machine learning process, we need to do some preprocessing to t
 
 <h3>Recommendation System Model</h3>
 
+The Recommendation System Model was built using collaborative filtering algorithm using Tensorflow and Keras API. The model is a regression model to predict of how a user would gives the rating of particular book and simply get the highest rating prediction of the book to be the recommended book to the user. The model was trained using all of the data in the rating data to make more variety of rating prediction.
 
+The model summary consist of :
+- `Input` Layer for the user
+- `Input` Layer for the book
+- `Embedding` Layer for the user
+- `Embedding` Layer for the book
+- `Concatenate` layer
+- `Flatten` Layer
+- `Dense` Layer (128 Units, activation ReLU)
+- `Dense` Layer ( 32 Units, activation ReLU)
+- Output `Dense` Layer (1 Unit, activation linear)
+
+The model then trained with the following detail :
+- Optimizer : Adam Optimizers (learning rate: 0.005)
+- Loss Function : Mean Squared Error
+- Metrics Evaluation : Mean Absolute Error
+- Epochs : 5
+
+In the last epochs, the model have result of :
+- Loss : `7.4043`
+- Metrics : `1.9221`
 
 <h3>Photo Detection (Unused)</h3>
 
