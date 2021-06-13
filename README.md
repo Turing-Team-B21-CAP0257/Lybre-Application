@@ -55,11 +55,13 @@ Before we do the machine learning process, we need to do some preprocessing to t
 - Rating Section 2 :
   - Create new table called 'isbn_id' to get book ID based on book ISBN
   - Joining the rating data with 'isbn_id' to add book ID to rating data
-  - Remove the invalid ISBN
+  - Remove invalid ISBN
   - Convert the book ID data type to Integer
   - Make new csv file which contains rating data that has been preprocessed
 
 <h3>Recommendation System Model</h3>
+
+
 
 <h3>Photo Detection (Unused)</h3>
 
