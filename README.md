@@ -2,8 +2,8 @@
 
 <h2>Machine Learning Documentation</h2>
 
-The code was originally developed using google colab notebook due to its feature and the support of GPU computation
-here's the link for the notebook : https://colab.research.google.com/drive/1d1RmXX_G6G6Ltqx8D5t7Tw8reXcpVALG?usp=sharing
+The code was originally developed using google colab notebook due to its feature and the support of GPU computation.
+Here's the link for the notebook : https://colab.research.google.com/drive/1d1RmXX_G6G6Ltqx8D5t7Tw8reXcpVALG?usp=sharing
 
 <h3>Library and Requirements</h3>
 
