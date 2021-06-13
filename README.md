@@ -8,21 +8,26 @@ here's the link for the notebook : https://colab.research.google.com/drive/1d1Rm
 <h3>Library and Requirements</h3>
 
 This project use following library to support the program:
-1. Python os
-2. Python re
-3. Python csv
-4. Python string
+1. Python os                 6. Pandas
+2. Python re                 7. Tensorflow
+3. Python csv                8. Matplotlib Pyplot
+4. Python string             9. Train test split from Sklearn
 5. Numpy
-6. Pandas
-7. Tensorflow
-8. Matplotlib Pyplot
-9. Sklearn
 
 Make sure to fully download it with pip command (if not available as default in your IDE) and import the library before running the program 
 
 <h3>Get Data</h3>
 
+The dataset used for this application is the book recommendation dataset from Kaggle,collected by Cai – Nicolas Ziegler from Book – Crossing community. The dataset contains 278,858 users (anonymized but with demographic information) providing 1,149,780 ratings (explicit / implicit) about 271,379 books. The dataset comprises of 3 files:
 
+- Users : 
+Contains the integer value of User-ID, and the location and the age of user if available.
+- Books : 
+Contains the valid respective ISBN and some content-based information of the book (Book-Title, Book-Author, Year-Of-Publication, Publisher). Moreover, it contains URLs linking to cover images, appearing in three different size for small, medium, and large that point to the Amazon web site.
+- Ratings : 
+Contains the book rating information based on User-ID and book ISBN. Ratings are expressed on a scale from 0-10.
+
+Here's the link for the original dataset: https://www.kaggle.com/arashnic/book-recommendation-dataset
 
 <h3>Preprocessing Data</h3>
 
